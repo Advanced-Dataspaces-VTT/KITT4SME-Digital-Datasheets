@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  frontend:
+    extends:
+      file:  ./frontend/docker-compose.yml
+      service: frontend
+  backend:
+    extends:
+      file:  ./backend/docker-compose.yml
+      service: backend
+  database:
+    extends:
+      file:  ./database/docker-compose.yml
+      service: database
+
+networks:
+    internal-network:
+      driver: bridge

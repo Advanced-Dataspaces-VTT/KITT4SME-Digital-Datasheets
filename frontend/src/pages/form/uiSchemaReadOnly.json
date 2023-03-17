@@ -1,0 +1,125 @@
+{
+  "information": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "hardware_dependencies": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "software_dependencies": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "module_properties": {
+        "ui:readonly": true, "ui:disabled": true
+  },
+  "public_endpoints": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "component_name": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "component_uuid": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "provider": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "version": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "description": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "datamodel": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "multiuser_support": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "multtenancy_support": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "dashboard": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "device_link": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "device_text": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "mandatory": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "module_link": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "module_text": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "mandatory": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "machine_parameters": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "automatic_product_quality_ctrl": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "stressful_manual_activities": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "lowskil_manual_operations": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "stressful_cognitive_qualityctrl_activity": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "lim_human_skills_in_qualityctrl": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "handle_heavy_loads": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "manual_task_repetitiveness": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "working_environment_conditions": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "robotic_systems_collision": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "high_mental_effort_task": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "predictive_maintenance_signal_events": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "parameters_setup": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "system_configuration_definition": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "machine_setup": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "machinery_performance_monitoring": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "endpoint": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "protocol": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "method": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "headers": {
+    "ui:readonly": true, "ui:disabled": true
+  },
+  "payload": {
+    "ui:readonly": true, "ui:disabled": true
+  }
+}

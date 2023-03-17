@@ -1,0 +1,12 @@
+[
+  {
+    "conditions": {
+    },
+    "event": {
+      "type": "log",
+      "params": {
+        "foo": "bar"
+      }
+    }
+  }
+]

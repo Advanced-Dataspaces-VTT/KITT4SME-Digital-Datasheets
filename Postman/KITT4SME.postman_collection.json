@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "cce7e87d-e8f7-4090-a291-798b3acdb367",
+		"name": "KITT4SME",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11787626"
+	},
+	"item": [
+		{
+			"name": "return_all_datasheets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/datasheets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"datasheets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "return_all_datasheets_id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"datasheet_id\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/datasheets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"datasheets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "return_all_datasheets_keycloak_id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"keycloak_id\": \"qwertyujlvkcjt1233\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/datasheets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"datasheets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert_new_datasheet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"keycloak_id\": \"qwertyujlvkcjt1233\",\n    \"hardware_dependencies\": [\n        {\n            \"device_link\": \"https://developer.nvidia.com/embedded/jetson-nano-developer-kit\",\n            \"device_text\": \"NVidia Jetson Nano\",\n            \"mandatory\": false\n        }\n    ],\n    \"information\": {\n        \"component_name\": \"AgriObject Detector\",\n        \"component_uuid\": \"6854f5a7-f0b0-4b29-b3d8-5b061de0dbf3\",\n        \"dashboard\": \"https://flexigrobots.collab-cloud.eu:8123/dashboard\",\n        \"datamodel\": \"http://schema.vtt.fi/ld/context\",\n        \"description\": \"Yolo based machinevision component for detecting objects and their movement on agricultural field. Model has been thought with 100s of hours of footage on tractors and other agricultural machines working simultaneously. Model can identify other machinery and livestock from realtime footage provided for the component. Component has interface to receive h265 encoded live video stream from UAVs. Component is also able to access Orion context broker specified in configuration to create and update object entities with their detected coordinates, heading and velocity information.\",\n        \"multiuser_support\": true,\n        \"multtenancy_support\": true,\n        \"provider\": \"https://www.vtt.fi\",\n        \"version\": \"1.0\"\n    },\n    \"module_properties\": {\n        \"automatic_product_quality_ctrl\": false,\n        \"handle_heavy_loads\": true,\n        \"high_mental_effort_task\": true,\n        \"lim_human_skills_in_qualityctrl\": false,\n        \"lowskil_manual_operations\": false,\n        \"machine_parameters\": false,\n        \"machine_setup\": false,\n        \"machinery_performance_monitoring\": false,\n        \"manual_task_repetitiveness\": false,\n        \"parameters_setup\": false,\n        \"predictive_maintenance_signal_events\": false,\n        \"robotic_systems_collision\": true,\n        \"stressful_cognitive_qualityctrl_activity\": false,\n        \"stressful_manual_activities\": false,\n        \"system_configuration_definition\": false,\n        \"working_environment_conditions\": false\n    },\n    \"public_endpoints\": [\n        {\n            \"endpoint\": \"agriobjects:1935\",\n            \"headers\": [\n                {}\n            ],\n            \"method\": \"\",\n            \"payload\": \"binary stream\",\n            \"protocol\": \"RTMP\"\n        },\n        {\n            \"endpoint\": \"/object\",\n            \"headers\": [\n                {\n                    \"key\": \"fiware-service\",\n                    \"value\": \"openiot\"\n                },\n                {\n                    \"key\": \"X-Auth-Token\",\n                    \"value\": \"OAuth2 Token\"\n                }\n            ],\n            \"method\": \"GET\",\n            \"protocol\": \"REST\"\n        }\n    ],\n    \"software_dependencies\": [\n        {\n            \"mandatory\": true,\n            \"module_link\": \"https://opencv.org/\",\n            \"module_text\": \"OpenCV machine vision library\"\n        },\n        {\n            \"mandatory\": true,\n            \"module_link\": \"https://github.com/jkuri/opencv-ffmpeg-rtmp-stream\",\n            \"module_text\": \"FFMpeg-RTMP-OpenCV link\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/datasheets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"datasheets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "return_all_customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert_new_customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"keycloak_id\": \"qwertyujlvkcjt1233\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,10 @@
+flask
+flask_restful
+flask_cors
+SQLAlchemy
+SQLAlchemy-serializer
+flask-marshmallow
+psycopg2
+python-dotenv
+gunicorn
+sqlalchemy-utils

@@ -1,0 +1,986 @@
+{
+  "type": "object",
+  "title": "KITT4SME Digital Datasheet",
+  "properties": {
+    "information": {
+      "$ref": "#/information"
+    },
+    "industry": {
+      "type": "array",
+      "title": "Applicable industries",
+      "items": {
+        "$ref": "#/industry"
+      }
+    },
+    "technicalrequirements": {
+      "$ref": "#/techrequirements"
+    },
+    "deploymentinfo": {
+      "$ref": "#/deploymentinfo"
+    },
+    "hardware_dependencies": {
+      "type": "array",
+      "title": "Component hardware dependencies",
+      "items": {
+        "$ref": "#/hardware_dependency"
+      }
+    },
+    "software_dependencies": {
+      "type": "array",
+      "title": "Component software dependencies",
+      "items": {
+        "$ref": "#/software_dependency"
+      }
+    },
+    "public_endpoints": {
+      "type": "array",
+      "title": "Modules public endpoints",
+      "items": {
+        "$ref": "#/public_endpoint"
+      }
+    },
+    "features":{
+      "$ref": "#/features"
+    },
+    "benefits":{
+      "$ref": "#/benefits"
+    },
+    "productiveaxis": {
+      "type": "object",
+      "title": "Productive Axis",
+      "$ref": "#/productiveaxis"
+    },
+    "category": {
+      "type": "object",
+      "title": "Product Category",
+      "$ref": "#/category"
+    },
+    "module_properties": {
+      "type": "object",
+      "title": "Critical issues the AI module provides solutions for",
+      "$ref": "#/module_property"
+    },
+    "skills":{
+      "$ref": "#/skills"
+    }
+  },
+  "information": {
+    "type": "object",
+    "title": "Component information",
+    "properties": {
+      "component_name": {
+        "title": "Component name",
+        "type": "string",
+        "description": "Component name as it is found in the RAMP Marketplace"
+      },
+      "component_uuid": {
+        "title": "Component UUID",
+        "type": "string",
+        "description": "Component UUID hash that uniquely identifies component"
+      },
+      "provider": {
+        "title": "Provider",
+        "type": "string",
+        "description": "Link to the component provider information"
+      },
+      "version": {
+        "title": "Version",
+        "type": "string",
+        "description": "Latest version number of the component"
+      },
+      "description": {
+        "title": "Description",
+        "type": "string",
+        "description": "Description of the component outlining the indented use and high level features of the component"
+      },
+      "online_resources": {
+        "title": "Online Resources",
+        "type": "string",
+        "description": "Link to online resources of the components"
+      },
+      "value_proposition": {
+        "title": "Value proposition",
+        "type": "string",
+        "description": "Value proposition of the component"
+      }
+    }
+  },
+  "deploymentinfo": {
+    "type": "object",
+    "title": "Deployment information",
+    "properties": {
+      "datamodel": {
+        "title": "Data model",
+        "type": "string",
+        "description": "Link to schema defining components NGSI datamodel"
+      },
+      "multiuser_support": {
+          "type": "boolean",
+          "title": "Supports multiple users",
+          "default": false
+      },
+      "multtenancy_support": {
+          "type": "boolean",
+          "title": "Supports multitenancy",
+          "default": false
+      },
+      "dashboard": {
+        "title": "Databoard",
+        "type": "string",
+        "description": "Link to component dashboard"
+      }
+    }
+  },
+  "techrequirements": {
+    "type": "object",
+    "title": "Technical requirements",
+    "properties": {
+      "requirement_cpu": {
+        "title": "CPU requirement",
+        "type": "string",
+        "description": "Number of requirred CPU cores"
+      },
+      "requirement_ram": {
+        "title": "Memory requirement",
+        "type": "string",
+        "description": "Required memory in gigabytes"
+      },
+      "requirement_disk": {
+        "title": "Disk space requirement",
+        "type": "string",
+        "description": "Required disk space"
+      },
+      "protocol": {
+        "type": "array",
+        "title": "Communication protocols used",
+        "items": {
+          "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name of the protocoll"
+          }
+        }
+        }
+      }
+    }
+  },
+   "productiveaxis": {
+    "type": "object",
+    "title": "Productive axis",
+     "description": "Select productive axis(es) that the component belongs to:",
+    "properties":
+      {
+        "ai_hri": {
+          "type": "boolean",
+          "title": "AI for human-robot interaction",
+          "default": false
+        },
+        "ai_quality": {
+          "type": "boolean",
+          "title": "AI for quality",
+          "default": false
+        },
+        "ai_manualactivity": {
+          "type": "boolean",
+          "title": "AI for reconfigurability or product personalization",
+          "default": false
+        }
+      }
+   },
+   "category": {
+    "type": "object",
+    "title": "Component Category",
+     "description": "Select category to which the component belongs to:",
+    "properties":
+      {
+        "reasoning": {
+          "type": "boolean",
+          "title": "Reasoning Engine",
+          "default": false
+        },
+        "decisionmaker": {
+          "type": "boolean",
+          "title": "Decision Maker",
+          "default": false
+        }
+      }
+   },
+  "industry":{
+    "title": "Applicable industry (NACE classification)",
+      "type": "string",
+      "oneOf": [
+        {
+          "const":"1",
+          "title":"Manufacture of food products"
+        },
+        {
+          "const":"2",
+          "title":"Manufacture of beverages"
+        },
+        {
+          "const":"3",
+          "title":"Manufacture of tobacco products"
+        },
+        {
+          "const":"4",
+          "title":"Manufacture of textiles"
+        },
+        {
+          "const":"5",
+          "title":"Manufacture of wearing apparel"
+        },
+        {
+          "const":"6",
+          "title":"Manufacture of wood and of products of wood and cork, except furniture"
+        },
+        {
+          "const":"7",
+          "title":"Manufacture of articles of straw and plaiting materials"
+        },
+        {
+          "const":"8",
+          "title":"Manufacture of paper and paper products"
+        },
+        {
+          "const":"9",
+          "title":"Printing and reproduction of recorded media"
+        },
+        {
+          "const":"10",
+          "title":"Manufacture of coke and refined petroleum products"
+        },
+        {
+          "const":"11",
+          "title":"Manufacture of chemicals and chemical products"
+        },
+        {
+          "const":"12",
+          "title":"Manufacture of basic pharmaceutical products and pharmaceutical preparations"
+        },
+        {
+          "const":"13",
+          "title":"Manufacture of leather and related products"
+        },
+        {
+          "const":"14",
+          "title":"Manufacture of rubber and plastic products"
+        },
+        {
+          "const":"15",
+          "title":"Manufacture of other non-metallic mineral products"
+        },
+        {
+          "const":"16",
+          "title":"Manufacture of basic metals"
+        },
+        {
+          "const":"17",
+          "title":"Manufacture of fabricated metal products, except machinery and equipment"
+        },
+        {
+          "const":"18",
+          "title":"Manufacture of fabricated metal products, except machinery and equipment"
+        },
+        {
+          "const":"19",
+          "title":"Manufacture of electrical equipment"
+        },
+        {
+          "const":"20",
+          "title":"Manufacture of machinery and equipment n.e.c."
+        },
+        {
+          "const":"21",
+          "title":"Manufacture of motor vehicles, trailers and semi"
+        },
+        {
+          "const":"22",
+          "title":"Manufacture of other transport equipment"
+        },
+        {
+          "const":"23",
+          "title":"Manufacture of furniture"
+        },
+        {
+          "const":"24",
+          "title":"Other manufacturing"
+        },
+        {
+          "const":"25",
+          "title":"Other manufacturing"
+        },
+        {
+          "const":"26",
+          "title":"All manufacturing sectors"
+        }
+    ]
+  },
+  "hardware_dependency": {
+    "type": "object",
+    "title": "Hardware dependency",
+    "properties": {
+      "device_link": {
+        "type": "string",
+        "title": "Link to device resource that can be link to device data sheet or website further describing device"
+      },
+      "device_text": {
+        "title": "Device manufacturer and model",
+        "type": "string"
+      },
+      "dependency_level": {
+        "type": "string",
+        "title": "Dependency level of the HW component",
+        "oneOf": [
+          {
+            "const":"1",
+            "title":"Yes, this type of HW is required for basic functionalities"
+          },
+          {
+            "const":"2",
+            "title":"Yes, this type of HW is required for basic functionalities"
+          },
+          {
+            "const":"3",
+            "title":"No, the HW reported would be used for additional functionalities"
+          }
+        ]
+      }
+    }
+  },
+  "software_dependency": {
+    "type": "object",
+    "title": "Software dependency",
+    "properties": {
+      "module_link": {
+        "type": "string",
+        "title": "Link to software resource that can be link to device data sheet or website further describing device"
+      },
+      "module_text": {
+        "type": "string",
+        "title": "Description of  the software manufacturer and model"
+      },
+      "dependency_level": {
+        "type": "string",
+        "title": "Dependency level of the component",
+        "oneOf": [
+          {
+            "const":"1",
+            "title":"Yes, this type of SW is required for basic functionalities"
+          },
+          {
+            "const":"2",
+            "title":"Yes, a specific unique SW type is required for basic functionalities"
+          },
+          {
+            "const":"3",
+            "title":"No, the SW reported would be used for additional functionalities"
+          }
+        ]
+      }
+    }
+  },
+  "module_property": {
+    "type": "object",
+    "title": "Component Critical Issues",
+    "description": "Select the main production critical issues the user will fix or address thanks to this solution.",
+    "properties": {
+      "quality": {
+        "type": "array",
+        "title": "Quality",
+        "items": {
+          "type":"object",
+          "properties":{
+            "issue": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Lack of automatic quality issue detection"
+                },
+                {
+                  "const":"2",
+                  "title":"Inaccurate automatic quality inspection"
+                }
+              ]
+            },
+            "relevance":{
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"The solution aims to completely solve or mitigate the criticality"
+                },
+                {
+                  "const":"2",
+                  "title":"The solution can contribute mitigate the criticality"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "operator": {
+        "type": "array",
+        "title": "Operator Wellbeing",
+        "items": {
+          "type":"object",
+          "properties":{
+            "issue": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Preblematic interaction with automated elements"
+                },
+                {
+                  "const":"2",
+                  "title":"Ergonomics hazards in the workplace"
+                },
+                {
+                  "const":"3",
+                  "title":"High dependedence on operator experience and knowledge"
+                },
+                {
+                  "const":"4",
+                  "title":"Production demand exceeding human capabilities"
+                },
+                {
+                  "const":"5",
+                  "title":"Mentally demanding activities "
+                },
+                {
+                  "const":"6",
+                  "title":"Limited operators knowledge or skills"
+                }
+              ]
+            },
+            "relevance":{
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"The solution aims to completely solve or mitigate the criticality"
+                },
+                {
+                  "const":"2",
+                  "title":"The solution can contribute mitigate the criticality"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "performance": {
+        "type": "array",
+        "title": "Machine Performance",
+        "items": {
+          "type":"object",
+          "properties":{
+            "issue": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Lack of predictive maintenance "
+                },
+                {
+                  "const":"2",
+                  "title":"Ineffective set-up of parameters / tools "
+                },
+                {
+                  "const":"3",
+                  "title":"Ineffective collection of performance data"
+                }
+              ]
+            },
+            "relevance":{
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"The solution aims to completely solve or mitigate the criticality"
+                },
+                {
+                  "const":"2",
+                  "title":"The solution can contribute mitigate the criticality"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "management": {
+        "type": "array",
+        "title": "Production Management",
+        "items": {
+          "type":"object",
+          "properties":{
+            "issue": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Ineffective equipment production capacity management"
+                },
+                {
+                  "const":"2",
+                  "title":"Ineffective scheduling and resources allocation"
+                },
+                {
+                  "const":"3",
+                  "title":"Ineffective analysis of performance data"
+                }
+              ]
+            },
+            "relevance":{
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"The solution aims to completely solve or mitigate the criticality"
+                },
+                {
+                  "const":"2",
+                  "title":"The solution can contribute mitigate the criticality"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "public_endpoint": {
+    "type": "object",
+    "title": "Public API endpoints",
+    "properties": {
+      "endpoint": {
+        "type": "string",
+        "description": "Link to the module endpoint"
+      },
+      "protocol": {
+        "type": "string",
+        "description": "Protocol that the endpoint expects like MQTT, REST, etc"
+      },
+      "method": {
+        "type": "string",
+        "default": "",
+        "description": "For REST this would be one of GET, POST, DELETE, PUT, PATCH"
+      },
+      "headers": {
+        "type": "array",
+        "items": {
+          "$ref": "#/headers"
+        }
+      },
+      "payload": {
+        "type": "string",
+        "description": "Endpoint payload definition as JSON or other structured format"
+      }
+    }
+  },
+  "features":{
+    "type": "object",
+    "title": "Features that the component offers",
+    "properties": {
+      "quality": {
+        "type": "array",
+        "title": "Quality",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Automate the process of goods quality control and digitize it"
+            },
+            {
+              "const":"2",
+              "title":"Provide a digital library of tipical errors/faults and product quality issues for each quality criticalities "
+            },
+            {
+              "const":"3",
+              "title":"Provide lists of possible reworking interventions for identified product quality issues"
+            },
+            {
+              "const":"4",
+              "title":"Provide root cause analysis of product quality defects"
+            },
+            {
+              "const":"5",
+              "title":"Provide root cause analysis of problems in the product quality control process"
+            },
+            {
+              "const":"6",
+              "title":"Provide list of  possible rectification instructions to solve, mitigate, and/or prevent quality criticalities"
+            }
+          ]
+        }
+      },
+      "operator": {
+        "type": "array",
+        "title": "Operator Wellbeing",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Monitor shop flor environment conditions in real-time and provide alerts and feedback"
+            },
+            {
+              "const":"2",
+              "title":"Monitor worker wellbeing status in real-time and provide alerts or ergonomic feedback"
+            },
+            {
+              "const":"3",
+              "title":"Monitor machine status and operation in real-time and provide safety alerts"
+            },
+            {
+              "const":"4",
+              "title":"Provide real-time alerts, notifications and feedbacks to operators during task procedures"
+            },
+            {
+              "const":"5",
+              "title":"Automate routine and physically demanding tasks for workers "
+            },
+            {
+              "const":"6",
+              "title":"Evaluate employee performance and provide AR training and assistance for tasks"
+            }
+          ]
+        }
+      },
+      "performance": {
+        "type": "array",
+        "title": "Machine Performance",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Monitor equipment in real-time"
+            },
+            {
+              "const":"2",
+              "title":"Predict when machines will need maintenance or repair based on performance and historical data"
+            },
+            {
+              "const":"3",
+              "title":"Monitor machine performance and resource consumption in real-time"
+            },
+            {
+              "const":"4",
+              "title":"Provide real-time alerts, notifications and feedbacks on anomalies, unexpected events or unusual patterns in machine performance data that may indicate a problem"
+            },
+            {
+              "const":"5",
+              "title":"Identify the cause of malfunctions in machines"
+            },
+            {
+              "const":"6",
+              "title":"Provide lists of insights, recommendations and intervention options for machine settings"
+            }
+          ]
+        }
+      },
+      "management": {
+        "type": "array",
+        "title": "Production Management",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Monitor production data of the worker-factory ecosystem in real-time, such as machine sensor readings"
+            },
+            {
+              "const":"2",
+              "title":"Monitor production metrics in real-time, such as output per hour, scrap rate, or downtime."
+            },
+            {
+              "const":"3",
+              "title":"Identify and analyze root causes of capacity constraints and production bottlenecks"
+            },
+            {
+              "const":"4",
+              "title":"Provide lists of insights, recommendations, and interventions to schedule machine and human resources and assign taks"
+            },
+            {
+              "const":"5",
+              "title":"Provide lists of insights, recommendations, and interventions to manage existing production capacity"
+            },
+            {
+              "const":"6",
+              "title":"Simulate processes for virtual process planning and/or scheduling"
+            },
+            {
+              "const":"7",
+              "title":"Automate job scheduling of human and machine resources"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "benefits":{
+    "type": "object",
+    "title": "Benefits of the component",
+    "description": "Tick the main benefit(s) end users will get from your solution. It must be inherent in at least 1 of the 4 production contexts",
+    "properties":
+      {
+      "quality": {
+        "type": "object",
+        "title": "Quality",
+        "properties":
+        {
+          "1": {
+            "type": "boolean",
+            "title": "Optimized Product Quality Control Process",
+            "default": false
+          },
+          "2": {
+            "type": "boolean",
+            "title": "Optimized Product Quality Control Process",
+            "default": false
+          }
+        }
+      },
+      "operator": {
+        "type": "object",
+        "title": "Operator Wellbeing",
+        "properties":
+        {
+          "1": {
+            "type": "boolean",
+            "title": "Improve protection of the physical state of the worker",
+            "default": false
+          },
+          "2": {
+            "type": "boolean",
+            "title": "Optimize exploitation and management of the mental capacities of the worker",
+            "default": false
+          },
+          "3": {
+            "type": "boolean",
+            "title": "Improve the level of protection and safety in the workplace",
+            "default": false
+          }
+        }
+      },
+      "machine": {
+        "type": "object",
+        "title": "Machine performance",
+        "properties":
+        {
+          "1": {
+            "type": "boolean",
+            "title": "Optimize exploitation and management of production machines uptime ",
+            "default": false
+          },
+          "2": {
+            "type": "boolean",
+            "title": "Optimize efficiency & effectiveness of the predictive maintenance process",
+            "default": false
+          }
+        }
+      },
+      "production": {
+        "type": "object",
+        "title": "Production Management",
+        "properties":
+        {
+          "1": {
+            "type": "boolean",
+            "title": "Improve the overall system production efficiency and flexibility",
+            "default": false
+          },
+          "2": {
+            "type": "boolean",
+            "title": "Optimize efficiency and effectiveness of production management processes",
+            "default": false
+          }
+        }
+      }
+    }
+  },
+  "skills": {
+    "type": "object",
+    "title": "Basic worker Skills in case you believe they are necessary to use your solution",
+    "properties": {
+      "process": {
+        "type": "array",
+        "title": "Process Skills",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Active Learning"
+            },
+            {
+              "const":"2",
+              "title":"Critical Thinking"
+            },
+            {
+              "const":"3",
+              "title":"Learning Strategies"
+            },
+            {
+              "const":"4",
+              "title":"Monitoring"
+            }
+          ]
+        }
+      },
+      "problemsolving": {
+        "type": "array",
+        "title": "Complex Problem Solving & Resource Management Skills",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Complex Problem Solving"
+            },
+            {
+              "const":"2",
+              "title":"Management of Financial Resources"
+            },
+            {
+              "const":"3",
+              "title":"Management of Material Resources"
+            },
+            {
+              "const":"4",
+              "title":"Management of Personnel Resources"
+            },
+            {
+              "const":"5",
+              "title":"Time Management"
+            }
+          ]
+        }
+      },
+      "social": {
+        "type": "array",
+        "title": "Social Skills",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Coordination"
+            },
+            {
+              "const":"2",
+              "title":"Instructing"
+            },
+            {
+              "const":"3",
+              "title":"Negotiation"
+            },
+            {
+              "const":"4",
+              "title":"Persuasion"
+            },
+            {
+              "const":"5",
+              "title":"Service Orientation"
+            },
+            {
+              "const":"5",
+              "title":"Social Perceptiveness"
+            }
+          ]
+        }
+      },
+      "system": {
+        "type": "array",
+        "title": "System Skills",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Judgment and Decision Making"
+            },
+            {
+              "const":"2",
+              "title":"Systems Analysis"
+            },
+            {
+              "const":"3",
+              "title":"Systems Evaluation"
+            }
+          ]
+        }
+      },
+      "technical": {
+        "type": "array",
+        "title": "Technical Skills",
+        "items": {
+          "type":"string",
+          "oneOf": [
+            {
+              "const":"1",
+              "title":"Equipment Maintenance"
+            },
+            {
+              "const":"2",
+              "title":"Equipment Selection"
+            },
+            {
+              "const":"3",
+              "title":"Installation"
+            },
+            {
+              "const":"4",
+              "title":"Operation and Control"
+            },
+            {
+              "const":"5",
+              "title":"Operation Analysis"
+            },
+            {
+              "const":"6",
+              "title":"Operation Monitoring"
+            },
+            {
+              "const":"7",
+              "title":"Programming"
+            },
+            {
+              "const":"8",
+              "title":"Quality Control Analysis"
+            },
+            {
+              "const":"9",
+              "title":"Repairing"
+            },
+            {
+              "const":"10",
+              "title":"Technology Design"
+            },
+            {
+              "const":"11",
+              "title":"Troubleshooting"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "headers": {
+    "type": "object",
+    "title": "HTML Header",
+    "properties": {
+      "key": {
+        "type": "string",
+        "description": "header key"
+      },
+      "value": {
+        "type": "string",
+        "description": "header value"
+      }
+    }
+  }
+}

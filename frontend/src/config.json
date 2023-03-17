@@ -1,0 +1,5 @@
+{
+  "KEYCLOAK_URL": "https://keycloak.collab-cloud.eu:8443/auth",
+  "KEYCLOAK_REALM": "DigitalDatasheets",
+  "KEYCLOAK_CLIENT_ID": "kitt4sme"
+}

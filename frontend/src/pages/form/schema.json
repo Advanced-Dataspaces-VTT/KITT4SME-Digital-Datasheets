@@ -259,11 +259,11 @@
       "multiuser_support": {
         "type": "object",
         "title": "Multiuser",
-        "description": "Tick ​​the option indicating the multi-user specifications of your solution",
+        "description": "Select if your solution supports multiple users",
         "properties": {
           "checkbox": {
           "type": "boolean",
-          "title": "Supports multiple users",
+          "title": "Yes, users share the same instance",
           "default": false
         }
       }
@@ -271,11 +271,11 @@
     "multienancy_support": {
       "type": "object",
       "title": "Multitenancy",
-      "description": "Tick ​​the option indicating the multi-tenant specifications of your solution",
+      "description": "Select ​​if your solution suports multi-tenancy",
       "properties": {
         "checkbox": {
           "type": "boolean",
-          "title": "Supports multitenancy",
+          "title": "Yes, the component supports multi tenancy so that several instances of the component can run on single machine",
           "default": false
         }
       }

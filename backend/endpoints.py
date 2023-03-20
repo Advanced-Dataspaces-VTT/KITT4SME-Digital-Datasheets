@@ -37,30 +37,16 @@ def create_database_connection():
     db_name = os.getenv("POSTGRES_DB_NAME")
     db_use_ssl = os.getenv("POSTGRES_USE_SSL")
 
-    # engine = sqlalchemy.create_engine(
-    #     "postgresql+psycopg2://{}:{}@{}:{}/{}".format(
-    #         db_user,
-    #         db_pass,
-    #         db_host,
-    #         db_port,
-    #         db_name
-    #     )
-    # )
-
-    POSTGRESQL_USER='postgres'
-    POSTGRESQL_PASSWORD='postgres'
-    POSTGRESQL_DATABASE='kitt4sme-digital-datasheet-database'
-    POSTGRESQL_HOST='localhost'
-    POSTGRESQL_PORT=5432
     engine = sqlalchemy.create_engine(
         "postgresql+psycopg2://{}:{}@{}:{}/{}".format(
-            'posgres',
-            'posgres',
-            'localhost',
-            5432,
-            'kitt4sme-digital-datasheet-database'
+            db_user,
+            db_pass,
+            db_host,
+            db_port,
+            db_name
         )
     )
+
     if not database_exists(engine.url):
         create_database(engine.url)
 

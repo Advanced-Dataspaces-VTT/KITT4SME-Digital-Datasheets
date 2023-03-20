@@ -99,7 +99,7 @@ def return_all_datasheets():
             )
 
         if filter_text:
-            query = session.query(Datasheets).filter(text(f'datasheet::text ILIKE \'%{filter_text}%\''))
+            filter_conditions.append(text(f'datasheet::text ILIKE \'%{filter_text}%\''))
 
 
         if filter_conditions:

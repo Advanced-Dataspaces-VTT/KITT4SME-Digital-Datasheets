@@ -15,9 +15,3 @@ services:
       - POSTGRES_PORT=$POSTGRES_PORT
       - POSTGRES_DB_NAME=$POSTGRES_DB_NAME
       - POSTGRES_USE_SSL=$POSTGRES_USE_SSL
-    networks:
-      - internal-network
-
-networks:
-    internal-network:
-      driver: bridge

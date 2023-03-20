@@ -13,7 +13,3 @@ services:
     extends:
       file:  ./database/docker-compose.yml
       service: database
-
-networks:
-    internal-network:
-      driver: bridge

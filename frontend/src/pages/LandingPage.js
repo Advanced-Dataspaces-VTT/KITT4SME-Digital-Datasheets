@@ -62,7 +62,6 @@ const HomePageFunctionality = () => {
       selectedCheckboxes,
       keycloak_id,
     };
-    console.log("PAYLOAD", payload);
     axios
       .post(
         "http://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets-search",
@@ -398,7 +397,7 @@ const HomePageFunctionality = () => {
           className="container-fluid"
           style={{ paddingTop: "5%", paddingBottom: "5%", width: "100%" }}
         >
-          {response != undefined ? (
+          {response && response.data? (
             <>
               <Spacer />
               {loading ? (
@@ -414,29 +413,28 @@ const HomePageFunctionality = () => {
                     style={{ maxHeight: 500, maxWidth: 1500, overflow: "auto" }}
                   >
                     {Object.keys(response).map((key, index) => {
-                      console.log("response", response.data);
                       return (
                         <div key={key}>
                           <Spacer />
                           <CardComponent
                             component_name={
-                              response.data[index].datasheet?.information
+                              response?.data[index]?.datasheet?.information
                                 ?.component_name
                             }
                             description={
-                              response.data[index].datasheet?.information
+                              response?.data[index]?.datasheet?.information
                                 ?.description
                             }
                             provider={
-                              response.data[index].datasheet?.information
+                              response?.data[index]?.datasheet?.information
                                 ?.provider
                             }
                             version={
-                              response.data[index].datasheet?.information
+                              response?.data[index]?.datasheet?.information
                                 ?.version
                             }
                             handleClick={() =>
-                              handleClick(response.data[index])
+                              handleClick(response?.data[index])
                             }
                           />
                         </div>

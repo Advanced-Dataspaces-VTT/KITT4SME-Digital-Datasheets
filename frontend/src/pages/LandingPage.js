@@ -396,7 +396,7 @@ const HomePageFunctionality = () => {
         </Box>
         <div
           className="container-fluid"
-          style={{ paddingTop: "5%", paddingBottom: "5%", width: "50%" }}
+          style={{ paddingTop: "5%", paddingBottom: "5%", width: "100%" }}
         >
           {response != undefined ? (
             <>

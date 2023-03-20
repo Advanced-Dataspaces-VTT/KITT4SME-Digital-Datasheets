@@ -5,73 +5,57 @@
     "information": {
       "$ref": "#/information"
     },
-    "industry": {
-      "type": "array",
-      "title": "Applicable industries",
-      "items": {
-        "$ref": "#/industry"
-      }
+    "context": {
+      "$ref": "#/context"
+    },
+    "module_properties": {
+      "type": "object",
+      "title": "Production Critical Issues",
+      "$ref": "#/module_property"
+    },
+    "skills":{
+      "$ref": "#/skills"
+    },
+    "support":{
+      "$ref": "#/support"
     },
     "technicalrequirements": {
       "$ref": "#/techrequirements"
     },
-    "deploymentinfo": {
-      "$ref": "#/deploymentinfo"
-    },
     "hardware_dependencies": {
       "type": "array",
-      "title": "Component hardware dependencies",
+      "title": "Hardware dependencies",
       "items": {
         "$ref": "#/hardware_dependency"
       }
     },
     "software_dependencies": {
       "type": "array",
-      "title": "Component software dependencies",
+      "title": "Software dependencies",
       "items": {
         "$ref": "#/software_dependency"
       }
     },
+    "datamodel": {
+      "$ref": "#/datamodel"
+    },
     "public_endpoints": {
-      "type": "array",
-      "title": "Modules public endpoints",
-      "items": {
-        "$ref": "#/public_endpoint"
-      }
-    },
-    "features":{
-      "$ref": "#/features"
-    },
-    "benefits":{
-      "$ref": "#/benefits"
-    },
-    "productiveaxis": {
-      "type": "object",
-      "title": "Productive Axis",
-      "$ref": "#/productiveaxis"
-    },
-    "category": {
-      "type": "object",
-      "title": "Product Category",
-      "$ref": "#/category"
-    },
-    "module_properties": {
-      "type": "object",
-      "title": "Critical issues the AI module provides solutions for",
-      "$ref": "#/module_property"
-    },
-    "skills":{
-      "$ref": "#/skills"
+       "$ref": "#/public_endpoint"
     }
   },
   "information": {
     "type": "object",
-    "title": "Component information",
+    "title": "Registration Data",
     "properties": {
       "component_name": {
         "title": "Component name",
         "type": "string",
-        "description": "Component name as it is found in the RAMP Marketplace"
+        "description": "Provide the full name"
+      },
+      "component_accronym": {
+        "title": "Component Acronym",
+        "type": "string",
+        "description": "Provide the acronym of the full name"
       },
       "component_uuid": {
         "title": "Component UUID",
@@ -81,18 +65,181 @@
       "provider": {
         "title": "Provider",
         "type": "string",
-        "description": "Link to the component provider information"
+        "description": "Provide a link to the component provider web-site"
       },
       "version": {
         "title": "Version",
         "type": "string",
-        "description": "Latest version number of the component"
+        "description": "Specify the version number"
+      }
+    }
+  },
+  "datamodel": {
+    "type": "object",
+    "title": "I&O Datamodel",
+    "properties": {
+      "input": {
+        "type": "object",
+        "title": "Input Entities",
+        "description": "Select the types of NGSI entities required as input data",
+        "properties":{
+          "type":"array",
+          "factory": {
+            "type": "array",
+            "title": "Factory",
+            "items": {
+              "$ref": "#/datamodel_factory"
+            }
+          },
+          "devices": {
+            "type": "array",
+            "title": "Devices",
+            "items": {
+              "$ref": "#/datamodel_devices"
+            }
+          },
+          "measurements": {
+            "type": "array",
+            "title": "Measurements",
+            "items": {
+              "$ref": "#/datamodel_measurements"
+            }
+          },
+          "workers": {
+            "type": "array",
+            "title": "Workers",
+            "items": {
+              "$ref": "#/datamodel_workers"
+            }
+          },
+          "datamodel": {
+            "title": "Other",
+            "type": "string",
+            "description": "If necessary, provide the Input entities missing"
+          }
+        }
+      },
+      "output": {
+        "type": "object",
+        "title": "Output Entities",
+        "description": "Select the types of NGSI entities required as output data",
+        "properties":{
+          "type":"array",
+          "factory": {
+            "type": "array",
+            "title": "Factory",
+            "items": {
+              "$ref": "#/datamodel_factory"
+            }
+          },
+          "devices": {
+            "type": "array",
+            "title": "Devices",
+            "items": {
+              "$ref": "#/datamodel_devices"
+            }
+          },
+          "measurements": {
+            "type": "array",
+            "title": "Measurements",
+            "items": {
+              "$ref": "#/datamodel_measurements"
+            }
+          },
+          "workers": {
+            "type": "array",
+            "title": "Workers",
+            "items": {
+              "$ref": "#/datamodel_workers"
+            }
+          },
+          "datamodel": {
+            "title": "Other",
+            "type": "string",
+            "description": "If necessary, provide the Output entities missing"
+          }
+        }
+      },
+      "datamodel_links": {
+        "type": "object",
+        "title": "Datamodel Link",
+        "properties": {
+          "input": {
+            "title": " ",
+            "type": "string",
+            "description": "Provide link to Input Data Model"
+          },
+          "output": {
+            "title": " ",
+            "type": "string",
+            "description": "Provide link to Output Data Model"
+          }
+        }
+      }
+    }
+  },
+  "context": {
+    "type": "object",
+    "title": "Context and Purpose",
+    "properties": {
+      "industry": {
+        "type": "array",
+        "title": "Applicable industries",
+        "description": "Select the industrial manufacturing sectors to which your solution is suitable",
+        "items": {
+          "$ref": "#/industry"
+        }
+      },
+      "productiveaxis": {
+        "type": "object",
+        "title": "Axis",
+        "$ref": "#/productiveaxis"
+      },
+      "category": {
+        "type": "object",
+        "title": "Category",
+        "$ref": "#/category"
       },
       "description": {
         "title": "Description",
         "type": "string",
-        "description": "Description of the component outlining the indented use and high level features of the component"
+        "description": "Provide a brief description of how your solution works to achieve your goals"
       },
+      "features":{
+        "$ref": "#/features"
+      },
+      "benefits":{
+        "$ref": "#/benefits"
+      },
+      "usecase": {
+        "title": "Use Case",
+        "type": "object",
+        "description": "Provide a typical application use case",
+        "properties": {
+          "usecasedesc": {
+            "title": " ",
+            "type":"string"
+          }
+        }
+      }
+    }
+  },
+  "support": {
+    "type": "object",
+    "title": "Support Resources",
+    "properties": {
+      "online_resources": {
+        "title": "Support Resource",
+        "type": "string",
+        "description": "Provide web-based, links to Online Support Materials as tutorials, guidelines, instructions"
+      }
+    }
+  },
+  "description1": {
+    "type": "object",
+    "title": "Registration information",
+    "properties": {
+
       "online_resources": {
         "title": "Online Resources",
         "type": "string",
@@ -105,66 +252,78 @@
       }
     }
   },
-  "deploymentinfo": {
-    "type": "object",
-    "title": "Deployment information",
-    "properties": {
-      "datamodel": {
-        "title": "Data model",
-        "type": "string",
-        "description": "Link to schema defining components NGSI datamodel"
-      },
-      "multiuser_support": {
-          "type": "boolean",
-          "title": "Supports multiple users",
-          "default": false
-      },
-      "multtenancy_support": {
-          "type": "boolean",
-          "title": "Supports multitenancy",
-          "default": false
-      },
-      "dashboard": {
-        "title": "Databoard",
-        "type": "string",
-        "description": "Link to component dashboard"
-      }
-    }
-  },
   "techrequirements": {
     "type": "object",
     "title": "Technical requirements",
     "properties": {
-      "requirement_cpu": {
-        "title": "CPU requirement",
+      "multiuser_support": {
+        "type": "object",
+        "title": "Multiuser",
+        "description": "Tick ​​the option indicating the multi-user specifications of your solution",
+        "properties": {
+          "checkbox": {
+          "type": "boolean",
+          "title": "Supports multiple users",
+          "default": false
+        }
+      }
+    },
+    "multienancy_support": {
+      "type": "object",
+      "title": "Multitenancy",
+      "description": "Tick ​​the option indicating the multi-tenant specifications of your solution",
+      "properties": {
+        "checkbox": {
+          "type": "boolean",
+          "title": "Supports multitenancy",
+          "default": false
+        }
+      }
+    },
+      "dashboard": {
+        "title": "Dashboard",
         "type": "string",
-        "description": "Number of requirred CPU cores"
+        "description": "Provide the link of your solutution dashboard or browser-accessible page"
+      },
+      "os": {
+        "$ref":"#/os"
+      },
+      "requirement_cpu": {
+        "title": "CPU",
+        "type": "string",
+        "description": "Provide the required Central Processing Unit specifications* [Number of Core]"
+      },
+      "requirement_gpu": {
+        "title": "GPU",
+        "type": "string",
+        "description": "Provide the requred Graphics Processing Units specificaitons* [Tick the most apropriate UM] "
       },
       "requirement_ram": {
-        "title": "Memory requirement",
+        "title": "RAM",
         "type": "string",
-        "description": "Required memory in gigabytes"
+        "description": "Provide the required Memory specifications* [Tick the most apropriate UM] "
       },
       "requirement_disk": {
-        "title": "Disk space requirement",
+        "title": "Disk Space",
         "type": "string",
-        "description": "Required disk space"
+        "description": "Provide the required Disk space specifications*  [Tick the most apropriate UM] "
       },
       "protocol": {
         "type": "array",
-        "title": "Communication protocols used",
+        "title": "Connectivity",
+        "description": "Provide the type(s) of connectivity allowed",
         "items": {
           "properties": {
-          "name": {
-            "type": "string",
-            "title": "Name of the protocoll"
+            "name": {
+              "type": "string",
+              "title": "Name of the protocoll"
+            }
           }
-        }
         }
       }
     }
   },
-   "productiveaxis": {
+  "productiveaxis": {
     "type": "object",
     "title": "Productive axis",
      "description": "Select productive axis(es) that the component belongs to:",
@@ -205,8 +364,116 @@
         }
       }
    },
-  "industry":{
-    "title": "Applicable industry (NACE classification)",
+    "datamodel_factory":{
+      "type": "string",
+      "oneOf": [
+        {
+          "const":"1",
+          "title":"Factory"
+        },
+        {
+          "const":"2",
+          "title":"Location"
+        },
+        {
+          "const":"3",
+          "title":"FactoryLocation"
+        }
+        ,
+        {
+          "const":"4",
+          "title":"Shopfloor"
+        }
+      ]
+    },
+    "datamodel_devices":{
+      "type": "string",
+      "oneOf": [
+        {
+          "const":"1",
+          "title":"EquipmentDevice"
+        },
+        {
+          "const":"2",
+          "title":"DeviceProperties"
+        },
+        {
+          "const":"3",
+          "title":"IoTDevice"
+        },
+        {
+          "const":"4",
+          "title":"DevicePosition"
+        },
+        {
+          "const":"5",
+          "title":"WearableDevice"
+        }
+      ]
+    },
+    "datamodel_measurements":{
+      "type": "string",
+      "oneOf": [
+        {
+          "const":"1",
+          "title":"Metadata"
+        },
+        {
+          "const":"2",
+          "title":"IOData"
+        },
+        {
+          "const":"3",
+          "title":"Timestamp"
+        },
+        {
+          "const":"4",
+          "title":"BinaryObject"
+        },
+        {
+          "const":"5",
+          "title":"Session"
+        },
+        {
+          "const":"6",
+          "title":"SmartNotification"
+        },
+        {
+          "const":"7",
+          "title":"ImageObject"
+        },
+        {
+          "const":"8",
+          "title":"DeviceMeasurement"
+        },
+        {
+          "const":"9",
+          "title":"PhysiologicalData"
+        },
+        {
+          "const":"10",
+          "title":"EquipmentIoTMeasurement"
+        }
+      ]
+    },
+    "datamodel_workers":{
+      "type": "string",
+      "oneOf": [
+        {
+          "const":"1",
+          "title":"WorkerStaticProperties"
+        },
+        {
+          "const":"2",
+          "title":"Worker"
+        },
+        {
+          "const":"3",
+          "title":"WorkeSession"
+        }
+      ]
+    },
+    "industry":{
       "type": "string",
       "oneOf": [
         {
@@ -317,14 +584,14 @@
   },
   "hardware_dependency": {
     "type": "object",
-    "title": "Hardware dependency",
+    "title": "Dependency",
     "properties": {
       "device_link": {
         "type": "string",
-        "title": "Link to device resource that can be link to device data sheet or website further describing device"
+        "title": "Name"
       },
       "device_text": {
-        "title": "Device manufacturer and model",
+        "title": "Role",
         "type": "string"
       },
       "dependency_level": {
@@ -349,19 +616,19 @@
   },
   "software_dependency": {
     "type": "object",
-    "title": "Software dependency",
+    "title": "Dependency",
     "properties": {
       "module_link": {
         "type": "string",
-        "title": "Link to software resource that can be link to device data sheet or website further describing device"
+        "title": "Name"
       },
       "module_text": {
         "type": "string",
-        "title": "Description of  the software manufacturer and model"
+        "title": "Role"
       },
       "dependency_level": {
         "type": "string",
-        "title": "Dependency level of the component",
+        "title": "Dependency level of the SW component",
         "oneOf": [
           {
             "const":"1",
@@ -376,6 +643,10 @@
             "title":"No, the SW reported would be used for additional functionalities"
           }
         ]
+      },
+      "module_id": {
+        "type": "string",
+        "title": "Provide the RAMP ID"
       }
     }
   },
@@ -552,36 +823,23 @@
   },
   "public_endpoint": {
     "type": "object",
-    "title": "Public API endpoints",
+    "title": "Public  Endpoints",
     "properties": {
-      "endpoint": {
-        "type": "string",
-        "description": "Link to the module endpoint"
+      "oapi": {
+        "type": "boolean",
+        "title": "Yes, there are OpenAPI specifications that describe entire API including available Endpoint "
       },
-      "protocol": {
+      "oapijson": {
+        "title": "OAPIjson",
         "type": "string",
-        "description": "Protocol that the endpoint expects like MQTT, REST, etc"
-      },
-      "method": {
-        "type": "string",
-        "default": "",
-        "description": "For REST this would be one of GET, POST, DELETE, PUT, PATCH"
-      },
-      "headers": {
-        "type": "array",
-        "items": {
-          "$ref": "#/headers"
-        }
-      },
-      "payload": {
-        "type": "string",
-        "description": "Endpoint payload definition as JSON or other structured format"
+        "description": "Provide the Json file for the OpenAPI specification"
       }
     }
   },
   "features":{
     "type": "object",
-    "title": "Features that the component offers",
+    "title": "Features",
+    "description": "Select the feature(s) included in the offer of your solution depending on the production context. It must be inherent in at least 1 of the 4 production contexts",
     "properties": {
       "quality": {
         "type": "array",
@@ -723,8 +981,8 @@
   },
   "benefits":{
     "type": "object",
-    "title": "Benefits of the component",
-    "description": "Tick the main benefit(s) end users will get from your solution. It must be inherent in at least 1 of the 4 production contexts",
+    "title": "Benefits",
+    "description": "Select the main benefit(s) end users will get from your solution. It must be inherent in at least 1 of the 4 production contexts",
     "properties":
       {
       "quality": {
@@ -739,7 +997,7 @@
           },
           "2": {
             "type": "boolean",
-            "title": "Optimized Product Quality Control Process",
+            "title": "Improve the overall Quality of the Product",
             "default": false
           }
         }
@@ -802,169 +1060,215 @@
       }
     }
   },
+  "os":{
+    "type":"array",
+    "title": "Operting System",
+    "description": "Tick the Operating System type(s) required by your solution*",
+    "items": {
+      "type":"string",
+      "oneOf": [
+        {
+          "const":"1",
+          "title":"Apple iOS"
+        },
+        {
+          "const":"2",
+          "title":"Apple macOS"
+        },
+        {
+          "const":"3",
+          "title":"Microsoft Windows"
+        },
+        {
+          "const":"4",
+          "title":"Google's Android OS"
+        },
+        {
+          "const":"5",
+          "title":"Unix-like OS"
+        }
+      ]
+    }
+  },
   "skills": {
     "type": "object",
-    "title": "Basic worker Skills in case you believe they are necessary to use your solution",
+    "title": "Skill Requirements",
     "properties": {
-      "process": {
-        "type": "array",
-        "title": "Process Skills",
-        "items": {
-          "type":"string",
-          "oneOf": [
-            {
-              "const":"1",
-              "title":"Active Learning"
-            },
-            {
-              "const":"2",
-              "title":"Critical Thinking"
-            },
-            {
-              "const":"3",
-              "title":"Learning Strategies"
-            },
-            {
-              "const":"4",
-              "title":"Monitoring"
+      "basic": {
+        "type": "object",
+        "title": "Basic Skills",
+        "description": "Select the basic worker skills in case you believe they are necessary to use your solution",
+        "properties": {
+          "type": "object",
+          "process": {
+            "title": "Process skills",
+            "type":"array",
+            "items": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Active Learning"
+                },
+                {
+                  "const":"2",
+                  "title":"Critical Thinking"
+                },
+                {
+                  "const":"3",
+                  "title":"Learning Strategies"
+                },
+                {
+                  "const":"4",
+                  "title":"Monitoring"
+                }
+              ]
             }
-          ]
+          }
         }
       },
-      "problemsolving": {
-        "type": "array",
-        "title": "Complex Problem Solving & Resource Management Skills",
-        "items": {
-          "type":"string",
-          "oneOf": [
-            {
-              "const":"1",
-              "title":"Complex Problem Solving"
-            },
-            {
-              "const":"2",
-              "title":"Management of Financial Resources"
-            },
-            {
-              "const":"3",
-              "title":"Management of Material Resources"
-            },
-            {
-              "const":"4",
-              "title":"Management of Personnel Resources"
-            },
-            {
-              "const":"5",
-              "title":"Time Management"
+      "crossfunctional": {
+        "type": "object",
+        "title": "Cross-Functional Skills",
+        "description": "Select cross-functional worker skills in case you believe they are necessary to use your solution",
+        "properties": {
+          "type": "object",
+          "problemsolving": {
+            "type": "array",
+            "title": "Complex Problem Solving & Resource Management Skills",
+            "items": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Complex Problem Solving"
+                },
+                {
+                  "const":"2",
+                  "title":"Management of Financial Resources"
+                },
+                {
+                  "const":"3",
+                  "title":"Management of Material Resources"
+                },
+                {
+                  "const":"4",
+                  "title":"Management of Personnel Resources"
+                },
+                {
+                  "const":"5",
+                  "title":"Time Management"
+                }
+              ]
             }
-          ]
-        }
-      },
-      "social": {
-        "type": "array",
-        "title": "Social Skills",
-        "items": {
-          "type":"string",
-          "oneOf": [
-            {
-              "const":"1",
-              "title":"Coordination"
-            },
-            {
-              "const":"2",
-              "title":"Instructing"
-            },
-            {
-              "const":"3",
-              "title":"Negotiation"
-            },
-            {
-              "const":"4",
-              "title":"Persuasion"
-            },
-            {
-              "const":"5",
-              "title":"Service Orientation"
-            },
-            {
-              "const":"5",
-              "title":"Social Perceptiveness"
+          },
+          "social": {
+            "type": "array",
+            "title": "Social Skills",
+            "items": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Coordination"
+                },
+                {
+                  "const":"2",
+                  "title":"Instructing"
+                },
+                {
+                  "const":"3",
+                  "title":"Negotiation"
+                },
+                {
+                  "const":"4",
+                  "title":"Persuasion"
+                },
+                {
+                  "const":"5",
+                  "title":"Service Orientation"
+                },
+                {
+                  "const":"5",
+                  "title":"Social Perceptiveness"
+                }
+              ]
             }
-          ]
-        }
-      },
-      "system": {
-        "type": "array",
-        "title": "System Skills",
-        "items": {
-          "type":"string",
-          "oneOf": [
-            {
-              "const":"1",
-              "title":"Judgment and Decision Making"
-            },
-            {
-              "const":"2",
-              "title":"Systems Analysis"
-            },
-            {
-              "const":"3",
-              "title":"Systems Evaluation"
+          },
+          "system": {
+            "type": "array",
+            "title": "System Skills",
+            "items": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Judgment and Decision Making"
+                },
+                {
+                  "const":"2",
+                  "title":"Systems Analysis"
+                },
+                {
+                  "const":"3",
+                  "title":"Systems Evaluation"
+                }
+              ]
             }
-          ]
-        }
-      },
-      "technical": {
-        "type": "array",
-        "title": "Technical Skills",
-        "items": {
-          "type":"string",
-          "oneOf": [
-            {
-              "const":"1",
-              "title":"Equipment Maintenance"
-            },
-            {
-              "const":"2",
-              "title":"Equipment Selection"
-            },
-            {
-              "const":"3",
-              "title":"Installation"
-            },
-            {
-              "const":"4",
-              "title":"Operation and Control"
-            },
-            {
-              "const":"5",
-              "title":"Operation Analysis"
-            },
-            {
-              "const":"6",
-              "title":"Operation Monitoring"
-            },
-            {
-              "const":"7",
-              "title":"Programming"
-            },
-            {
-              "const":"8",
-              "title":"Quality Control Analysis"
-            },
-            {
-              "const":"9",
-              "title":"Repairing"
-            },
-            {
-              "const":"10",
-              "title":"Technology Design"
-            },
-            {
-              "const":"11",
-              "title":"Troubleshooting"
+          },
+          "technical": {
+            "type": "array",
+            "title": "Technical Skills",
+            "items": {
+              "type":"string",
+              "oneOf": [
+                {
+                  "const":"1",
+                  "title":"Equipment Maintenance"
+                },
+                {
+                  "const":"2",
+                  "title":"Equipment Selection"
+                },
+                {
+                  "const":"3",
+                  "title":"Installation"
+                },
+                {
+                  "const":"4",
+                  "title":"Operation and Control"
+                },
+                {
+                  "const":"5",
+                  "title":"Operation Analysis"
+                },
+                {
+                  "const":"6",
+                  "title":"Operation Monitoring"
+                },
+                {
+                  "const":"7",
+                  "title":"Programming"
+                },
+                {
+                  "const":"8",
+                  "title":"Quality Control Analysis"
+                },
+                {
+                  "const":"9",
+                  "title":"Repairing"
+                },
+                {
+                  "const":"10",
+                  "title":"Technology Design"
+                },
+                {
+                  "const":"11",
+                  "title":"Troubleshooting"
+                }
+              ]
             }
-          ]
+          }
         }
       }
     }

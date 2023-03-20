@@ -9,12 +9,19 @@ import TextInputComponent from "../components/TextInput.js";
 import Spacer from "../components/Spacer";
 import SingleButtonComponent from "../components/SingleButton.js";
 import { useKeycloak } from "@react-keycloak/web";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import Title from "../components/Title.js";
+import CardComponent from "../components/CardComponent.js";
+import Paper from "@mui/material/Paper";
+import CircularLoaderComponent from "../components/CircularLoader";
 
 const HomePageFunctionality = () => {
+  const [loading, setLoading] = useState(false);
+
   const [response, setResponse] = useState(null);
   const [filter, setFilter] = useState("");
-  const [selectedCheckboxes, setselectedCheckboxes] = useState("")
+  const [selectedCheckboxes, setselectedCheckboxes] = useState("");
   const [checkboxes, setCheckboxes] = useState({
     "module_properties.quality.issue_1": false,
     "module_properties.quality.issue_2": false,
@@ -33,7 +40,6 @@ const HomePageFunctionality = () => {
     "module_properties.management.issue_1": false,
     "module_properties.management.issue_2": false,
     "module_properties.management.issue_3": false,
-
   });
 
   const { keycloak } = useKeycloak();
@@ -50,7 +56,7 @@ const HomePageFunctionality = () => {
     const selectedCheckboxes = Object.entries(checkboxes)
       .filter(([, checked]) => checked)
       .map(([value]) => value);
-    setselectedCheckboxes(selectedCheckboxes)
+    setselectedCheckboxes(selectedCheckboxes);
     const payload = {
       filter,
       selectedCheckboxes,
@@ -58,7 +64,10 @@ const HomePageFunctionality = () => {
     };
     console.log("PAYLOAD", payload);
     axios
-      .post("http://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets-search", payload)
+      .post(
+        "http://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets-search",
+        payload
+      )
       .then((response) => {
         console.log(response.data);
         setResponse(response.data);
@@ -86,14 +95,21 @@ const HomePageFunctionality = () => {
       "module_properties.management.issue_1": false,
       "module_properties.management.issue_2": false,
       "module_properties.management.issue_3": false,
-
     });
   };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleNavigation = () => {
-    navigate('/search-results', {state: {'results': response.data}})
-  }
+    navigate("/search-results", { state: { results: response.data } });
+  };
+
+  const handleNavigationClick = (clickedItemData) => {
+    navigate("/selected-search-result", { state: { data: clickedItemData } });
+  };
+
+  const handleClick = (clickedItemData) => {
+    handleNavigationClick(clickedItemData);
+  };
   return (
     <>
       <div>
@@ -159,7 +175,6 @@ const HomePageFunctionality = () => {
                       sx={{ fontSize: "1.5rem" }}
                     />
                   </Grid>
-
                 </Grid>
                 <Grid item xs={3}>
                   <Typography variant="h6">Operator Wellbeing</Typography>
@@ -259,7 +274,6 @@ const HomePageFunctionality = () => {
                       sx={{ fontSize: "1.5rem" }}
                     />
                   </Grid>
-
                 </Grid>
                 <Grid item xs={3}>
                   <Typography variant="h6">Machine Performance</Typography>
@@ -311,7 +325,6 @@ const HomePageFunctionality = () => {
                       sx={{ fontSize: "1.5rem" }}
                     />
                   </Grid>
-
                 </Grid>
                 <Grid item xs={3}>
                   <Typography variant="h6">Production Management</Typography>
@@ -381,18 +394,72 @@ const HomePageFunctionality = () => {
             handleClick={() => handleResetClick()}
           />
         </Box>
-        {response && response.data ? (
-          <>
-          <Typography sx={{ fontSize: "1.5rem" }} variant="h6">
-            Search criteria yielded {response.data.length} results
-          </Typography>
-          <SingleButtonComponent
-          text={"View results"}
-          path={""}
-          handleClick={() => handleNavigation()}
-        />
-        </>
-        ) : null}
+        <div
+          className="container-fluid"
+          style={{ paddingTop: "5%", paddingBottom: "5%", width: "50%" }}
+        >
+          {response != undefined ? (
+            <>
+              <Spacer />
+              {loading ? (
+                <>
+                  <Title text={"Loading datasheets"} />
+                  <Spacer />
+                  <CircularLoaderComponent />
+                </>
+              ) : (
+                <>
+                  <Spacer />
+                  <Paper
+                    style={{ maxHeight: 500, maxWidth: 1500, overflow: "auto" }}
+                  >
+                    {Object.keys(response).map((key, index) => {
+                      console.log("response", response.data);
+                      return (
+                        <div key={key}>
+                          <Spacer />
+                          <CardComponent
+                            component_name={
+                              response.data[index].datasheet?.information
+                                ?.component_name
+                            }
+                            description={
+                              response.data[index].datasheet?.information
+                                ?.description
+                            }
+                            provider={
+                              response.data[index].datasheet?.information
+                                ?.provider
+                            }
+                            version={
+                              response.data[index].datasheet?.information
+                                ?.version
+                            }
+                            handleClick={() =>
+                              handleClick(response.data[index])
+                            }
+                          />
+                        </div>
+                      );
+                    })}
+                  </Paper>
+                  <Spacer />
+                  <Title
+                    text={
+                      "Loaded: " + Object.keys(response).length + " datasheets"
+                    }
+                  />
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              <Spacer />
+            </>
+          )}
+
+          <Spacer />
+        </div>
       </div>
 
       <div>

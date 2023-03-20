@@ -7,7 +7,6 @@ import PrivateRoute from "./helpers/PrivateRoute";
 
 import HomePage from "./pages/LandingPage";
 
-import SearchResultsPage from "./pages/SearchResultsPage"
 import SearchResultSelectedPage from "./pages/SearchResultSelected"
 import CreateDataSheet from "./pages/CreateDatasheetPage";
 
@@ -36,14 +35,6 @@ function App() {
                                 element={
                                     <PrivateRoute>
                                         <CreateDataSheet/>
-                                    </PrivateRoute>
-                                }
-                            />
-                            <Route
-                                path="/search-results"
-                                element={
-                                    <PrivateRoute>
-                                        <SearchResultsPage/>
                                     </PrivateRoute>
                                 }
                             />

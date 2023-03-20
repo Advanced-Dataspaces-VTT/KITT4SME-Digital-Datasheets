@@ -54,11 +54,7 @@ export default function ProfileIconComponent() {
                      open={Boolean(anchorEl)}
                      onClose={handleClose}
                 >
-                    {/*<MenuItem onClick={() => handleNavigation('/my-profile')} sx={{fontSize: 15}}>My profile</MenuItem>
-                    <MenuItem onClick={() => handleNavigation('/my-datasheets')} sx={{fontSize: 15}}>My datasheets</MenuItem>
-                    <MenuItem onClick={() => handleNavigation('/create-datasheet')} sx={{fontSize: 15}}>Create datasheet</MenuItem>
-                    <MenuItem onClick={() => handleNavigation('/Search')} sx={{fontSize: 15}}>Search</MenuItem>*/}
-                    <MenuItem onClick={() => handleNavigation('/Search')} sx={{fontSize: 15}}>Search</MenuItem>
+                    <MenuItem onClick={() => handleNavigation('/search')} sx={{fontSize: 15}}>Search</MenuItem>
                     <MenuItem onClick={() => handleNavigation('/create-datasheet')} sx={{fontSize: 15}}>Create datasheet</MenuItem>
                     <MenuItem onClick={() => keycloak.logout()} sx={{fontSize: 15}}>Logout</MenuItem>
             </Menu>

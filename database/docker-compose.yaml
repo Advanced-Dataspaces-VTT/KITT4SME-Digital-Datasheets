@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  database:
+    container_name: kitt4sme-digital-datasheets-database
+    build: .
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./.env:/app/.env
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USER}
+      POSTGRES_PASSWORD: ${POSTGRESQL_PASSWORD}
+      POSTGRES_DB: ${POSTGRESQL_DATABASE}
+      POSTGRES_HOST: ${POSTGRESQL_HOST}
+      POSTGRES_PORT: ${POSTGRESQL_PORT}

@@ -1,22 +1,19 @@
 {
 	"info": {
-		"_postman_id": "cce7e87d-e8f7-4090-a291-798b3acdb367",
-		"name": "KITT4SME",
+		"_postman_id": "6e831459-06cb-4acf-a147-38acd9a9338a",
+		"name": "KITT4SME ONLINE",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "11787626"
 	},
 	"item": [
 		{
-			"name": "return_all_datasheets",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "search_datasheets",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\n    \"filter\":\"\",\n    \"selectedCheckboxes\":[\n        \"module_properties.quality.issue_1\",\n        \"module_properties.quality.issue_2\",\n        \"module_properties.operator.issue_1\",\n        \"module_properties.operator.issue_2\",\n        \"module_properties.operator.issue_3\",\n        \"module_properties.operator.issue_4\",\n        \"module_properties.operator.issue_5\",\n        \"module_properties.operator.issue_6\",\n        \"module_properties.performance.issue_1\",\n        \"module_properties.performance.issue_2\",\n        \"module_properties.performance.issue_3\",\n        \"module_properties.management.issue_1\",\n        \"module_properties.management.issue_2\",\n        \"module_properties.management.issue_3\"\n    ],\n    \"keycloak_id\":\"76cd49c6-5d52-498c-b50e-a016910ba358\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -24,76 +21,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/datasheets",
-					"protocol": "http",
+					"raw": "{{base_url}}/datasheets-search",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5000",
 					"path": [
-						"datasheets"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "return_all_datasheets_id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"datasheet_id\": \"1\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/datasheets",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"datasheets"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "return_all_datasheets_keycloak_id",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"keycloak_id\": \"qwertyujlvkcjt1233\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/datasheets",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"datasheets"
+						"datasheets-search"
 					]
 				}
 			},
@@ -114,65 +47,43 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/datasheets",
-					"protocol": "http",
+					"raw": "{{base_url}}/datasheets",
 					"host": [
-						"localhost"
+						"{{base_url}}"
 					],
-					"port": "5000",
 					"path": [
 						"datasheets"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		},
 		{
-			"name": "return_all_customers",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/customer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"customer"
-					]
-				}
-			},
-			"response": []
-		},
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
 		{
-			"name": "insert_new_customer",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"keycloak_id\": \"qwertyujlvkcjt1233\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:5000/customer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"customer"
-					]
-				}
-			},
-			"response": []
+			"key": "base_url",
+			"value": "",
+			"type": "string"
 		}
 	]
 }

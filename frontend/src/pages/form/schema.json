@@ -291,22 +291,31 @@
       "requirement_cpu": {
         "title": "CPU",
         "type": "string",
-        "description": "Provide the required Central Processing Unit specifications* [Number of Core]"
+        "description": "Provide the required Central Processing Unit specifications [Number of Core]"
       },
       "requirement_gpu": {
         "title": "GPU",
         "type": "string",
-        "description": "Provide the requred Graphics Processing Units specificaitons* [Tick the most apropriate UM] "
+        "description": "Provide the requred Graphics Processing Units specifications"
+      },
+      "gpu_unit": {
+        "$ref":"#/unit"
       },
       "requirement_ram": {
         "title": "RAM",
         "type": "string",
-        "description": "Provide the required Memory specifications* [Tick the most apropriate UM] "
+        "description": "Provide the required Memory specifications"
+      },
+      "ram_unit": {
+        "$ref":"#/unit"
       },
       "requirement_disk": {
         "title": "Disk Space",
         "type": "string",
-        "description": "Provide the required Disk space specifications*  [Tick the most apropriate UM] "
+        "description": "Provide the required Disk space specifications"
+      },
+       "disk_unit": {
+        "$ref":"#/unit"
       },
       "protocol": {
         "type": "array",
@@ -326,7 +335,7 @@
   "productiveaxis": {
     "type": "object",
     "title": "Productive axis",
-     "description": "Select productive axis(es) that the component belongs to:",
+    "description": "Select productive axis(es) that the component belongs to:",
     "properties":
       {
         "ai_hri": {
@@ -349,7 +358,7 @@
    "category": {
     "type": "object",
     "title": "Component Category",
-     "description": "Select category to which the component belongs to:",
+    "description": "Select category to which the component belongs to:",
     "properties":
       {
         "reasoning": {
@@ -366,6 +375,7 @@
    },
     "datamodel_factory":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -388,6 +398,7 @@
     },
     "datamodel_devices":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -413,6 +424,7 @@
     },
     "datamodel_measurements":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -458,6 +470,7 @@
     },
     "datamodel_workers":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -475,6 +488,7 @@
     },
     "industry":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -597,6 +611,7 @@
       "dependency_level": {
         "type": "string",
         "title": "Dependency level of the HW component",
+        "default": 1,
         "oneOf": [
           {
             "const":"1",
@@ -629,6 +644,7 @@
       "dependency_level": {
         "type": "string",
         "title": "Dependency level of the SW component",
+        "default": 1,
         "oneOf": [
           {
             "const":"1",
@@ -663,6 +679,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -675,17 +692,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -698,6 +705,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -726,17 +734,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -749,6 +747,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -765,17 +764,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -788,6 +777,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -804,17 +794,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -846,6 +826,7 @@
         "title": "Quality",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -879,6 +860,7 @@
         "title": "Operator Wellbeing",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -912,6 +894,7 @@
         "title": "Machine Performance",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -945,6 +928,7 @@
         "title": "Production Management",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -1066,6 +1050,7 @@
     "description": "Tick the Operating System type(s) required by your solution*",
     "items": {
       "type":"string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -1090,6 +1075,40 @@
       ]
     }
   },
+  "unit":{
+    "type":"string",
+    "title": " ",
+    "description": "Select the unit of measure",
+    "default": 1,
+    "oneOf": [
+        {
+          "const":"1",
+          "title":"KB"
+        },
+        {
+          "const":"2",
+          "title":"MB"
+        },
+        {
+          "const":"3",
+          "title":"GB"
+        }
+    ]
+  },
+  "relevance":{
+    "type":"string",
+    "default": 1,
+    "oneOf": [
+      {
+        "const":"1",
+        "title":"The solution aims to completely solve or mitigate the criticality"
+      },
+      {
+        "const":"2",
+        "title":"The solution can contribute mitigate the criticality"
+      }
+    ]
+  },
   "skills": {
     "type": "object",
     "title": "Skill Requirements",
@@ -1105,6 +1124,7 @@
             "type":"array",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1138,6 +1158,7 @@
             "title": "Complex Problem Solving & Resource Management Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1167,6 +1188,7 @@
             "title": "Social Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1200,6 +1222,7 @@
             "title": "System Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1221,6 +1244,7 @@
             "title": "Technical Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",

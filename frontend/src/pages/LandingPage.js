@@ -412,7 +412,7 @@ const HomePageFunctionality = () => {
                   <Paper
                     style={{ maxHeight: 500, maxWidth: 1500, overflow: "auto" }}
                   >
-                    {Object.keys(response).map((key, index) => {
+                    {Object.keys(response.data).map((key, index) => {
                       return (
                         <div key={key}>
                           <Spacer />
@@ -444,7 +444,7 @@ const HomePageFunctionality = () => {
                   <Spacer />
                   <Title
                     text={
-                      "Loaded: " + Object.keys(response).length + " datasheets"
+                      "Loaded: " + Object.keys(response.data).length + " datasheets"
                     }
                   />
                 </>

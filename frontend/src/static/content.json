@@ -1,3 +1,4 @@
+
 {
   "type": "object",
   "title": "KITT4SME Digital Datasheet",
@@ -45,17 +46,17 @@
   },
   "information": {
     "type": "object",
-    "title": "Registration information",
+    "title": "Registration Data",
     "properties": {
       "component_name": {
         "title": "Component name",
         "type": "string",
-        "description": "Component name as it is found in the RAMP Marketplace"
+        "description": "Provide the full name"
       },
       "component_accronym": {
         "title": "Component Acronym",
         "type": "string",
-        "description": "Acronym for the component"
+        "description": "Provide the acronym of the full name"
       },
       "component_uuid": {
         "title": "Component UUID",
@@ -65,12 +66,12 @@
       "provider": {
         "title": "Provider",
         "type": "string",
-        "description": "Link to the component provider information"
+        "description": "Provide a link to the component provider web-site"
       },
       "version": {
         "title": "Version",
         "type": "string",
-        "description": "Latest version number of the component"
+        "description": "Specify the version number"
       }
     }
   },
@@ -159,6 +160,22 @@
             "description": "If necessary, provide the Output entities missing"
           }
         }
+      },
+      "datamodel_links": {
+        "type": "object",
+        "title": "Datamodel Link",
+        "properties": {
+          "input": {
+            "title": " ",
+            "type": "string",
+            "description": "Provide link to Input Data Model"
+          },
+          "output": {
+            "title": " ",
+            "type": "string",
+            "description": "Provide link to Output Data Model"
+          }
+        }
       }
     }
   },
@@ -243,11 +260,11 @@
       "multiuser_support": {
         "type": "object",
         "title": "Multiuser",
-        "description": "Tick ​​the option indicating the multi-user specifications of your solution",
+        "description": "Select if your solution supports multiple users",
         "properties": {
           "checkbox": {
           "type": "boolean",
-          "title": "Supports multiple users",
+          "title": "Yes, users share the same instance",
           "default": false
         }
       }
@@ -255,11 +272,11 @@
     "multienancy_support": {
       "type": "object",
       "title": "Multitenancy",
-      "description": "Tick ​​the option indicating the multi-tenant specifications of your solution",
+      "description": "Select ​​if your solution suports multi-tenancy",
       "properties": {
         "checkbox": {
           "type": "boolean",
-          "title": "Supports multitenancy",
+          "title": "Yes, the component supports multi tenancy so that several instances of the component can run on single machine",
           "default": false
         }
       }
@@ -269,25 +286,37 @@
         "type": "string",
         "description": "Provide the link of your solutution dashboard or browser-accessible page"
       },
+      "os": {
+        "$ref":"#/os"
+      },
       "requirement_cpu": {
         "title": "CPU",
         "type": "string",
-        "description": "Provide the required Central Processing Unit specifications* [Number of Core]"
+        "description": "Provide the required Central Processing Unit specifications [Number of Core]"
       },
       "requirement_gpu": {
         "title": "GPU",
         "type": "string",
-        "description": "Provide the requred Graphics Processing Units specificaitons* [Tick the most apropriate UM] "
+        "description": "Provide the required Memory dimension of Graphics Processing Units"
+      },
+      "gpu_unit": {
+        "$ref":"#/unit"
       },
       "requirement_ram": {
         "title": "RAM",
         "type": "string",
-        "description": "Provide the required Memory specifications* [Tick the most apropriate UM] "
+        "description": "Provide the required Memory specifications"
+      },
+      "ram_unit": {
+        "$ref":"#/unit"
       },
       "requirement_disk": {
         "title": "Disk Space",
         "type": "string",
-        "description": "Provide the required Disk space specifications*  [Tick the most apropriate UM] "
+        "description": "Provide the required Disk space specifications"
+      },
+       "disk_unit": {
+        "$ref":"#/unit"
       },
       "protocol": {
         "type": "array",
@@ -307,7 +336,7 @@
   "productiveaxis": {
     "type": "object",
     "title": "Productive axis",
-     "description": "Select productive axis(es) that the component belongs to:",
+    "description": "Select productive axis(es) that the component belongs to:",
     "properties":
       {
         "ai_hri": {
@@ -330,7 +359,7 @@
    "category": {
     "type": "object",
     "title": "Component Category",
-     "description": "Select category to which the component belongs to:",
+    "description": "Select category to which the component belongs to:",
     "properties":
       {
         "reasoning": {
@@ -347,6 +376,7 @@
    },
     "datamodel_factory":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -369,6 +399,7 @@
     },
     "datamodel_devices":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -394,6 +425,7 @@
     },
     "datamodel_measurements":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -439,6 +471,7 @@
     },
     "datamodel_workers":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -456,6 +489,7 @@
     },
     "industry":{
       "type": "string",
+      "default": 1,
       "oneOf": [
         {
           "const":"1",
@@ -578,6 +612,7 @@
       "dependency_level": {
         "type": "string",
         "title": "Dependency level of the HW component",
+        "default": 1,
         "oneOf": [
           {
             "const":"1",
@@ -603,6 +638,10 @@
         "type": "string",
         "title": "Name"
       },
+      "module_version": {
+        "type": "string",
+        "title": "Version"
+      },
       "module_text": {
         "type": "string",
         "title": "Role"
@@ -610,6 +649,7 @@
       "dependency_level": {
         "type": "string",
         "title": "Dependency level of the SW component",
+        "default": 1,
         "oneOf": [
           {
             "const":"1",
@@ -624,6 +664,10 @@
             "title":"No, the SW reported would be used for additional functionalities"
           }
         ]
+      },
+      "module_id": {
+        "type": "string",
+        "title": "Provide the RAMP ID"
       }
     }
   },
@@ -640,6 +684,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -652,17 +697,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -675,6 +710,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -703,17 +739,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -726,6 +752,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -742,17 +769,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -765,6 +782,7 @@
           "properties":{
             "issue": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -781,17 +799,7 @@
               ]
             },
             "relevance":{
-              "type":"string",
-              "oneOf": [
-                {
-                  "const":"1",
-                  "title":"The solution aims to completely solve or mitigate the criticality"
-                },
-                {
-                  "const":"2",
-                  "title":"The solution can contribute mitigate the criticality"
-                }
-              ]
+              "$ref":"#/relevance"
             }
           }
         }
@@ -823,6 +831,7 @@
         "title": "Quality",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -856,6 +865,7 @@
         "title": "Operator Wellbeing",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -889,6 +899,7 @@
         "title": "Machine Performance",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -922,6 +933,7 @@
         "title": "Production Management",
         "items": {
           "type":"string",
+          "default": 1,
           "oneOf": [
             {
               "const":"1",
@@ -974,7 +986,7 @@
           },
           "2": {
             "type": "boolean",
-            "title": "Optimized Product Quality Control Process",
+            "title": "Improve the overall Quality of the Product",
             "default": false
           }
         }
@@ -1037,6 +1049,71 @@
       }
     }
   },
+  "os":{
+    "type":"array",
+    "title": "Operting System",
+    "description": "Tick the Operating System type(s) required by your solution*",
+    "items": {
+      "type":"string",
+      "default": 1,
+      "oneOf": [
+        {
+          "const":"1",
+          "title":"Apple iOS"
+        },
+        {
+          "const":"2",
+          "title":"Apple macOS"
+        },
+        {
+          "const":"3",
+          "title":"Microsoft Windows"
+        },
+        {
+          "const":"4",
+          "title":"Google's Android OS"
+        },
+        {
+          "const":"5",
+          "title":"Unix-like OS"
+        }
+      ]
+    }
+  },
+  "unit":{
+    "type":"string",
+    "title": " ",
+    "description": "Select the unit of measure",
+    "default": 1,
+    "oneOf": [
+        {
+          "const":"1",
+          "title":"KB"
+        },
+        {
+          "const":"2",
+          "title":"MB"
+        },
+        {
+          "const":"3",
+          "title":"GB"
+        }
+    ]
+  },
+  "relevance":{
+    "type":"string",
+    "default": 1,
+    "oneOf": [
+      {
+        "const":"1",
+        "title":"The solution aims to completely solve or mitigate the criticality"
+      },
+      {
+        "const":"2",
+        "title":"The solution can contribute mitigate the criticality"
+      }
+    ]
+  },
   "skills": {
     "type": "object",
     "title": "Skill Requirements",
@@ -1052,6 +1129,7 @@
             "type":"array",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1085,6 +1163,7 @@
             "title": "Complex Problem Solving & Resource Management Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1114,6 +1193,7 @@
             "title": "Social Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1147,6 +1227,7 @@
             "title": "System Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",
@@ -1168,6 +1249,7 @@
             "title": "Technical Skills",
             "items": {
               "type":"string",
+              "default": 1,
               "oneOf": [
                 {
                   "const":"1",

@@ -1,3 +1,4 @@
+
 {
   "type": "object",
   "title": "KITT4SME Digital Datasheet",
@@ -296,7 +297,7 @@
       "requirement_gpu": {
         "title": "GPU",
         "type": "string",
-        "description": "Provide the requred Graphics Processing Units specifications"
+        "description": "Provide the required Memory dimension of Graphics Processing Units"
       },
       "gpu_unit": {
         "$ref":"#/unit"
@@ -636,6 +637,10 @@
       "module_link": {
         "type": "string",
         "title": "Name"
+      },
+      "module_version": {
+        "type": "string",
+        "title": "Version"
       },
       "module_text": {
         "type": "string",

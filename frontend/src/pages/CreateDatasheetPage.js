@@ -22,7 +22,6 @@ import TextInput from "../components/TextInput";
 import {useLocation, useNavigate} from "react-router-dom";
 
 const onSubmit = async ({formData}) => {
-    console.log("Form data: ", formData)
     try {
         const response_keycloak = await keycloak.loadUserInfo();
         formData['keycloak_id'] = response_keycloak.sub;

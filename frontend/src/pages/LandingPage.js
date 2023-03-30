@@ -68,7 +68,6 @@ const HomePageFunctionality = () => {
         payload
       )
       .then((response) => {
-        console.log(response.data);
         setResponse(response.data);
       })
       .catch((error) => console.error(error));

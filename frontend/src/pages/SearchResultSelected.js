@@ -35,7 +35,6 @@ const UploadFunctionality = () => {
     const {keycloak} = useKeycloak();
     const keycloak_id = keycloak.tokenParsed.sub
     const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(data?.keycloak_id ? keycloak_id == data['keycloak_id'] : false)
-    console.log("digitalDatasheetOwner" , digitalDatasheetOwner)
     const FormWithConditionals = applyRules(
         digitalDatasheetOwner ? schema: schemaReadOnly,
         digitalDatasheetOwner ? uiSchema: uiSchemaReadOnly,
@@ -45,7 +44,6 @@ const UploadFunctionality = () => {
     )(Form);
 
     const exportData = async () => {
-        console.log(data['datasheet']['information']['component_name'])
         const element = document.createElement("a");
         const dataForFile = new Blob([JSON.stringify(data)], {type: 'text/plain'}); //pass data from localStorage API to blob
         element.href = URL.createObjectURL(dataForFile);

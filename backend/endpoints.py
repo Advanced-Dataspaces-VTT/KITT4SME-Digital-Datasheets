@@ -105,10 +105,7 @@ def return_all_datasheets():
         if filter_conditions:
             query = query.filter(and_(*filter_conditions))
 
-        print(query)
         result = query.all()
-        print(result)
-
         return prepare_success_response(data=datasheet_schema.dump(result))
     except psycopg2.Error:
         return prepare_error_response('Failed to search.')

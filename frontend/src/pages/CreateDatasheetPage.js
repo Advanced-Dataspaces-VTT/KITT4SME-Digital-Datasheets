@@ -26,7 +26,7 @@ const onSubmit = async ({formData}) => {
     try {
         const response_keycloak = await keycloak.loadUserInfo();
         formData['keycloak_id'] = response_keycloak.sub;
-        const url = 'http://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
+        const url = 'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
         const response = await fetch(url, {
             method: 'POST', mode: 'cors', cache: 'no-cache', credentials: 'same-origin', headers: {
                 'Content-Type': 'application/json'

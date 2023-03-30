@@ -62,7 +62,7 @@ const UploadFunctionality = () => {
                 const response_keycloak = await keycloak.loadUserInfo();
                 formData['keycloak_id'] = response_keycloak.sub;
                 formData['datasheet_id'] = data.id;
-                const url = 'http://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
+                const url = 'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
                 const response = await fetch(url, {
                     method: 'PUT', mode: 'cors', cache: 'no-cache', credentials: 'same-origin', headers: {
                         'Content-Type': 'application/json'

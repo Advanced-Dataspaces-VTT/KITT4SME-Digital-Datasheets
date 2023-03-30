@@ -2,7 +2,6 @@ import React, {memo, useEffect, useState} from "react";
 import applyRules from 'rjsf-conditionals';
 import Engine from 'json-rules-engine-simplified';
 import Form from '@rjsf/core';
-import uiSchemaReadOnly from './form/uiSchemaReadOnly.json';
 import schema from '../static/content.json'
 import uiSchema from './form/uiSchema.json';
 import rules from './form/rules.json';
@@ -34,9 +33,10 @@ const UploadFunctionality = () => {
     const {keycloak} = useKeycloak();
     const keycloak_id = keycloak.tokenParsed.sub
     const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(data?.keycloak_id ? keycloak_id == data['keycloak_id'] : false)
+
     const FormWithConditionals = applyRules(
         schema,
-        digitalDatasheetOwner ? uiSchema: uiSchemaReadOnly,
+        uiSchema,
         rules,
         Engine,
         extraActions,
@@ -95,15 +95,10 @@ const UploadFunctionality = () => {
                                     path={""}
                                     handleClick={() => exportData()}
                                 />
-                                {/* {
-                                    digitalDatasheetOwner ?
-                                        <Title text={"You are the owner of this datasheet!"}/> :
-                                        null
-                                } */}
                             </>
                         </Stack>
                         <Spacer/>
-                        <FormWithConditionals showErrorList={true} onSubmit={onSubmit}formData={data['datasheet']}/>
+                        <FormWithConditionals showErrorList={true} onSubmit={onSubmit}formData={data['datasheet']} disabled={!digitalDatasheetOwner}/>
 
                     </>
                     : <Title text={"Error loading datasheet."}/>

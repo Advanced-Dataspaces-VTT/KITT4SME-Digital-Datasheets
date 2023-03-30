@@ -2,10 +2,9 @@ import React, {memo, useEffect, useState} from "react";
 import applyRules from 'rjsf-conditionals';
 import Engine from 'json-rules-engine-simplified';
 import Form from '@rjsf/core';
-import schemaReadOnly from './form/schemaReadOnly.json';
 import uiSchemaReadOnly from './form/uiSchemaReadOnly.json';
-import schema from './form/schema.json';
-import uiSchema from './form/schema.json';
+import schema from '../static/content.json'
+import uiSchema from './form/uiSchema.json';
 import rules from './form/rules.json';
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
@@ -36,7 +35,7 @@ const UploadFunctionality = () => {
     const keycloak_id = keycloak.tokenParsed.sub
     const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(data?.keycloak_id ? keycloak_id == data['keycloak_id'] : false)
     const FormWithConditionals = applyRules(
-        digitalDatasheetOwner ? schema: schemaReadOnly,
+        schema,
         digitalDatasheetOwner ? uiSchema: uiSchemaReadOnly,
         rules,
         Engine,

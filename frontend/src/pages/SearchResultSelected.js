@@ -2,10 +2,9 @@ import React, {memo, useEffect, useState} from "react";
 import applyRules from 'rjsf-conditionals';
 import Engine from 'json-rules-engine-simplified';
 import Form from '@rjsf/core';
-import schemaReadOnly from './form/schemaReadOnly.json';
 import uiSchemaReadOnly from './form/uiSchemaReadOnly.json';
-import schema from './form/schema.json';
-import uiSchema from './form/schema.json';
+import schema from '../static/content.json'
+import uiSchema from './form/uiSchema.json';
 import rules from './form/rules.json';
 import Footer from "../components/Footer";
 import NavBar from "../components/NavBar";
@@ -35,9 +34,8 @@ const UploadFunctionality = () => {
     const {keycloak} = useKeycloak();
     const keycloak_id = keycloak.tokenParsed.sub
     const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(data?.keycloak_id ? keycloak_id == data['keycloak_id'] : false)
-    console.log("digitalDatasheetOwner" , digitalDatasheetOwner)
     const FormWithConditionals = applyRules(
-        digitalDatasheetOwner ? schema: schemaReadOnly,
+        schema,
         digitalDatasheetOwner ? uiSchema: uiSchemaReadOnly,
         rules,
         Engine,
@@ -45,7 +43,6 @@ const UploadFunctionality = () => {
     )(Form);
 
     const exportData = async () => {
-        console.log(data['datasheet']['information']['component_name'])
         const element = document.createElement("a");
         const dataForFile = new Blob([JSON.stringify(data)], {type: 'text/plain'}); //pass data from localStorage API to blob
         element.href = URL.createObjectURL(dataForFile);
@@ -62,7 +59,7 @@ const UploadFunctionality = () => {
                 const response_keycloak = await keycloak.loadUserInfo();
                 formData['keycloak_id'] = response_keycloak.sub;
                 formData['datasheet_id'] = data.id;
-                const url = 'http://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
+                const url = 'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
                 const response = await fetch(url, {
                     method: 'PUT', mode: 'cors', cache: 'no-cache', credentials: 'same-origin', headers: {
                         'Content-Type': 'application/json'

@@ -110,11 +110,11 @@ This section collects information and data regarding the parameters relating to 
 #### Multiuser
 (Single choice)
 Mandatory	Tick the multi-user specification of the AI component:
-□	Yes, users share the same instance 
+- Yes, users share the same instance 
 #### Multitenancy
 (Single choice)
 Mandatory	Tick the multi-tenant specification of the AI component: 
-□	Yes, the component supports multi tenancy so that several instances of the component can run on single machine
+- Yes, the component supports multi tenancy so that several instances of the component can run on single machine
 #### Dashboard
 (Open-ended)	Fill in by reporting the component dashboard link or landing page accessible through a web browser.
 #### Operating System
@@ -165,9 +165,9 @@ Not Mandatory	Fill in the Role field, by providing information about the role of
 	Dependency 
 (Single choice)
 Not Mandatory	Tick the option that indicated the dependencies level of the hardware:
-□	Yes, this type of HW is required for basic functionalities. 
-□	Yes, a specific unique HW type is required for basic functionalities.
-□	No, the HW reported would be used for additional functionalities.
+- Yes, this type of HW is required for basic functionalities. 
+- Yes, a specific unique HW type is required for basic functionalities.
+- No, the HW reported would be used for additional functionalities.
 For each HW specified in the first field, compilation of the dependency level is mandatory.
 
 ### Software dependencies
@@ -187,9 +187,9 @@ Not Mandatory	Fill in the Version field, by providing the version of the softwar
 	Dependencies level
 (Single choice)
 Not Mandatory	Tick the option that indicated the dependencies level of the software:
-□	Yes, this type of SW is required for basic functionalities.  
-□	Yes, a specific unique SW type is required for basic functionalities. 
-□	No, the SW reported would be used for additional functionalities.
+- Yes, this type of SW is required for basic functionalities.  
+- Yes, a specific unique SW type is required for basic functionalities. 
+- No, the SW reported would be used for additional functionalities.
 
 For each SW specified in the first field, compilation of the dependency level is mandatory.
 	Provide the RAMP ID

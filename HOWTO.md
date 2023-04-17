@@ -43,14 +43,14 @@ Mandatory	Tick the industrial manufacturing sectors that best characterize the f
 ###	Axis
 (Multiple choice)
 Mandatory	Tick the axis/s to which the component belongs. The component should troubleshoot, and address challenges related to one or more of the KITT4SME axes:
-□	AI for human-robot interaction: acts by providing the means for real-time monitoring of the psychological and physical conditions of workers, activation of fatigue and stress-relieving interventions as well as for the characterization and evolution of workforce competences.
-□	AI for quality: acts by providing the means for early and automatic error-detection and better run time decisions. A quality issue results in reworking costs, customer assistance costs or even recalls of entire production lots depending on how fast it is detected.
-□	AI for reconfigurability or product personalization addresses the complexity of production processes that are increasingly influenced by product customization. It moves beyond standard linear optimization-based approaches that focus on raw material availability, production capacity and demand, working at both the optimization of production settings and scheduling and planning levels.
+- AI for human-robot interaction: acts by providing the means for real-time monitoring of the psychological and physical conditions of workers, activation of fatigue and stress-relieving interventions as well as for the characterization and evolution of workforce competences.
+- AI for quality: acts by providing the means for early and automatic error-detection and better run time decisions. A quality issue results in reworking costs, customer assistance costs or even recalls of entire production lots depending on how fast it is detected.
+- AI for reconfigurability or product personalization addresses the complexity of production processes that are increasingly influenced by product customization. It moves beyond standard linear optimization-based approaches that focus on raw material availability, production capacity and demand, working at both the optimization of production settings and scheduling and planning levels.
 ###	Category
 (Multiple choice)
 Mandatory	Tick the type of component among the two macro-categories:
-□	Reasoning Engine: reasoning engine module reads the data streams, merge them and detect possible deviations from desired effects. This kind of module can be dedicated to detecting heterogeneous conditions such as divergence of machine or process parameters, fluctuations in quality, vibrations, physical or mental stress of operators among many others.
-□	Decision making: decision maker module generates in real-time interventions to be applied in the shop floor. Scope and underlying technologies can vary broadly, depending on the observed problem: optimisation algorithms cope with flexible production demands finding the trade-off between conflicting objectives, models for time-series analysis find patterns in monitored parameters to predict upcoming quality issues, rule-based modules orchestrate the human-machine interactions by suggesting relieving actions when operators become fatigued or stressed; intrinsic job rotation in which cobots change their behaviour to break the routine of repetitive tasks is proposed by machine learning modules.
+- Reasoning Engine: reasoning engine module reads the data streams, merge them and detect possible deviations from desired effects. This kind of module can be dedicated to detecting heterogeneous conditions such as divergence of machine or process parameters, fluctuations in quality, vibrations, physical or mental stress of operators among many others.
+- Decision making: decision maker module generates in real-time interventions to be applied in the shop floor. Scope and underlying technologies can vary broadly, depending on the observed problem: optimisation algorithms cope with flexible production demands finding the trade-off between conflicting objectives, models for time-series analysis find patterns in monitored parameters to predict upcoming quality issues, rule-based modules orchestrate the human-machine interactions by suggesting relieving actions when operators become fatigued or stressed; intrinsic job rotation in which cobots change their behaviour to break the routine of repetitive tasks is proposed by machine learning modules.
 ###	Description
 (Open-ended)
 Mandatory	Fill in by providing a brief and general description of how the functional characteristics of the component work to provide the expected result.
@@ -78,8 +78,8 @@ This section is intended to gather information about critical manufacturing prob
 (Multiple choice)
 Not Mandatory 	Tick the main production critical issues that would be solved or mitigated by the application of the AI component. They are reflected in 4 categories in line with the main dynamics where the major production critical issues are present: Quality, Operator Wellbeing, Machine Performance and Production Management. 
 Evaluate the list of the main company production criticalities, ticking the most suitable level of relevance in consideration of how much the component solves it or contributes to mitigating it. 
-□	The solution can contribute mitigate the criticality
-□	The solution aims to completely solve or mitigate the criticality
+- The solution can contribute mitigate the criticality
+- The solution aims to completely solve or mitigate the criticality
 The categories to which the selected criticalities belong must be consistent with those of the benefits: resolving a criticality, however, can lead to benefits in different contexts.
 
 It is mandatory to indicate at least one critical issue regardless of the section. If no critical issues are found, the user has the freedom not to select any but is obliged to indicate it by writing in field Other.
@@ -159,10 +159,10 @@ This section collects information necessary to provide a description of any hard
 Not Mandatory	Fill in the Name field, by providing the name of the hardware.
 
 The user is shown a single empty field and the possibility of adding new ones to fill out.
-	Role
+#### Role
 (Open-ended)
 Not Mandatory	Fill in the Role field, by providing information about the role of the hardware and whether it provides input/output data for the component or is a sink for the information provided by the component.
-	Dependency 
+#### Dependency 
 (Single choice)
 Not Mandatory	Tick the option that indicated the dependencies level of the hardware:
 - Yes, this type of HW is required for basic functionalities. 
@@ -178,13 +178,13 @@ Not Mandatory
 	Fill in the Name field, by providing the name of the software.
 
 The user is shown a single empty field and the possibility of adding new ones to fill out.
-	Role
+#### Role
 (Open-ended)
 Not Mandatory	Fill out in the Role field, by providing information about the role of the software.
-	Version
+#### Version
 (Open-ended)
 Not Mandatory	Fill in the Version field, by providing the version of the software.
-	Dependencies level
+#### Dependencies level
 (Single choice)
 Not Mandatory	Tick the option that indicated the dependencies level of the software:
 - Yes, this type of SW is required for basic functionalities.  
@@ -192,7 +192,7 @@ Not Mandatory	Tick the option that indicated the dependencies level of the softw
 - No, the SW reported would be used for additional functionalities.
 
 For each SW specified in the first field, compilation of the dependency level is mandatory.
-	Provide the RAMP ID
+#### Provide the RAMP ID
 (Open-ended)
 Not Mandatory	Fill in by providing the link of software datasheet.
  
@@ -228,10 +228,9 @@ This section collects information necessary for describing the component in case
 ###	OAPI
 (Single choice)
 Not Mandatory	Tick if any OpenAPI specification exists (Public endpoint for a managed instance enables data access to your managed instance from outside the virtual network). 
-□	Yes, there are OpenAPI specifications that describe entire API including available Endpoint
+- Yes, there are OpenAPI specifications that describe entire API including available Endpoint
 ### OAPIjson
 (Open-ended)
 Not Mandatory	Fill in by providing the Json file for the OpenAPI specification. 
-
 The exclusive insertion of Json file must be the constraint
 

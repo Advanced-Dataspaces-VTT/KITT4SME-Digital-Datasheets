@@ -1,4 +1,6 @@
 import os
+import json
+import datetime
 import psycopg2
 import sqlalchemy
 from sqlalchemy import or_ , String, and_
@@ -8,7 +10,7 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy_utils import database_exists, create_database
 
 from dataclasses import dataclass
-from flask import Flask, request
+from flask import Flask, request, send_from_directory, current_app, url_for
 from flask_cors import CORS, cross_origin
 from flask_restful import Api
 from flask_marshmallow import Marshmallow
@@ -18,6 +20,8 @@ ma = Marshmallow(app)
 cors = CORS(app)
 api = Api(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+app.config['BACKUP_DIRECTORY'] = './'
+
 Base = declarative_base()
 
 
@@ -56,6 +60,53 @@ def create_database_connection():
     session = session()
     return session
 
+"""
+    Start of Backup API
+"""
+@app.route('/backup-datasheets', methods=['GET'])
+@cross_origin()
+def backup_datasheets():
+    session = create_database_connection()
+    datasheets = session.query(Datasheets).all()
+
+    backup_dir = current_app.config['BACKUP_DIRECTORY']
+    backup_filename = f"datasheets_backup_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.json"
+
+    backup_path = os.path.join(backup_dir, backup_filename)
+
+    datasheet_schema = DatasheetsSchema()
+    with open(backup_path, 'w') as backup_file:
+        for datasheet in datasheets:
+            json.dump(datasheet_schema.dump(datasheet), backup_file)
+            backup_file.write('\n')
+
+    backup_url = url_for('download_backup', filename=backup_filename, _external=True)
+
+    return prepare_success_response('Backup created.', {'backup_url': backup_url})
+
+
+
+@app.route('/download-backup/<path:filename>', methods=['GET'])
+@cross_origin()
+def download_backup(filename):
+    backup_dir = current_app.config['BACKUP_DIRECTORY']
+    print("file path ", filename )
+    return send_from_directory(directory=backup_dir, path=filename)
+
+
+@app.route('/backup-files', methods=['GET'])
+@cross_origin()
+def get_backup_files():
+    backup_dir = current_app.config['BACKUP_DIRECTORY']
+    backup_files = [f for f in os.listdir(backup_dir) if os.path.isfile(os.path.join(backup_dir, f))]
+    backup_urls = [url_for('download_backup', filename=f, _external=True) for f in backup_files]
+
+    return prepare_success_response('List of backup files.', {'backup_files': backup_files, 'backup_urls': backup_urls})
+
+
+"""
+    End of Backup API
+"""
 
 """
     Start of Datasheets API
@@ -77,6 +128,21 @@ class DatasheetsSchema(ma.Schema):
 datasheet_schema = DatasheetsSchema()
 datasheet_schema = DatasheetsSchema(many=True)
 
+@app.route('/datasheets-delete/<int:id>', methods=['DELETE'])
+@cross_origin()
+def delete_datasheet(id):
+    session = create_database_connection()
+    datasheet = session.query(Datasheets).get(id)
+    if not datasheet:
+        return prepare_error_response('Datasheet not found.')
+    try:
+        session.delete(datasheet) 
+        session.commit()  
+        return prepare_success_response('Datasheet removed.')     
+    except psycopg2.Error:
+        session.rollback()
+        return prepare_error_response('Failed to delete.')
+    
 @app.route("/datasheets-search", methods=['POST'])
 @cross_origin()
 def return_all_datasheets():

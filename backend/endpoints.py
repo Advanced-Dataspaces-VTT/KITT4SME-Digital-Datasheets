@@ -1,5 +1,6 @@
 import os
 import json
+import random
 import datetime
 import psycopg2
 import sqlalchemy
@@ -14,6 +15,8 @@ from flask import Flask, request, send_from_directory, current_app, url_for
 from flask_cors import CORS, cross_origin
 from flask_restful import Api
 from flask_marshmallow import Marshmallow
+
+from util import get_all_keys
 
 app = Flask(__name__)
 ma = Marshmallow(app)
@@ -34,11 +37,11 @@ def prepare_success_response(message=None, data=None):
 
 
 def create_database_connection():
-    db_user = os.getenv("POSTGRES_DB_USER")
-    db_pass =  os.getenv("POSTGRES_DB_PASS")
-    db_host = os.getenv("POSTGRES_HOST")
-    db_port = os.getenv("POSTGRES_PORT")
-    db_name = os.getenv("POSTGRES_DB_NAME")
+    db_user = os.getenv("POSTGRES_DB_USER", 'postgres')
+    db_pass =  os.getenv("POSTGRES_DB_PASS", 'postgres')
+    db_host = os.getenv("POSTGRES_HOST", 'localhost')
+    db_port = os.getenv("POSTGRES_PORT", 5438)
+    db_name = os.getenv("POSTGRES_DB_NAME", 'kitt4sme-digital-datasheet-database')
     db_use_ssl = os.getenv("POSTGRES_USE_SSL")
 
     engine = sqlalchemy.create_engine(
@@ -171,7 +174,11 @@ def return_all_datasheets():
         if filter_conditions:
             query = query.filter(and_(*filter_conditions))
 
-        result = query.all()
+        result = query.all()           
+        
+        if not result:
+            result = session.query(Datasheets).all()   
+
         return prepare_success_response(data=datasheet_schema.dump(result))
     except psycopg2.Error:
         return prepare_error_response('Failed to search.')

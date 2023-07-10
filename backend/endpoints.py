@@ -16,7 +16,7 @@ from flask_cors import CORS, cross_origin
 from flask_restful import Api
 from flask_marshmallow import Marshmallow
 
-from util import get_all_keys
+from util import load_saved_datasheeet
 
 app = Flask(__name__)
 ma = Marshmallow(app)
@@ -174,10 +174,19 @@ def return_all_datasheets():
         if filter_conditions:
             query = query.filter(and_(*filter_conditions))
 
-        result = query.all()           
+        result = query.all()         
         
-        if not result:
+        if not result:  # If the result is empty, return all datasheets
             result = session.query(Datasheets).all()   
+
+       
+        for datasheet in result:
+            datasheet_ids = load_saved_datasheeet([datasheet.datasheet], filter_text)
+            if not datasheet_ids:
+                pass
+            else:
+                matching_datasheets = session.query(Datasheets).filter_by(id=datasheet.id)
+                result = matching_datasheets
 
         return prepare_success_response(data=datasheet_schema.dump(result))
     except psycopg2.Error:

@@ -13,7 +13,7 @@ def load_saved_datasheeet(saved_schema, filter_text):
 
     # Traverse the objects in dump.json
     for obj in saved_schema:
-        module_properties = obj['datasheet']['module_properties']
+        module_properties = obj['module_properties']
         updated_properties = {}
 
         # Traverse the properties to check
@@ -42,7 +42,7 @@ def load_saved_datasheeet(saved_schema, filter_text):
                     updated_properties[prop] = updated_items
 
         # Update the module_properties in the current object
-        obj['datasheet']['module_properties'] = updated_properties
+        obj['module_properties'] = updated_properties
 
         # Add the updated object to the new list
         updated_data.append(obj)

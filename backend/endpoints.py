@@ -16,6 +16,7 @@ from flask_cors import CORS, cross_origin
 from flask_restful import Api
 from flask_marshmallow import Marshmallow
 
+from convert import manage_conversion
 from util import load_saved_datasheeet
 
 app = Flask(__name__)
@@ -40,7 +41,7 @@ def create_database_connection():
     db_user = os.getenv("POSTGRES_DB_USER", 'postgres')
     db_pass =  os.getenv("POSTGRES_DB_PASS", 'postgres')
     db_host = os.getenv("POSTGRES_HOST", 'localhost')
-    db_port = os.getenv("POSTGRES_PORT", 5438)
+    db_port = os.getenv("POSTGRES_PORT", 5432)
     db_name = os.getenv("POSTGRES_DB_NAME", 'kitt4sme-digital-datasheet-database')
     db_use_ssl = os.getenv("POSTGRES_USE_SSL")
 
@@ -110,6 +111,22 @@ def get_backup_files():
 """
     End of Backup API
 """
+
+"""
+Query, Extract, and Convert Datasheets from Numberic representation to Human Readable
+"""
+@app.route('/datasheets-numberic-to-human-readable', methods=['GET'])
+@cross_origin()
+def convert_datasheet():
+    try:
+        session = create_database_connection()
+        result = session.query(Datasheets).all() 
+        print(len(result))
+        for datasheet in result:
+            manage_conversion([datasheet.datasheet])
+        return prepare_success_response()
+    except psycopg2.Error:
+        return prepare_error_response('Failed to convert.')
 
 """
     Start of Datasheets API

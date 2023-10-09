@@ -16,7 +16,10 @@ import CardComponent from "../components/CardComponent.js";
 import Paper from "@mui/material/Paper";
 import CircularLoaderComponent from "../components/CircularLoader";
 
+import { SEARCH_DATASHEET_URL } from "../util/urls.js";
+
 const HomePageFunctionality = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const [response, setResponse] = useState(null);
@@ -42,8 +45,8 @@ const HomePageFunctionality = () => {
     "module_properties.management.issue_3": false,
   });
 
-  const { keycloak } = useKeycloak();
-  const keycloak_id = keycloak.tokenParsed.sub;
+  //const { keycloak } = useKeycloak();
+  //const keycloak_id = keycloak.tokenParsed.sub;
 
   const handleCheckboxChange = (event) => {
     setCheckboxes({
@@ -60,7 +63,7 @@ const HomePageFunctionality = () => {
     const payload = {
       filter,
       selectedCheckboxes,
-      keycloak_id,
+      //keycloak_id,
     };
     axios
       .post(
@@ -72,7 +75,7 @@ const HomePageFunctionality = () => {
       })
       .catch((error) => console.error(error));
   };
-
+  console.log()
   const handleResetClick = () => {
     setFilter("");
     setCheckboxes({
@@ -96,7 +99,7 @@ const HomePageFunctionality = () => {
     });
   };
 
-  const navigate = useNavigate();
+
   const handleNavigation = () => {
     navigate("/search-results", { state: { results: response.data } });
   };
@@ -108,6 +111,7 @@ const HomePageFunctionality = () => {
   const handleClick = (clickedItemData) => {
     handleNavigationClick(clickedItemData);
   };
+
   return (
     <>
       <div>
@@ -392,7 +396,7 @@ const HomePageFunctionality = () => {
             handleClick={() => handleResetClick()}
           />
         </Box>
-        <div
+<div
           className="container-fluid"
           style={{ paddingTop: "5%", paddingBottom: "5%", width: "100%" }}
         >
@@ -408,44 +412,12 @@ const HomePageFunctionality = () => {
               ) : (
                 <>
                   <Spacer />
-                  <Paper
-                    style={{ maxHeight: 500, maxWidth: 1500, overflow: "auto" }}
-                  >
-                    {Object.keys(response?.data).map((key, index) => {
-                      return (
-                        <div key={key}>
-                          <Spacer />
-                          <CardComponent
-                            component_name={
-                              response?.data[index]?.datasheet?.information
-                                ?.component_name
-                            }
-                            description={
-                              response?.data[index]?.datasheet?.information
-                                ?.description
-                            }
-                            provider={
-                              response?.data[index]?.datasheet?.information
-                                ?.provider
-                            }
-                            version={
-                              response?.data[index]?.datasheet?.information
-                                ?.version
-                            }
-                            handleClick={() =>
-                              handleClick(response?.data[index])
-                            }
-                          />
-                        </div>
-                      );
-                    })}
-                  </Paper>
-                  <Spacer />
-                  <Title
-                    text={
-                      "Loaded: " + Object.keys(response?.data).length + " datasheets"
-                    }
+                  <SingleButtonComponent
+                    text={"View search results: " + Object.keys(response?.data).length }
+                    path={""}
+                    handleClick={() => handleNavigation()}
                   />
+                  
                 </>
               )}
             </>

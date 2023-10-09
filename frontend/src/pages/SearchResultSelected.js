@@ -15,7 +15,7 @@ import SingleButton from "../components/SingleButton";
 import {useKeycloak} from "@react-keycloak/web";
 import Title from "../components/Title";
 
-
+import { UPDATE_DATASHEET_URL } from "../util/urls";
 
 
 const extraActions = {
@@ -30,9 +30,10 @@ const extraActions = {
 const UploadFunctionality = () => {
     const location = useLocation();
     const [data, setData] = useState(location?.state?.data ? location.state.data : null)
-    const {keycloak} = useKeycloak();
-    const keycloak_id = keycloak.tokenParsed.sub
-    const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(data?.keycloak_id ? keycloak_id == data['keycloak_id'] : false)
+    //const {keycloak} = useKeycloak();
+    //const keycloak_id = keycloak.tokenParsed.sub
+    //const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(data?.keycloak_id ? keycloak_id == data['keycloak_id'] : false)
+    const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(false)
 
     const FormWithConditionals = applyRules(
         schema,
@@ -53,13 +54,13 @@ const UploadFunctionality = () => {
     };
 
     //PATCH
-    const onSubmit = async ({formData}) => {
+    /*const onSubmit = async ({formData}) => {
         try {
             if (digitalDatasheetOwner) {
                 const response_keycloak = await keycloak.loadUserInfo();
                 formData['keycloak_id'] = response_keycloak.sub;
                 formData['datasheet_id'] = data.id;
-                const url = 'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
+                const url = UPDATE_DATASHEET_URL
                 const response = await fetch(url, {
                     method: 'PUT', mode: 'cors', cache: 'no-cache', credentials: 'same-origin', headers: {
                         'Content-Type': 'application/json'
@@ -77,7 +78,7 @@ const UploadFunctionality = () => {
         } catch (err) {
             alert("Error: Unknown error has occurred!")
         }
-    }
+    }*/
 
     return (
         <>
@@ -98,7 +99,7 @@ const UploadFunctionality = () => {
                             </>
                         </Stack>
                         <Spacer/>
-                        <FormWithConditionals showErrorList={true} onSubmit={onSubmit}formData={data['datasheet']} disabled={!digitalDatasheetOwner}/>
+                        <FormWithConditionals showErrorList={true} /*onSubmit={onSubmit} */ formData={data['datasheet']} disabled={!digitalDatasheetOwner}/>
 
                     </>
                     : <Title text={"Error loading datasheet."}/>

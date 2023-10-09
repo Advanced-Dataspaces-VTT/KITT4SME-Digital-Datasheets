@@ -21,11 +21,13 @@ import Stack from "@mui/material/Stack";
 import TextInput from "../components/TextInput";
 import {useLocation, useNavigate} from "react-router-dom";
 
+import { CREATE_DATASHEET_URL } from "../util/urls.js";
+
 const onSubmit = async ({formData}) => {
     try {
         const response_keycloak = await keycloak.loadUserInfo();
         formData['keycloak_id'] = response_keycloak.sub;
-        const url = 'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets'
+        const url = CREATE_DATASHEET_URL
         const response = await fetch(url, {
             method: 'POST', mode: 'cors', cache: 'no-cache', credentials: 'same-origin', headers: {
                 'Content-Type': 'application/json'

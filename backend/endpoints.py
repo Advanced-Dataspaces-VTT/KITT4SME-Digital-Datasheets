@@ -232,7 +232,9 @@ def get_datasheets():
         for datasheet in result:
             if(request.args.get("validate") == 1):
                 if (validate_marketplace(datasheet)):
-                    results.append(datsheet)
+                    results.append(datasheet)
+            else:
+                results.append(datasheet)
         return prepare_success_response(message=json.dumps(results))
     except psycopg2.Error:
         return prepare_error_response('Failed to retrieve datasheets from DB')

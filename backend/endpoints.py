@@ -4,6 +4,7 @@ import random
 import datetime
 import psycopg2
 import sqlalchemy
+import requests
 from sqlalchemy import or_ , String, and_
 from sqlalchemy import update, text
 from sqlalchemy.ext.declarative import declarative_base
@@ -63,6 +64,13 @@ def create_database_connection():
     session.configure(bind=engine)
     session = session()
     return session
+
+def validate_marketplace(datasheet):
+    validate_api = os.environ["VALIDATION_URL"]+datasheet["component_uuid"]
+    ret = requests.get(validate_api)
+    if (ret.status_code != 200):
+        return False
+    return True
 
 """
     Start of Backup API
@@ -208,6 +216,27 @@ def return_all_datasheets():
         return prepare_success_response(data=datasheet_schema.dump(result))
     except psycopg2.Error:
         return prepare_error_response('Failed to search.')
+
+
+"""
+Return all datasheets 
+"""
+@app.route('/datasheets', methods=['GET'])
+@cross_origin()
+def get_datasheets():
+    try:
+        session = create_database_connection()
+        result = session.query(Datasheets).all() 
+        results = []
+        print(len(result))
+        for datasheet in result:
+            if(request.args.get("validate") == 1):
+                if (validate_marketplace(datasheet)):
+                    results.append(datsheet)
+        return prepare_success_response(message=json.dumps(results))
+    except psycopg2.Error:
+        return prepare_error_response('Failed to retrieve datasheets from DB')
+
 
 @app.route("/datasheets", methods=['POST'])
 @cross_origin()

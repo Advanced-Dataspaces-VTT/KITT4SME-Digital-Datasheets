@@ -14,6 +14,7 @@ import Stack from '@mui/material/Stack'
 import SingleButton from '../components/SingleButton'
 import { useKeycloak } from '@react-keycloak/web'
 import Title from '../components/Title'
+import yaml from 'yaml'
 
 import { UPDATE_DATASHEET_URL } from '../util/urls'
 
@@ -53,6 +54,23 @@ const UploadFunctionality = () => {
     element.download = 'datasheet-' + fileName + '.json'
     document.body.appendChild(element)
     element.click()
+  }
+  const exportDataYaml = () => {
+    const element = document.createElement('a')
+    const yamlString = yaml.stringify(data) // Convert data to YAML format
+    const dataForFile = new Blob([yamlString], { type: 'text/plain' })
+
+    element.href = URL.createObjectURL(dataForFile)
+
+    const fileName = data['datasheet']['information']['component_name'].replace(
+      ' ',
+      '-',
+    )
+    element.download = 'datasheet-' + fileName + '.yaml'
+
+    document.body.appendChild(element)
+    element.click()
+    document.body.removeChild(element) // Clean up the element after clicking
   }
 
   //PATCH
@@ -97,9 +115,19 @@ const UploadFunctionality = () => {
             <Stack spacing={1} direction="column">
               <>
                 <SingleButton
-                  text={'Download datasheet'}
+                  text={'Download datasheet JSON'}
                   path={''}
                   handleClick={() => exportData()}
+                />
+              </>
+            </Stack>
+            <Spacer />
+            <Stack spacing={1} direction="column">
+              <>
+                <SingleButton
+                  text={'Download datasheet YAML'}
+                  path={''}
+                  handleClick={() => exportDataYaml()}
                 />
               </>
             </Stack>

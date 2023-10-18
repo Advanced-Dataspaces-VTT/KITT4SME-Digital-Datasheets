@@ -63,7 +63,7 @@ export default function ProfileIconComponent() {
             onClose={handleClose}
           >
             <MenuItem
-              onClick={() => handleNavigation('/search')}
+              onClick={() => handleNavigation('/')}
               sx={{ fontSize: 15 }}
             >
               Search

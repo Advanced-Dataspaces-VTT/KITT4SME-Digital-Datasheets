@@ -124,7 +124,7 @@ const UploadFunctionality = () => {
         className="container-fluid"
         style={{ paddingTop: '5%', paddingBottom: '5%', width: '50%' }}
       >
-        <Stack spacing={2} direction="column">
+        {/*<Stack spacing={2} direction="column">
           <>
             <SingleButton
               text={'Upload datasheet'}
@@ -139,7 +139,7 @@ const UploadFunctionality = () => {
               style={{ display: 'none' }}
             />
           </>
-        </Stack>
+        </Stack>*/}
 
         <Spacer />
 

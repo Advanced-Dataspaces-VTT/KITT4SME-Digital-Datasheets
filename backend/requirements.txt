@@ -10,4 +10,5 @@ python-dotenv
 gunicorn
 sqlalchemy-utils
 requests
+#logging
 

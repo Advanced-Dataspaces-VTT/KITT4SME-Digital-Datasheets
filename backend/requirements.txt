@@ -4,7 +4,11 @@ flask_cors
 SQLAlchemy
 SQLAlchemy-serializer
 flask-marshmallow
-psycopg2
+#psycopg2
+psycopg2-binary
 python-dotenv
 gunicorn
 sqlalchemy-utils
+requests
+#logging
+

@@ -7,7 +7,7 @@ services:
     image: ryankford/digital-datasheets:1.0-backend
     build: .
     ports:
-      - '5000:5000'
+      - '5001:5001'
     environment:
       - POSTGRES_DB_USER=$POSTGRES_DB_USER
       - POSTGRES_DB_PASS=$POSTGRES_DB_PASS
@@ -15,3 +15,5 @@ services:
       - POSTGRES_PORT=$POSTGRES_PORT
       - POSTGRES_DB_NAME=$POSTGRES_DB_NAME
       - POSTGRES_USE_SSL=$POSTGRES_USE_SSL
+      - VALIDATION_URL=https://ramp.eu/ms/component/api/v1/component/
+      - VALIDATION_TIMEOUT=24

@@ -1,9 +1,11 @@
 import os
 import json
+import time
 import random
 import datetime
 import psycopg2
 import sqlalchemy
+import requests
 from sqlalchemy import or_ , String, and_
 from sqlalchemy import update, text
 from sqlalchemy.ext.declarative import declarative_base
@@ -44,7 +46,7 @@ def create_database_connection():
     db_port = os.getenv("POSTGRES_PORT", 5432)
     db_name = os.getenv("POSTGRES_DB_NAME", 'kitt4sme-digital-datasheet-database')
     db_use_ssl = os.getenv("POSTGRES_USE_SSL")
-
+    app.logger.debug(str(db_user)+","+str(db_pass)+","+str(db_host)+","+str(db_port)+","+str(db_name)+","+str(db_use_ssl))
     engine = sqlalchemy.create_engine(
         "postgresql+psycopg2://{}:{}@{}:{}/{}".format(
             db_user,
@@ -63,6 +65,31 @@ def create_database_connection():
     session.configure(bind=engine)
     session = session()
     return session
+
+def validate_marketplace(datasheet):
+    retval = False
+    # If datasheet hasn't been validated or too much time has passed since last validation
+    app.logger.debug("validation status: "+ str(datasheet.validation))
+    if (datasheet.validation_ts == None):
+        datasheet.validation_ts = 0
+    print("datasheet: "+str(datasheet.datasheet))
+    if (datasheet.validation == -1 or datasheet.validation_ts < time.time()-int(os.environ["VALIDATION_TIMEOUT"])*3600):
+        validate_api = os.environ["VALIDATION_URL"]+datasheet.datasheet["datasheet"]["information"]["component_uuid"]
+        print(validate_api)
+        ret = requests.get(validate_api)
+        session = create_database_connection()
+        if (ret.status_code != 200):
+            query = (update(Datasheets).where(Datasheets.id == datasheet.id).values(validation=0, validation_ts=time.time()))
+        else:
+            query = (update(Datasheets).where(Datasheets.id == datasheet.id).values(validation=1, validation_ts=time.time()))
+            retval = True
+        session.execute(query)
+        session.commit()
+    else:
+        if (datasheet.validation == 1 ):
+            retval = True
+    print("validation result: "+str(retval))
+    return retval
 
 """
     Start of Backup API
@@ -139,11 +166,13 @@ class Datasheets(Base, SerializerMixin):
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
     keycloak_id = sqlalchemy.Column(sqlalchemy.String(length=100))
     datasheet = sqlalchemy.Column(sqlalchemy.JSON())
+    validation = sqlalchemy.Column(sqlalchemy.Integer)
+    validation_ts = sqlalchemy.Column(sqlalchemy.BigInteger)
 
 
 class DatasheetsSchema(ma.Schema):
     class Meta:
-        fields = ("id", "keycloak_id", "datasheet")
+        fields = ("id", "keycloak_id", "datasheet", "validation", "validation_ts")
 
 datasheet_schema = DatasheetsSchema()
 datasheet_schema = DatasheetsSchema(many=True)
@@ -208,6 +237,30 @@ def return_all_datasheets():
         return prepare_success_response(data=datasheet_schema.dump(result))
     except psycopg2.Error:
         return prepare_error_response('Failed to search.')
+
+
+"""
+Return all datasheets 
+"""
+@app.route('/datasheets', methods=['GET'])
+@cross_origin()
+def get_datasheets():
+    try:
+        session = create_database_connection()
+        result = session.query(Datasheets).all() 
+        results = []
+        print(str(len(result))+" args: "+str(request.args))
+        for datasheet in result:
+            if(request.args.get('validate') == '1'):
+                if (validate_marketplace(datasheet)):
+                    results.append(datasheet.datasheet)
+            else:
+                results.append(datasheet.datasheet)
+        print(results)
+        return prepare_success_response(data=results)
+    except psycopg2.Error:
+        return prepare_error_response('Failed to retrieve datasheets from DB')
+
 
 @app.route("/datasheets", methods=['POST'])
 @cross_origin()
@@ -295,5 +348,6 @@ def insert_new_customer():
 if __name__ == '__main__':
     app.run(
         debug=os.getenv("DEBUG", False),
-        host='0.0.0.0'
+        host='0.0.0.0',
+        port="5001"
     )

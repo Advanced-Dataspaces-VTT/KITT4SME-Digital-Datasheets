@@ -1,1 +1,17 @@
-{}
+{
+    "compose-yaml": {
+        "ui:widget": "textarea"
+    },
+    "context":{
+        "ui:style": {
+            "background": "#f0f0f0",
+            "padding": 5
+        }
+    },
+    "technicalrequirements":{
+        "ui:style": {
+            "background": "#f0f0f0",
+            "padding": 5
+        }
+    }
+}

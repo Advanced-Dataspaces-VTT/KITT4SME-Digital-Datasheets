@@ -41,6 +41,9 @@
     },
     "public_endpoints": {
       "$ref": "#/public_endpoint"
+    },
+    "deployment_info": {
+       "$ref": "#/deployment_data"
     }
   },
   "information": {
@@ -813,6 +816,21 @@
         "title": "OAPIjson",
         "type": "string",
         "description": "Provide the Json file for the OpenAPI specification"
+      }
+    }
+  },
+  "deployment_data": {
+    "type": "object",
+    "title": "Deployment Information",
+    "properties": {
+      "repo_url": {  
+        "type": "string",
+        "title": "Component repository URL"
+      },
+      "compose-yaml": {
+        "title": "Compose YAML",
+        "type": "string",
+        "description": "Provide Docker composer information in YAML format"
       }
     }
   },

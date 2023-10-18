@@ -1,8 +1,5 @@
-import * as React from 'react';
-
+import * as React from 'react'
 
 export default function SpacerComponent() {
-    return (
-        <div style={{margin: '5%'}}/>
-    );
+  return <div style={{ margin: '5%' }} />
 }

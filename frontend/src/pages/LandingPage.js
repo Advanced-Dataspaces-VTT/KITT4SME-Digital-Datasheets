@@ -66,10 +66,7 @@ const HomePageFunctionality = () => {
       //keycloak_id,
     }
     axios
-      .post(
-        'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets-search',
-        payload,
-      )
+      .post(SEARCH_DATASHEET_URL, payload)
       .then((response) => {
         setResponse(response.data)
       })

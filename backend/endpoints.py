@@ -234,6 +234,13 @@ def return_all_datasheets():
                 matching_datasheets = session.query(Datasheets).filter_by(id=datasheet.id)
                 result = matching_datasheets
 
+        for datasheet in result:
+            if(request.args.get('validate') == '1'):
+                if (validate_marketplace(datasheet)):
+                    result.append(datasheet.datasheet)
+            else:
+                result.append(datasheet.datasheet)
+
         return prepare_success_response(data=datasheet_schema.dump(result))
     except psycopg2.Error:
         return prepare_error_response('Failed to search.')

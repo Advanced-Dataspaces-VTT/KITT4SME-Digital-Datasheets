@@ -23,29 +23,69 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { CREATE_DATASHEET_URL } from '../util/urls.js'
 
+const validateUuidWithAPI = async (uuid) => {
+  try {
+    const apiUrl = `https://ramp.eu/ms/component/api/v1/component/${uuid}`
+    const response = await fetch(apiUrl)
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      if (
+        errorData &&
+        errorData.error === 'Bad Request' &&
+        errorData.message.includes('Invalid UUID string')
+      ) {
+        // The server returned a specific error for invalid UUID
+        return false
+      } else {
+        throw new Error(`Failed to fetch: ${response.statusText}`)
+      }
+    }
+
+    const data = await response.json()
+
+    // Check if the API response indicates a valid UUID
+    return data && data.componentId === uuid
+  } catch (error) {
+    console.error('Error validating UUID with API:', error)
+    return false
+  }
+}
+
 const onSubmit = async ({ formData }) => {
   try {
-    const response_keycloak = await keycloak.loadUserInfo()
-    formData['keycloak_id'] = response_keycloak.sub
-    const url = CREATE_DATASHEET_URL
-    const response = await fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(formData),
-    })
-    if (response.status === 200) {
-      alert('Success: Datasheet created successfully.')
+    const valid_uuid = await validateUuidWithAPI(
+      formData['information']['component_uuid'],
+    )
+    console.log('valid_uuid', valid_uuid)
+    if (valid_uuid) {
+      // The UUID is valid, proceed with the form submission
+      const response_keycloak = await keycloak.loadUserInfo()
+      formData['keycloak_id'] = response_keycloak.sub
+      const url = CREATE_DATASHEET_URL
+      const response = await fetch(url, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(formData),
+      })
+
+      if (response.status === 200) {
+        alert('Success: Datasheet created successfully.')
+      } else {
+        alert('Error: Datasheet was not created successfully.')
+      }
     } else {
-      alert('Error: Datasheet was not created successfully.')
+      alert('Error: Invalid UUID. Please check and try again.')
     }
   } catch (err) {
+    console.error('Error in onSubmit:', err)
     alert('Error: Unknown error has occurred!')
   }
 }
@@ -85,6 +125,12 @@ const UploadFunctionality = () => {
     uploadedData = location.state.data['datasheet']
   }
 
+  const handleKeyDown = (event) => {
+    // Disable form submission on enter key press
+    if (event.key === 'Enter') {
+      event.preventDefault()
+    }
+  }
   const handleNavigation = (path, data) => {
     navigate(path, { state: { data: data } })
   }
@@ -148,6 +194,7 @@ const UploadFunctionality = () => {
           onSubmit={onSubmit}
           formData={uploadedData}
           uiSchema={uiSchema}
+          onKeyDown={handleKeyDown}
         ></FormWithConditionals>
       </div>
       <div>

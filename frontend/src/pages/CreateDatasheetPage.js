@@ -113,7 +113,23 @@ const FormWithConditionals = applyRules(
   rules,
   Engine,
   extraActions,
-)(Form)
+)(({ onKeyDown, ...props }) => (
+  <form
+    {...props}
+    onKeyDown={(e) => {
+      // Disable form submission on enter key press
+      if (e.key === 'Enter') {
+        e.preventDefault()
+      }
+      // Call the provided onKeyDown from props
+      if (onKeyDown) {
+        onKeyDown(e)
+      }
+    }}
+  >
+    <Form {...props} />
+  </form>
+))
 
 const UploadFunctionality = () => {
   const location = useLocation()

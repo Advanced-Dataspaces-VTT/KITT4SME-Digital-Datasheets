@@ -325,7 +325,7 @@
         "description": "Provide the type(s) of connectivity allowed",
         "items": {
           "properties": {
-            "name": {
+            "Name of the protocoll": {
               "type": "string",
               "title": "Name of the protocoll"
             }
@@ -339,17 +339,17 @@
     "title": "Productive axis",
     "description": "Select productive axis(es) that the component belongs to:",
     "properties": {
-      "ai_hri": {
+      "AI for human-robot interaction": {
         "type": "boolean",
         "title": "AI for human-robot interaction",
         "default": false
       },
-      "ai_quality": {
+      "AI for qualit": {
         "type": "boolean",
         "title": "AI for quality",
         "default": false
       },
-      "ai_manualactivity": {
+      "AI for reconfigurability or product personalization": {
         "type": "boolean",
         "title": "AI for reconfigurability or product personalization",
         "default": false
@@ -361,12 +361,12 @@
     "title": "Component Category",
     "description": "Select category to which the component belongs to:",
     "properties": {
-      "reasoning": {
+      "Reasoning Engine": {
         "type": "boolean",
         "title": "Reasoning Engine",
         "default": false
       },
-      "decisionmaker": {
+      "Decision Maker": {
         "type": "boolean",
         "title": "Decision Maker",
         "default": false
@@ -375,222 +375,222 @@
   },
   "datamodel_factory": {
     "type": "string",
-    "default": 1,
+    "default": "Factory",
     "oneOf": [
       {
-        "const": "1",
+        "const": "Factory",
         "title": "Factory"
       },
       {
-        "const": "2",
+        "const": "Location",
         "title": "Location"
       },
       {
-        "const": "3",
+        "const": "FactoryLocation",
         "title": "FactoryLocation"
       },
       {
-        "const": "4",
+        "const": "Shopfloor",
         "title": "Shopfloor"
       }
     ]
   },
   "datamodel_devices": {
     "type": "string",
-    "default": 1,
+    "default": "EquipmentDevice",
     "oneOf": [
       {
-        "const": "1",
+        "const": "EquipmentDevice",
         "title": "EquipmentDevice"
       },
       {
-        "const": "2",
+        "const": "DeviceProperties",
         "title": "DeviceProperties"
       },
       {
-        "const": "3",
+        "const": "IoTDevice",
         "title": "IoTDevice"
       },
       {
-        "const": "4",
+        "const": "DevicePosition",
         "title": "DevicePosition"
       },
       {
-        "const": "5",
+        "const": "WearableDevice",
         "title": "WearableDevice"
       }
     ]
   },
   "datamodel_measurements": {
     "type": "string",
-    "default": "1",
+    "default": "Metadata",
     "oneOf": [
       {
-        "const": "1",
+        "const": "Metadata",
         "title": "Metadata"
       },
       {
-        "const": "2",
+        "const": "IOData",
         "title": "IOData"
       },
       {
-        "const": "3",
+        "const": "Timestamp",
         "title": "Timestamp"
       },
       {
-        "const": "4",
+        "const": "BinaryObject",
         "title": "BinaryObject"
       },
       {
-        "const": "5",
+        "const": "Session",
         "title": "Session"
       },
       {
-        "const": "6",
+        "const": "SmartNotification",
         "title": "SmartNotification"
       },
       {
-        "const": "7",
+        "const": "ImageObject",
         "title": "ImageObject"
       },
       {
-        "const": "8",
+        "const": "DeviceMeasurement",
         "title": "DeviceMeasurement"
       },
       {
-        "const": "9",
+        "const": "PhysiologicalData",
         "title": "PhysiologicalData"
       },
       {
-        "const": "10",
+        "const": "EquipmentIoTMeasurement",
         "title": "EquipmentIoTMeasurement"
       }
     ]
   },
   "datamodel_workers": {
     "type": "string",
-    "default": "1",
+    "default": "WorkerStaticProperties",
     "oneOf": [
       {
-        "const": "1",
+        "const": "WorkerStaticProperties",
         "title": "WorkerStaticProperties"
       },
       {
-        "const": "2",
+        "const": "Worker",
         "title": "Worker"
       },
       {
-        "const": "3",
+        "const": "WorkeSession",
         "title": "WorkeSession"
       }
     ]
   },
   "industry": {
     "type": "string",
-    "default": "1",
+    "default": "Manufacture of food products",
     "oneOf": [
       {
-        "const": "1",
+        "const": "Manufacture of food products",
         "title": "Manufacture of food products"
       },
       {
-        "const": "2",
+        "const": "Manufacture of beverages",
         "title": "Manufacture of beverages"
       },
       {
-        "const": "3",
+        "const": "Manufacture of tobacco products",
         "title": "Manufacture of tobacco products"
       },
       {
-        "const": "4",
+        "const": "Manufacture of textiles",
         "title": "Manufacture of textiles"
       },
       {
-        "const": "5",
+        "const": "Manufacture of wearing apparel",
         "title": "Manufacture of wearing apparel"
       },
       {
-        "const": "6",
+        "const": "Manufacture of wood and of products of wood and cork, except furniture",
         "title": "Manufacture of wood and of products of wood and cork, except furniture"
       },
       {
-        "const": "7",
+        "const": "Manufacture of articles of straw and plaiting materials",
         "title": "Manufacture of articles of straw and plaiting materials"
       },
       {
-        "const": "8",
+        "const": "Manufacture of paper and paper products",
         "title": "Manufacture of paper and paper products"
       },
       {
-        "const": "9",
+        "const": "Printing and reproduction of recorded media",
         "title": "Printing and reproduction of recorded media"
       },
       {
-        "const": "10",
+        "const": "Manufacture of coke and refined petroleum products",
         "title": "Manufacture of coke and refined petroleum products"
       },
       {
-        "const": "11",
+        "const": "Manufacture of chemicals and chemical products",
         "title": "Manufacture of chemicals and chemical products"
       },
       {
-        "const": "12",
+        "const": "Manufacture of basic pharmaceutical products and pharmaceutical preparations",
         "title": "Manufacture of basic pharmaceutical products and pharmaceutical preparations"
       },
       {
-        "const": "13",
+        "const": "Manufacture of leather and related products",
         "title": "Manufacture of leather and related products"
       },
       {
-        "const": "14",
+        "const": "Manufacture of rubber and plastic products",
         "title": "Manufacture of rubber and plastic products"
       },
       {
-        "const": "15",
+        "const": "Manufacture of other non-metallic mineral products",
         "title": "Manufacture of other non-metallic mineral products"
       },
       {
-        "const": "16",
+        "const": "Manufacture of basic metals",
         "title": "Manufacture of basic metals"
       },
       {
-        "const": "17",
+        "const": "Manufacture of fabricated metal products, except machinery and equipment",
         "title": "Manufacture of fabricated metal products, except machinery and equipment"
       },
       {
-        "const": "18",
+        "const": "Manufacture of fabricated metal products, except machinery and equipment",
         "title": "Manufacture of fabricated metal products, except machinery and equipment"
       },
       {
-        "const": "19",
+        "const": "Manufacture of electrical equipment",
         "title": "Manufacture of electrical equipment"
       },
       {
-        "const": "20",
+        "const": "Manufacture of machinery and equipment n.e.c.",
         "title": "Manufacture of machinery and equipment n.e.c."
       },
       {
-        "const": "21",
+        "const": "Manufacture of motor vehicles, trailers and semi",
         "title": "Manufacture of motor vehicles, trailers and semi"
       },
       {
-        "const": "22",
+        "const": "Manufacture of other transport equipment",
         "title": "Manufacture of other transport equipment"
       },
       {
-        "const": "23",
+        "const": "Manufacture of furniture",
         "title": "Manufacture of furniture"
       },
       {
-        "const": "24",
+        "const": "Other manufacturing",
         "title": "Other manufacturing"
       },
       {
-        "const": "25",
+        "const": "Other manufacturing",
         "title": "Other manufacturing"
       },
       {
-        "const": "26",
+        "const": "All manufacturing sectors",
         "title": "All manufacturing sectors"
       }
     ]
@@ -610,18 +610,18 @@
       "dependency_level": {
         "type": "string",
         "title": "Dependency level of the HW component",
-        "default": "1",
+        "default": "Yes, this type of HW is required for basic functionalities",
         "oneOf": [
           {
-            "const": "1",
+            "const": "Yes, this type of HW is required for basic functionalities",
             "title": "Yes, this type of HW is required for basic functionalities"
           },
           {
-            "const": "2",
+            "const": "Yes, this type of HW is required for basic functionalities",
             "title": "Yes, this type of HW is required for basic functionalities"
           },
           {
-            "const": "3",
+            "const": "No, the HW reported would be used for additional functionalities",
             "title": "No, the HW reported would be used for additional functionalities"
           }
         ]
@@ -647,18 +647,18 @@
       "dependency_level": {
         "type": "string",
         "title": "Dependency level of the SW component",
-        "default": "1",
+        "default": "Yes, this type of SW is required for basic functionalities",
         "oneOf": [
           {
-            "const": "1",
+            "const": "Yes, this type of SW is required for basic functionalities",
             "title": "Yes, this type of SW is required for basic functionalities"
           },
           {
-            "const": "2",
+            "const": "Yes, a specific unique SW type is required for basic functionalities",
             "title": "Yes, a specific unique SW type is required for basic functionalities"
           },
           {
-            "const": "3",
+            "const": "No, the SW reported would be used for additional functionalities",
             "title": "No, the SW reported would be used for additional functionalities"
           }
         ]
@@ -682,14 +682,14 @@
           "properties": {
             "issue": {
               "type": "string",
-              "default": "1",
+              "default": "Lack of automatic quality issue detection",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Lack of automatic quality issue detection",
                   "title": "Lack of automatic quality issue detection"
                 },
                 {
-                  "const": "2",
+                  "const": "Inaccurate automatic quality inspection",
                   "title": "Inaccurate automatic quality inspection"
                 }
               ]
@@ -708,30 +708,30 @@
           "properties": {
             "issue": {
               "type": "string",
-              "default": "1",
+              "default": "Preblematic interaction with automated elements",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Preblematic interaction with automated elements",
                   "title": "Preblematic interaction with automated elements"
                 },
                 {
-                  "const": "2",
+                  "const": "Ergonomics hazards in the workplace",
                   "title": "Ergonomics hazards in the workplace"
                 },
                 {
-                  "const": "3",
+                  "const": "High dependedence on operator experience and knowledge",
                   "title": "High dependedence on operator experience and knowledge"
                 },
                 {
-                  "const": "4",
+                  "const": "Production demand exceeding human capabilities",
                   "title": "Production demand exceeding human capabilities"
                 },
                 {
-                  "const": "5",
+                  "const": "Mentally demanding activities ",
                   "title": "Mentally demanding activities "
                 },
                 {
-                  "const": "6",
+                  "const": "Limited operators knowledge or skills",
                   "title": "Limited operators knowledge or skills"
                 }
               ]
@@ -750,18 +750,18 @@
           "properties": {
             "issue": {
               "type": "string",
-              "default": "1",
+              "default": "Lack of predictive maintenance ",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Lack of predictive maintenance ",
                   "title": "Lack of predictive maintenance "
                 },
                 {
-                  "const": "2",
+                  "const": "Ineffective set-up of parameters / tools ",
                   "title": "Ineffective set-up of parameters / tools "
                 },
                 {
-                  "const": "3",
+                  "const": "Ineffective collection of performance data",
                   "title": "Ineffective collection of performance data"
                 }
               ]
@@ -780,18 +780,18 @@
           "properties": {
             "issue": {
               "type": "string",
-              "default": "1",
+              "default": "Ineffective equipment production capacity management",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Ineffective equipment production capacity management",
                   "title": "Ineffective equipment production capacity management"
                 },
                 {
-                  "const": "2",
+                  "const": "Ineffective scheduling and resources allocation",
                   "title": "Ineffective scheduling and resources allocation"
                 },
                 {
-                  "const": "3",
+                  "const": "Ineffective analysis of performance data",
                   "title": "Ineffective analysis of performance data"
                 }
               ]
@@ -844,30 +844,30 @@
         "title": "Quality",
         "items": {
           "type": "string",
-          "default": "1",
+          "default": "Automate the process of goods quality control and digitize it",
           "oneOf": [
             {
-              "const": "1",
+              "const": "Automate the process of goods quality control and digitize it",
               "title": "Automate the process of goods quality control and digitize it"
             },
             {
-              "const": "2",
+              "const": "Provide a digital library of tipical errors/faults and product quality issues for each quality criticalities ",
               "title": "Provide a digital library of tipical errors/faults and product quality issues for each quality criticalities "
             },
             {
-              "const": "3",
+              "const": "Provide lists of possible reworking interventions for identified product quality issues",
               "title": "Provide lists of possible reworking interventions for identified product quality issues"
             },
             {
-              "const": "4",
+              "const": "Provide root cause analysis of product quality defects",
               "title": "Provide root cause analysis of product quality defects"
             },
             {
-              "const": "5",
+              "const": "Provide root cause analysis of problems in the product quality control process",
               "title": "Provide root cause analysis of problems in the product quality control process"
             },
             {
-              "const": "6",
+              "const": "Provide list of  possible rectification instructions to solve, mitigate, and/or prevent quality criticalities",
               "title": "Provide list of  possible rectification instructions to solve, mitigate, and/or prevent quality criticalities"
             }
           ]
@@ -878,30 +878,30 @@
         "title": "Operator Wellbeing",
         "items": {
           "type": "string",
-          "default": "1",
+          "default": "Monitor shop flor environment conditions in real-time and provide alerts and feedback",
           "oneOf": [
             {
-              "const": "1",
+              "const": "Monitor shop flor environment conditions in real-time and provide alerts and feedback",
               "title": "Monitor shop flor environment conditions in real-time and provide alerts and feedback"
             },
             {
-              "const": "2",
+              "const": "Monitor worker wellbeing status in real-time and provide alerts or ergonomic feedback",
               "title": "Monitor worker wellbeing status in real-time and provide alerts or ergonomic feedback"
             },
             {
-              "const": "3",
+              "const": "Monitor machine status and operation in real-time and provide safety alerts",
               "title": "Monitor machine status and operation in real-time and provide safety alerts"
             },
             {
-              "const": "4",
+              "const": "Provide real-time alerts, notifications and feedbacks to operators during task procedures",
               "title": "Provide real-time alerts, notifications and feedbacks to operators during task procedures"
             },
             {
-              "const": "5",
+              "const": "Automate routine and physically demanding tasks for workers ",
               "title": "Automate routine and physically demanding tasks for workers "
             },
             {
-              "const": "6",
+              "const": "Evaluate employee performance and provide AR training and assistance for tasks",
               "title": "Evaluate employee performance and provide AR training and assistance for tasks"
             }
           ]
@@ -912,30 +912,30 @@
         "title": "Machine Performance",
         "items": {
           "type": "string",
-          "default": "1",
+          "default": "Monitor equipment in real-time",
           "oneOf": [
             {
-              "const": "1",
+              "const": "Monitor equipment in real-time",
               "title": "Monitor equipment in real-time"
             },
             {
-              "const": "2",
+              "const": "Predict when machines will need maintenance or repair based on performance and historical data",
               "title": "Predict when machines will need maintenance or repair based on performance and historical data"
             },
             {
-              "const": "3",
+              "const": "Monitor machine performance and resource consumption in real-time",
               "title": "Monitor machine performance and resource consumption in real-time"
             },
             {
-              "const": "4",
+              "const": "Provide real-time alerts, notifications and feedbacks on anomalies, unexpected events or unusual patterns in machine performance data that may indicate a problem",
               "title": "Provide real-time alerts, notifications and feedbacks on anomalies, unexpected events or unusual patterns in machine performance data that may indicate a problem"
             },
             {
-              "const": "5",
+              "const": "Identify the cause of malfunctions in machines",
               "title": "Identify the cause of malfunctions in machines"
             },
             {
-              "const": "6",
+              "const": "Provide lists of insights, recommendations and intervention options for machine settings",
               "title": "Provide lists of insights, recommendations and intervention options for machine settings"
             }
           ]
@@ -946,34 +946,34 @@
         "title": "Production Management",
         "items": {
           "type": "string",
-          "default": "1",
+          "default": "Monitor production data of the worker-factory ecosystem in real-time, such as machine sensor readings",
           "oneOf": [
             {
-              "const": "1",
+              "const": "Monitor production data of the worker-factory ecosystem in real-time, such as machine sensor readings",
               "title": "Monitor production data of the worker-factory ecosystem in real-time, such as machine sensor readings"
             },
             {
-              "const": "2",
+              "const": "Monitor production metrics in real-time, such as output per hour, scrap rate, or downtime.",
               "title": "Monitor production metrics in real-time, such as output per hour, scrap rate, or downtime."
             },
             {
-              "const": "3",
+              "const": "Identify and analyze root causes of capacity constraints and production bottlenecks",
               "title": "Identify and analyze root causes of capacity constraints and production bottlenecks"
             },
             {
-              "const": "4",
+              "const": "Provide lists of insights, recommendations, and interventions to schedule machine and human resources and assign taks",
               "title": "Provide lists of insights, recommendations, and interventions to schedule machine and human resources and assign taks"
             },
             {
-              "const": "5",
+              "const": "Provide lists of insights, recommendations, and interventions to manage existing production capacity",
               "title": "Provide lists of insights, recommendations, and interventions to manage existing production capacity"
             },
             {
-              "const": "6",
+              "const": "Simulate processes for virtual process planning and/or scheduling",
               "title": "Simulate processes for virtual process planning and/or scheduling"
             },
             {
-              "const": "7",
+              "const": "Automate job scheduling of human and machine resources",
               "title": "Automate job scheduling of human and machine resources"
             }
           ]
@@ -990,12 +990,12 @@
         "type": "object",
         "title": "Quality",
         "properties": {
-          "1": {
+          "Optimized Product Quality Control Process": {
             "type": "boolean",
             "title": "Optimized Product Quality Control Process",
             "default": false
           },
-          "2": {
+          "Improve the overall Quality of the Product": {
             "type": "boolean",
             "title": "Improve the overall Quality of the Product",
             "default": false
@@ -1006,17 +1006,17 @@
         "type": "object",
         "title": "Operator Wellbeing",
         "properties": {
-          "1": {
+          "Improve protection of the physical state of the worker": {
             "type": "boolean",
             "title": "Improve protection of the physical state of the worker",
             "default": false
           },
-          "2": {
+          "Optimize exploitation and management of the mental capacities of the worker": {
             "type": "boolean",
             "title": "Optimize exploitation and management of the mental capacities of the worker",
             "default": false
           },
-          "3": {
+          "Improve the level of protection and safety in the workplace": {
             "type": "boolean",
             "title": "Improve the level of protection and safety in the workplace",
             "default": false
@@ -1027,12 +1027,12 @@
         "type": "object",
         "title": "Machine performance",
         "properties": {
-          "1": {
+          "Optimize exploitation and management of production machines uptime": {
             "type": "boolean",
             "title": "Optimize exploitation and management of production machines uptime ",
             "default": false
           },
-          "2": {
+          "Optimize efficiency & effectiveness of the predictive maintenance process": {
             "type": "boolean",
             "title": "Optimize efficiency & effectiveness of the predictive maintenance process",
             "default": false
@@ -1043,12 +1043,12 @@
         "type": "object",
         "title": "Production Management",
         "properties": {
-          "1": {
+          "Improve the overall system production efficiency and flexibility": {
             "type": "boolean",
             "title": "Improve the overall system production efficiency and flexibility",
             "default": false
           },
-          "2": {
+          "Optimize efficiency and effectiveness of production management processes": {
             "type": "boolean",
             "title": "Optimize efficiency and effectiveness of production management processes",
             "default": false
@@ -1063,26 +1063,26 @@
     "description": "Tick the Operating System type(s) required by your solution*",
     "items": {
       "type": "string",
-      "default": "1",
+      "default": "Apple iOS",
       "oneOf": [
         {
-          "const": "1",
+          "const": "Apple iOS",
           "title": "Apple iOS"
         },
         {
-          "const": "2",
+          "const": "Apple macOS",
           "title": "Apple macOS"
         },
         {
-          "const": "3",
+          "const": "Microsoft Windows",
           "title": "Microsoft Windows"
         },
         {
-          "const": "4",
+          "const": "Google's Android OS",
           "title": "Google's Android OS"
         },
         {
-          "const": "5",
+          "const": "Unix-like OS",
           "title": "Unix-like OS"
         }
       ]
@@ -1092,32 +1092,32 @@
     "type": "string",
     "title": " ",
     "description": "Select the unit of measure",
-    "default": "1",
+    "default": "KB",
     "oneOf": [
       {
-        "const": "1",
+        "const": "KB",
         "title": "KB"
       },
       {
-        "const": "2",
+        "const": "MB",
         "title": "MB"
       },
       {
-        "const": "3",
+        "const": "GB",
         "title": "GB"
       }
     ]
   },
   "relevance": {
     "type": "string",
-    "default": "1",
+    "default": "The solution aims to completely solve or mitigate the criticality",
     "oneOf": [
       {
-        "const": "1",
+        "const": "The solution aims to completely solve or mitigate the criticality",
         "title": "The solution aims to completely solve or mitigate the criticality"
       },
       {
-        "const": "2",
+        "const": "The solution can contribute mitigate the criticality",
         "title": "The solution can contribute mitigate the criticality"
       }
     ]
@@ -1137,22 +1137,22 @@
             "type": "array",
             "items": {
               "type": "string",
-              "default": "1",
+              "default": "Active Learning",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Active Learning",
                   "title": "Active Learning"
                 },
                 {
-                  "const": "2",
+                  "const": "Critical Thinking",
                   "title": "Critical Thinking"
                 },
                 {
-                  "const": "3",
+                  "const": "Learning Strategies",
                   "title": "Learning Strategies"
                 },
                 {
-                  "const": "4",
+                  "const": "Monitoring",
                   "title": "Monitoring"
                 }
               ]
@@ -1171,26 +1171,26 @@
             "title": "Complex Problem Solving & Resource Management Skills",
             "items": {
               "type": "string",
-              "default": "1",
+              "default": "Complex Problem Solving",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Complex Problem Solving",
                   "title": "Complex Problem Solving"
                 },
                 {
-                  "const": "2",
+                  "const": "Management of Financial Resources",
                   "title": "Management of Financial Resources"
                 },
                 {
-                  "const": "3",
+                  "const": "Management of Material Resources",
                   "title": "Management of Material Resources"
                 },
                 {
-                  "const": "4",
+                  "const": "Management of Personnel Resources",
                   "title": "Management of Personnel Resources"
                 },
                 {
-                  "const": "5",
+                  "const": "Time Management",
                   "title": "Time Management"
                 }
               ]
@@ -1201,30 +1201,30 @@
             "title": "Social Skills",
             "items": {
               "type": "string",
-              "default": "1",
+              "default": "Coordination",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Coordination",
                   "title": "Coordination"
                 },
                 {
-                  "const": "2",
+                  "const": "Instructing",
                   "title": "Instructing"
                 },
                 {
-                  "const": "3",
+                  "const": "Negotiation",
                   "title": "Negotiation"
                 },
                 {
-                  "const": "4",
+                  "const": "Persuasion",
                   "title": "Persuasion"
                 },
                 {
-                  "const": "5",
+                  "const": "Service Orientation",
                   "title": "Service Orientation"
                 },
                 {
-                  "const": "5",
+                  "const": "Social Perceptiveness",
                   "title": "Social Perceptiveness"
                 }
               ]
@@ -1235,18 +1235,18 @@
             "title": "System Skills",
             "items": {
               "type": "string",
-              "default": "1",
+              "default": "Judgment and Decision Making",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Judgment and Decision Making",
                   "title": "Judgment and Decision Making"
                 },
                 {
-                  "const": "2",
+                  "const": "Systems Analysis",
                   "title": "Systems Analysis"
                 },
                 {
-                  "const": "3",
+                  "const": "Systems Evaluation",
                   "title": "Systems Evaluation"
                 }
               ]
@@ -1257,50 +1257,50 @@
             "title": "Technical Skills",
             "items": {
               "type": "string",
-              "default": "1",
+              "default": "Equipment Maintenance",
               "oneOf": [
                 {
-                  "const": "1",
+                  "const": "Equipment Maintenance",
                   "title": "Equipment Maintenance"
                 },
                 {
-                  "const": "2",
+                  "const": "Equipment Selection",
                   "title": "Equipment Selection"
                 },
                 {
-                  "const": "3",
+                  "const": "Installation",
                   "title": "Installation"
                 },
                 {
-                  "const": "4",
+                  "const": "Operation and Control",
                   "title": "Operation and Control"
                 },
                 {
-                  "const": "5",
+                  "const": "Operation Analysis",
                   "title": "Operation Analysis"
                 },
                 {
-                  "const": "6",
+                  "const": "Operation Monitoring",
                   "title": "Operation Monitoring"
                 },
                 {
-                  "const": "7",
+                  "const": "Programming",
                   "title": "Programming"
                 },
                 {
-                  "const": "8",
+                  "const": "Quality Control Analysis",
                   "title": "Quality Control Analysis"
                 },
                 {
-                  "const": "9",
+                  "const": "Repairing",
                   "title": "Repairing"
                 },
                 {
-                  "const": "10",
+                  "const": "Technology Design",
                   "title": "Technology Design"
                 },
                 {
-                  "const": "11",
+                  "const": "Troubleshooting",
                   "title": "Troubleshooting"
                 }
               ]

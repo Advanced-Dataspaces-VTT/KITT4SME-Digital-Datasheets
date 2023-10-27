@@ -114,7 +114,7 @@ const FormWithConditionals = applyRules(
   Engine,
   extraActions,
 )(({ onKeyDown, ...props }) => (
-  <form
+  <Form
     {...props}
     onKeyDown={(e) => {
       // Disable form submission on enter key press
@@ -126,9 +126,7 @@ const FormWithConditionals = applyRules(
         onKeyDown(e)
       }
     }}
-  >
-    <Form {...props} />
-  </form>
+  />
 ))
 
 const UploadFunctionality = () => {

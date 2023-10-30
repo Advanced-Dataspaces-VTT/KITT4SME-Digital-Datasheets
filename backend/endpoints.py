@@ -316,6 +316,27 @@ def get_datasheets():
     except psycopg2.Error:
         return prepare_error_response('Failed to retrieve datasheets from DB')
 
+"""
+Return all datasheets
+"""
+@app.route('/datasheets', methods=['GET'])
+@cross_origin()
+def get_datasheets():
+    try:
+        session = create_database_connection()
+        result = session.query(Datasheets).all()
+        results = []
+        print(str(len(result))+" args: "+str(request.args))
+        for datasheet in result:
+            if(request.args.get('validate') == '1'):
+                if (validate_marketplace(datasheet)):
+                    results.append(datasheet.datasheet)
+            else:
+                results.append(datasheet.datasheet)
+        print(results)
+        return prepare_success_response(data=results)
+    except psycopg2.Error:
+        return prepare_error_response('Failed to retrieve datasheets from DB')
 
 @app.route("/datasheets", methods=['POST'])
 @cross_origin()

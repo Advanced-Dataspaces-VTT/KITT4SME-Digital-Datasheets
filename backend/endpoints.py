@@ -192,41 +192,113 @@ def delete_datasheet(id):
         session.rollback()
         return prepare_error_response('Failed to delete.')
 
+def parse_words(text):
+    ignore_array = ["","a", "in", "into", "to","with"]
+    ret = []
+    if (len(text) > 0):
+        words = text.split(" ")
+        for word in words:
+            if word in ignore_array:
+                print("ignoring word: "+word)
+            else:
+                ret.append(word.lower())
+    return ret
+
+def get_property_words(selected_checkboxes, schema):
+    ret = []
+    for checkbox in selected_checkboxes:
+        box_element = checkbox.split(".")
+        issues = schema["module_property"]["properties"][box_element[1]]["items"]["properties"]["issue"]["oneOf"]
+        index = int(box_element[2].split("_")[1])
+        print(issues)
+        words = parse_words(issues[index-1]["title"])
+        for word in words:
+            if word not in ret:
+                ret.append(word)
+    return ret
+
 @app.route("/datasheets-search", methods=['POST'])
 @cross_origin()
 def return_all_datasheets():
     try:
+        with open("content.json", 'r') as file:
+            schema = json.load(file)
         session = create_database_connection()
         payload = request.json
         print("TEST")
         selected_checkboxes = payload.get('selectedCheckboxes')
         filter_text = payload.get('filter')
-
+        print("checkboxes:")
+        print(selected_checkboxes)
+        print("filter_text:")
+        print(filter_text)
+        search_words = parse_words(filter_text)
+        search_words.extend(get_property_words(selected_checkboxes, schema))
+        return_sheets = []
         query = session.query(Datasheets)
+        search_words = parse_words(filter_text)
+        print("search_words:")
+        print(search_words)
 
-        filter_conditions = []
+        result = query.all()    
+        datahseets = datasheet_schema.dump(result)
+        #print(datahseets)
+        keywords = []
+        for datasheet in datahseets:
+            found = True
+            print("datasheet:")
+            #print(datasheet)
+            information = datasheet["datasheet"]["information"]
+            print(information)
+            keywords.extend(parse_words(information["component_accronym"]))
+            keywords.extend(parse_words(information["component_name"]))
+            keywords.extend(parse_words(information["provider"]))
+            print(keywords)
+            # context elements
+            context = datasheet["datasheet"]["context"]
+            #print("context:")
+            #print(context)
+            keywords.extend(parse_words(context["description"]))
 
-        for key in selected_checkboxes:
-            json_key = key.replace('.', '->')
-            json_key = json_key.split('->')
-            value = json_key[2].split('_')
-            filter_conditions.append(
-                text(f"datasheet -> '{json_key[0]}' -> '{json_key[1]}' -> 0 ->> '{value[0]}' IS NOT NULL")
-            )
+            if (context["productiveaxis"]["ai_hri"]):
+                keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_hri"]["title"]))
+            if (context["productiveaxis"]["ai_quality"]):
+                keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_quality"]["title"]))
+            if (context["productiveaxis"]["ai_manualactivity"]):
+                keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_manualactivity"]["title"]))
+            if (context["category"]["reasoning"]):  
+                keywords.extend(parse_words(schema["category"]["properties"]["reasoning"]["title"]))
+            if (context["category"]["decisionmaker"]):
+                keywords.extend(parse_words(schema["category"]["properties"]["decisionmaker"]["title"]))
+            #print("keywords after context")
+            #print(keywords)
+            module_properties = datasheet["datasheet"]["module_properties"]
+            
+            if (len(search_words) > 0):
+                matches = 0 
+                for word in search_words:
+                    if word in keywords:
+                        matches = matches + 1
+                if (matches == 0):
+                    found = False
 
-        if filter_text:
-            filter_conditions.append(text(f'datasheet::text ILIKE \'%{filter_text}%\''))
+            # module_properties elements
+            properties = len(selected_checkboxes)
+            for checkbox in selected_checkboxes:
+                box_element = checkbox.split(".")
+                for issue in module_properties[box_element[1]]:
+                    index = int(box_element[2].split("_")[1])
+                    if (int(issue["issue"]) == index):
+                        properties = properties - 1
 
-
-        if filter_conditions:
-            query = query.filter(and_(*filter_conditions))
-
-        result = query.all()
-
-        return prepare_success_response(data=datasheet_schema.dump(result))
-    except psycopg2.Error:
-        return prepare_error_response('Failed to search.')
-
+            if (found and properties <= 0):
+                print("append datasheet")
+                print(datasheet)
+                return_sheets.append(datasheet)
+    except KeyError:
+        print("Error fetching datasheets")
+        return prepare_error_response('Failed to search.')      
+    return prepare_success_response(data=return_sheets)
 
 """
 Return all datasheets
@@ -249,7 +321,6 @@ def get_datasheets():
         return prepare_success_response(data=results)
     except psycopg2.Error:
         return prepare_error_response('Failed to retrieve datasheets from DB')
-
 
 @app.route("/datasheets", methods=['POST'])
 @cross_origin()

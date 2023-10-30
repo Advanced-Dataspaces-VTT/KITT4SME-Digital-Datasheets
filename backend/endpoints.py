@@ -147,7 +147,7 @@ Query, Extract, and Convert Datasheets from Numberic representation to Human Rea
 def convert_datasheet():
     try:
         session = create_database_connection()
-        result = session.query(Datasheets).all() 
+        result = session.query(Datasheets).all()
         print(len(result))
         for datasheet in result:
             manage_conversion([datasheet.datasheet])
@@ -185,19 +185,20 @@ def delete_datasheet(id):
     if not datasheet:
         return prepare_error_response('Datasheet not found.')
     try:
-        session.delete(datasheet) 
-        session.commit()  
-        return prepare_success_response('Datasheet removed.')     
+        session.delete(datasheet)
+        session.commit()
+        return prepare_success_response('Datasheet removed.')
     except psycopg2.Error:
         session.rollback()
         return prepare_error_response('Failed to delete.')
-    
+
 @app.route("/datasheets-search", methods=['POST'])
 @cross_origin()
 def return_all_datasheets():
     try:
         session = create_database_connection()
         payload = request.json
+        print("TEST")
         selected_checkboxes = payload.get('selectedCheckboxes')
         filter_text = payload.get('filter')
 
@@ -220,26 +221,7 @@ def return_all_datasheets():
         if filter_conditions:
             query = query.filter(and_(*filter_conditions))
 
-        result = query.all()         
-        
-        if not result:  # If the result is empty, return all datasheets
-            result = session.query(Datasheets).all()   
-
-       
-        for datasheet in result:
-            datasheet_ids = load_saved_datasheeet([datasheet.datasheet], filter_text)
-            if not datasheet_ids:
-                pass
-            else:
-                matching_datasheets = session.query(Datasheets).filter_by(id=datasheet.id)
-                result = matching_datasheets
-
-        for datasheet in result:
-            if(request.args.get('validate') == '1'):
-                if (validate_marketplace(datasheet)):
-                    result.append(datasheet.datasheet)
-            else:
-                result.append(datasheet.datasheet)
+        result = query.all()
 
         return prepare_success_response(data=datasheet_schema.dump(result))
     except psycopg2.Error:
@@ -247,14 +229,14 @@ def return_all_datasheets():
 
 
 """
-Return all datasheets 
+Return all datasheets
 """
 @app.route('/datasheets', methods=['GET'])
 @cross_origin()
 def get_datasheets():
     try:
         session = create_database_connection()
-        result = session.query(Datasheets).all() 
+        result = session.query(Datasheets).all()
         results = []
         print(str(len(result))+" args: "+str(request.args))
         for datasheet in result:
@@ -356,5 +338,5 @@ if __name__ == '__main__':
     app.run(
         debug=os.getenv("DEBUG", False),
         host='0.0.0.0',
-        port="5001"
+        port="5000"
     )

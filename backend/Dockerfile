@@ -6,4 +6,4 @@ RUN python -m pip install --upgrade pip
 RUN python -m pip install -r requirements.txt
 WORKDIR /app
 COPY . /app
-CMD ["gunicorn", "--bind", "0.0.0.0:5001", "endpoints:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "endpoints:app"]

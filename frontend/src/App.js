@@ -9,6 +9,7 @@ import HomePage from './pages/LandingPage'
 
 import SearchResultSelectedPage from './pages/SearchResultSelected'
 import CreateDataSheet from './pages/CreateDatasheetPage'
+import SearchResults from './pages/SearchResults'
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <SearchResultSelectedPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/search-results"
+                element={
+                  <PrivateRoute>
+                    <SearchResults />
                   </PrivateRoute>
                 }
               />

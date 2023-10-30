@@ -147,7 +147,7 @@ Query, Extract, and Convert Datasheets from Numberic representation to Human Rea
 def convert_datasheet():
     try:
         session = create_database_connection()
-        result = session.query(Datasheets).all() 
+        result = session.query(Datasheets).all()
         print(len(result))
         for datasheet in result:
             manage_conversion([datasheet.datasheet])
@@ -185,9 +185,9 @@ def delete_datasheet(id):
     if not datasheet:
         return prepare_error_response('Datasheet not found.')
     try:
-        session.delete(datasheet) 
-        session.commit()  
-        return prepare_success_response('Datasheet removed.')     
+        session.delete(datasheet)
+        session.commit()
+        return prepare_success_response('Datasheet removed.')
     except psycopg2.Error:
         session.rollback()
         return prepare_error_response('Failed to delete.')
@@ -225,6 +225,7 @@ def return_all_datasheets():
             schema = json.load(file)
         session = create_database_connection()
         payload = request.json
+        print("TEST")
         selected_checkboxes = payload.get('selectedCheckboxes')
         filter_text = payload.get('filter')
         print("checkboxes:")
@@ -298,23 +299,6 @@ def return_all_datasheets():
         print("Error fetching datasheets")
         return prepare_error_response('Failed to search.')      
     return prepare_success_response(data=return_sheets)
-
-def get_datasheets():
-    try:
-        session = create_database_connection()
-        result = session.query(Datasheets).all() 
-        results = []
-        print(str(len(result))+" args: "+str(request.args))
-        for datasheet in result:
-            if(request.args.get('validate') == '1'):
-                if (validate_marketplace(datasheet)):
-                    results.append(datasheet.datasheet)
-            else:
-                results.append(datasheet.datasheet)
-        print(results)
-        return prepare_success_response(data=results)
-    except psycopg2.Error:
-        return prepare_error_response('Failed to retrieve datasheets from DB')
 
 """
 Return all datasheets
@@ -425,5 +409,5 @@ if __name__ == '__main__':
     app.run(
         debug=os.getenv("DEBUG", False),
         host='0.0.0.0',
-        port="5001"
+        port="5000"
     )

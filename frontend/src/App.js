@@ -6,15 +6,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PrivateRoute from './helpers/PrivateRoute'
 
 import HomePage from './pages/LandingPage'
+
 import SearchResultSelectedPage from './pages/SearchResultSelected'
 import CreateDataSheet from './pages/CreateDatasheetPage'
-import SearchResults from './pages/SearchResults'
+
 function App() {
   return (
     <div>
       <ReactKeycloakProvider
         initOptions={{
-          onLoad: 'check-sso', // Change this to "check-sso"
+          onLoad: 'login-required',
           checkLoginIframe: false,
         }}
         authClient={keycloak}
@@ -22,25 +23,27 @@ function App() {
         <React.StrictMode>
           <BrowserRouter>
             <Routes>
-              {/* Public route for HomePage */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/search-results" element={<SearchResults />} />
-              <Route
-                path="/selected-search-result"
-                element={<SearchResultSelectedPage />}
-              />
-
-              {/* Private routes */}
               <Route
                 path="*"
                 element={
                   <PrivateRoute>
-                    <Routes>
-                      <Route
-                        path="/create-datasheet"
-                        element={<CreateDataSheet />}
-                      />
-                    </Routes>
+                    <HomePage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/create-datasheet"
+                element={
+                  <PrivateRoute>
+                    <CreateDataSheet />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/selected-search-result"
+                element={
+                  <PrivateRoute>
+                    <SearchResultSelectedPage />
                   </PrivateRoute>
                 }
               />

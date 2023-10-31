@@ -1,0 +1,320 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is Datasheet backend API documentation. This is intended only for development purposes",
+        "version": "1.0.1",
+        "title": "Datasheets Backend",
+        "termsOfService": "",
+        "contact": {
+            "email": "kari.kolehmainen@vtt.fi"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "localhost",
+    "basePath": "/v2",
+    "tags": [
+        {
+            "name": "datasheets",
+            "description": "Datasheet operations",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "https://github.com/Advanced-Dataspaces-VTT/KITT4SME-Digital-Datasheets"
+            }
+        }
+    ],
+    "schemes": [
+        "https",
+        "http"
+    ],
+    "paths": {
+        "/backup-datasheets": {
+            "get": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "backup datasheets",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "URL"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/download-backup/<path:filename>": {
+            "get": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "Download datasheet backup file",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "produces": [
+                    "application/json",
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Pet object that needs to be added to the store",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/backup-files": {
+            "get": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "List of backupfiles",
+                "description": "Get list of backupfiles",
+                "operationId": "findPetsByStatus",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status values that need to be considered for filter",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "available",
+                                "pending",
+                                "sold"
+                            ],
+                            "default": "available"
+                        },
+                        "collectionFormat": "multi"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Pet"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/datasheets-numberic-to-human-readable": {
+            "get": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "Human readable form of datasheets",
+                "description": "Returns a single pet",
+                "operationId": "getPetById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Pet"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/datasheets-delete/{id}": {
+            "delete": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "delete datasheet",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "int"
+                ],
+                "produces": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "datasheet ID",
+                        "description": "id of the datasheet to be deleted",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "404": {
+                        "description": "Invalid Datasheet ID"
+                    }
+                }
+            }
+        },
+        "/datasheets-search": {
+            "get": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "Get all datasheets based on search parameters",
+                "description": "Get all datasheets based on search parameters",
+                "operationId": "",
+                "produces": [
+                    "application/json",
+                ],
+                "parameters": [
+                    {
+                        "name": "filter_text",
+                        "in": "header",
+                        "description": "Free text search to be used",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "selected_checkboxes",
+                        "in": "header",
+                        "description": "Array of module paramter checkboxes",
+                        "required": true,
+                        "type": "array"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/datasheets": {
+            "get": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "Returns validated datasheets",
+                "description": "Returns a list of datasheets that have been validated by market place",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "validate",
+                        "in": "parameter",
+                        "description": "1 or 0 if the datasheet is to be validated against the marketplace",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {}
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "Create datasheet",
+                "description": "Creates new datasheet into the database",
+                "operationId": "",
+                "parameters": [
+                    {
+                        "name": "datasheet",
+                        "in": "header",
+                        "description": "Datasheet in JSON form",
+                        "required": true,
+                        "type": "iapplication/json"
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "datasheets"
+                ],
+                "summary": "Update datasheet",
+                "description": "Update existing datasheet",
+                "operationId": "",
+                "parameters": [
+                    {
+                        "name": "datasheet",
+                        "in": "header",
+                        "description": "Datasheet in JSON form",
+                        "required": true,
+                        "type": "iapplication/json"
+                    }
+                ]
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "api_key",
+            "in": "header"
+        },
+        "petstore_auth": {
+            "type": "oauth2",
+            "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
+            "flow": "implicit",
+            "scopes": {
+                "read:pets": "read your pets",
+                "write:pets": "modify pets in your account"
+            }
+        }
+    },
+    "definitions": {
+       
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    }
+}
+

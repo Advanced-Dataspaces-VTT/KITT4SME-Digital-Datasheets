@@ -17,11 +17,25 @@ from flask import Flask, request, send_from_directory, current_app, url_for
 from flask_cors import CORS, cross_origin
 from flask_restful import Api
 from flask_marshmallow import Marshmallow
+from flask_swagger_ui import get_swaggerui_blueprint
 
 from convert import manage_conversion
 from util import load_saved_datasheeet
 
 app = Flask(__name__)
+
+SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI (without trailing '/')
+API_URL = '/static/swagger.json'  # Our API url (can of course be a local resource)
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,  # Swagger UI static files will be mapped to '{SWAGGER_URL}/dist/'
+    API_URL,
+    config={  # Swagger UI config overrides
+        'app_name': "Datasheets Backend"
+    }
+)
+app.register_blueprint(swaggerui_blueprint)
+
 ma = Marshmallow(app)
 cors = CORS(app)
 api = Api(app)
@@ -29,6 +43,10 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['BACKUP_DIRECTORY'] = './'
 
 Base = declarative_base()
+
+@app.route('/static/<path:filename>')
+def send_static(filename):
+    return send_from_directory(directory="/static", path=filename)
 
 
 def prepare_error_response(message):
@@ -409,5 +427,5 @@ if __name__ == '__main__':
     app.run(
         debug=os.getenv("DEBUG", False),
         host='0.0.0.0',
-        port="5000"
+        port="5001"
     )

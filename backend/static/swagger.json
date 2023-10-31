@@ -13,8 +13,8 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "localhost",
-    "basePath": "/v2",
+    "host": "localhost:5001",
+    "basePath": "",
     "tags": [
         {
             "name": "datasheets",
@@ -23,6 +23,10 @@
                 "description": "Find out more",
                 "url": "https://github.com/Advanced-Dataspaces-VTT/KITT4SME-Digital-Datasheets"
             }
+        },
+        {
+            "name": "backups",
+            "description": "Datasheet backup operations"
         }
     ],
     "schemes": [
@@ -33,7 +37,7 @@
         "/backup-datasheets": {
             "get": {
                 "tags": [
-                    "datasheets"
+                    "backups"
                 ],
                 "summary": "backup datasheets",
                 "description": "",
@@ -58,7 +62,7 @@
         "/download-backup/<path:filename>": {
             "get": {
                 "tags": [
-                    "datasheets"
+                    "backups"
                 ],
                 "summary": "Download datasheet backup file",
                 "description": "",
@@ -99,7 +103,7 @@
         "/backup-files": {
             "get": {
                 "tags": [
-                    "datasheets"
+                    "backups"
                 ],
                 "summary": "List of backupfiles",
                 "description": "Get list of backupfiles",
@@ -145,8 +149,8 @@
                     "datasheets"
                 ],
                 "summary": "Human readable form of datasheets",
-                "description": "Returns a single pet",
-                "operationId": "getPetById",
+                "description": "Get list of datasheets in human readable form",
+                "operationId": "",
                 "produces": [
                     "application/json"
                 ],
@@ -244,7 +248,7 @@
                 "parameters": [
                     {
                         "name": "validate",
-                        "in": "parameter",
+                        "in": "query",
                         "description": "1 or 0 if the datasheet is to be validated against the marketplace",
                         "required": true,
                         "type": "integer"

@@ -46,7 +46,7 @@ Base = declarative_base()
 
 @app.route('/static/<path:filename>')
 def send_static(filename):
-    return send_from_directory(directory="/static", path=filename)
+    return send_from_directory(directory="static", path=filename)
 
 
 def prepare_error_response(message):
@@ -92,7 +92,7 @@ def validate_marketplace(datasheet):
         datasheet.validation_ts = 0
     print("datasheet: "+str(datasheet.datasheet))
     if (datasheet.validation == -1 or datasheet.validation_ts < time.time()-int(os.environ["VALIDATION_TIMEOUT"])*3600):
-        validate_api = os.environ["VALIDATION_URL"]+datasheet.datasheet["datasheet"]["information"]["component_uuid"]
+        validate_api = os.environ["VALIDATION_URL"]+datasheet.datasheet["information"]["component_uuid"]
         print(validate_api)
         ret = requests.get(validate_api)
         session = create_database_connection()

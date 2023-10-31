@@ -252,6 +252,8 @@ def return_all_datasheets():
         print(filter_text)
         search_words = parse_words(filter_text)
         search_words.extend(get_property_words(selected_checkboxes, schema))
+        properties = len(selected_checkboxes)
+
         return_sheets = []
         query = session.query(Datasheets)
         search_words = parse_words(filter_text)
@@ -276,43 +278,46 @@ def return_all_datasheets():
             context = datasheet["datasheet"]["context"]
             #print("context:")
             #print(context)
-            keywords.extend(parse_words(context["description"]))
+            if ("description" in context):
+                keywords.extend(parse_words(context["description"]))
 
-            if (context["productiveaxis"]["ai_hri"]):
-                keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_hri"]["title"]))
-            if (context["productiveaxis"]["ai_quality"]):
-                keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_quality"]["title"]))
-            if (context["productiveaxis"]["ai_manualactivity"]):
-                keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_manualactivity"]["title"]))
-            if (context["category"]["reasoning"]):  
-                keywords.extend(parse_words(schema["category"]["properties"]["reasoning"]["title"]))
-            if (context["category"]["decisionmaker"]):
-                keywords.extend(parse_words(schema["category"]["properties"]["decisionmaker"]["title"]))
-            #print("keywords after context")
-            #print(keywords)
-            module_properties = datasheet["datasheet"]["module_properties"]
+            if ("productiveaxis" in context):
+                if ("ai_hri" in context["productiveaxis"]):
+                    keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_hri"]["title"]))
+                if ("ai_quality" in context["productiveaxis"]):
+                    keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_quality"]["title"]))
+                if ("ai_manualactivity" in context["productiveaxis"]):
+                    keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_manualactivity"]["title"]))
+            if ("category" in context):
+                if ("reasoning" in context["category"]):  
+                    keywords.extend(parse_words(schema["category"]["properties"]["reasoning"]["title"]))
+                if ("decisionmaker" in context["category"]):
+                    keywords.extend(parse_words(schema["category"]["properties"]["decisionmaker"]["title"]))
+            print("keywords after context")
+            print(keywords)
+            if ("module_properties" in datasheet["datasheet"]):
+                module_properties = datasheet["datasheet"]["module_properties"]
             
-            if (len(search_words) > 0):
-                matches = 0 
-                for word in search_words:
-                    if word in keywords:
-                        matches = matches + 1
-                if (matches == 0):
-                    found = False
+                if (len(search_words) > 0):
+                    matches = 0 
+                    for word in search_words:
+                        if word in keywords:
+                            matches = matches + 1
+                    if (matches == 0):
+                        found = False
 
-            # module_properties elements
-            properties = len(selected_checkboxes)
-            for checkbox in selected_checkboxes:
-                box_element = checkbox.split(".")
-                for issue in module_properties[box_element[1]]:
-                    index = int(box_element[2].split("_")[1])
-                    if (int(issue["issue"]) == index):
-                        properties = properties - 1
+                # module_properties elements
+                for checkbox in selected_checkboxes:
+                    box_element = checkbox.split(".")
+                    for issue in module_properties[box_element[1]]:
+                        index = int(box_element[2].split("_")[1])
+                        if (int(issue["issue"]) == index):
+                            properties = properties - 1
 
-            if (found and properties <= 0):
-                print("append datasheet")
-                print(datasheet)
-                return_sheets.append(datasheet)
+                if (found and properties <= 0):
+                    print("append datasheet")
+                    print(datasheet)
+                    return_sheets.append(datasheet)
     except KeyError:
         print("Error fetching datasheets")
         return prepare_error_response('Failed to search.')      

@@ -372,7 +372,7 @@
   },
   "datamodel_factory": {
     "type": "string",
-    "default": 1,
+    "default": "1",
     "oneOf": [
       {
         "const": "1",
@@ -394,7 +394,7 @@
   },
   "datamodel_devices": {
     "type": "string",
-    "default": 1,
+    "default": "1",
     "oneOf": [
       {
         "const": "1",

@@ -211,7 +211,7 @@ def delete_datasheet(id):
         return prepare_error_response('Failed to delete.')
 
 def parse_words(text):
-    ignore_array = ["","a", "in", "into", "to","with"]
+    ignore_array = ["","a", "in", "into", "of", "on", "the","to","with"]
     ret = []
     if (len(text) > 0):
         words = text.split(" ")
@@ -219,7 +219,8 @@ def parse_words(text):
             if word in ignore_array:
                 print("ignoring word: "+word)
             else:
-                ret.append(word.lower())
+                if word not in ret:
+                    ret.append(word.lower())
     return ret
 
 def get_property_words(selected_checkboxes, schema):
@@ -251,7 +252,10 @@ def return_all_datasheets():
         print("filter_text:")
         print(filter_text)
         search_words = parse_words(filter_text)
-        search_words.extend(get_property_words(selected_checkboxes, schema))
+        property_words = get_property_words(selected_checkboxes, schema)
+        for word in property_words:
+            if word not in search_words:
+                search_words.append(word)
         properties = len(selected_checkboxes)
 
         return_sheets = []
@@ -269,7 +273,7 @@ def return_all_datasheets():
             print("datasheet:")
             #print(datasheet)
             information = datasheet["datasheet"]["information"]
-            print(information)
+            print(information)  
             keywords.extend(parse_words(information["component_accronym"]))
             keywords.extend(parse_words(information["component_name"]))
             keywords.extend(parse_words(information["provider"]))
@@ -283,17 +287,81 @@ def return_all_datasheets():
 
             if ("productiveaxis" in context):
                 if ("ai_hri" in context["productiveaxis"]):
-                    keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_hri"]["title"]))
+                    if (context["productiveaxis"]["ai_hri"]):
+                        f_words = parse_words(schema["productiveaxis"]["properties"]["ai_hri"]["title"])
+                        #print("ai_hri: "+str(f_words))
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
                 if ("ai_quality" in context["productiveaxis"]):
-                    keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_quality"]["title"]))
+                    if (context["productiveaxis"]["ai_quality"]):
+                        f_words = parse_words(schema["productiveaxis"]["properties"]["ai_quality"]["title"])
+                        #print("ai_quality: "+str(f_words))
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
                 if ("ai_manualactivity" in context["productiveaxis"]):
-                    keywords.extend(parse_words(schema["productiveaxis"]["properties"]["ai_manualactivity"]["title"]))
+                    if (context["productiveaxis"]["ai_manualactivity"]):
+                        f_words = parse_words(schema["productiveaxis"]["properties"]["ai_manualactivity"]["title"])
+                        #print("ai_manualactivity: "+str(f_words))
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
             if ("category" in context):
-                if ("reasoning" in context["category"]):  
-                    keywords.extend(parse_words(schema["category"]["properties"]["reasoning"]["title"]))
+                if ("reasoning" in context["category"]):
+                    if (context["category"]["reasoning"]):
+                        f_words = parse_words(schema["category"]["properties"]["reasoning"]["title"])
+                        #print("reasoning: " + str(f_words))
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
                 if ("decisionmaker" in context["category"]):
-                    keywords.extend(parse_words(schema["category"]["properties"]["decisionmaker"]["title"]))
-            print("keywords after context")
+                    if (context["category"]["decisionmaker"]):
+                        f_words = parse_words(schema["category"]["properties"]["decisionmaker"]["title"])
+                        #print("decisionmaker: " + str(f_words))
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                        keywords.extend()
+            if ("features" in context):
+                if ("quality" in context["features"]):
+                    features_quality_selected = context["features"]["quality"]
+                    for selection in features_quality_selected:
+                        #print("parsing selection (Quality): "+str(selection))
+                        f_arr = schema["features"]["properties"]["quality"]["items"]["oneOf"]
+                        if (len(f_arr) < int(selection)):
+                            print("features-quality out of bounds: "+str(len(f_arr)))
+                        else:
+                            f_words = parse_words(f_arr[int(selection)-1]["title"])
+                            for word in f_words:
+                                if word not in keywords:
+                                    keywords.append(word)
+                if ("operator" in context["features"]):
+                    features_operator_selected = context["features"]["operator"]
+                    for selection in features_operator_selected:
+                        #print("parsing selection (Operator): "+str(selection))
+                        f_words = parse_words(schema["features"]["properties"]["operator"]["items"]["oneOf"][int(selection)-1]["title"])
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                if ("performance" in context["features"]):
+                    features_selected = context["features"]["performance"]
+                    for selection in features_selected:
+                        #print("parsing selection (performance): "+str(selection))
+                        f_words = parse_words(schema["features"]["properties"]["performance"]["items"]["oneOf"][int(selection)-1]["title"])
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                if ("management" in context["features"]):
+                    features_selected = context["features"]["management"]
+                    for selection in features_selected:
+                        #print("parsing selection (management): "+str(selection))
+                        f_words = parse_words(schema["features"]["properties"]["management"]["items"]["oneOf"][int(selection)-1]["title"])
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                                
+            print("keywords of the datasheet")
             print(keywords)
             if ("module_properties" in datasheet["datasheet"]):
                 module_properties = datasheet["datasheet"]["module_properties"]

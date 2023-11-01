@@ -3,7 +3,7 @@ version: "3.8"
 services:
   frontend:
     container_name: kitt4sme-digital-datasheets-frontend
-    image: ryankford/digital-datasheets:1.0.1-frontend
+    image: ryankford/digital-datasheets:1.0.2-frontend
     build:
       context: .
       dockerfile: Dockerfile

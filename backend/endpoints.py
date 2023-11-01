@@ -211,13 +211,14 @@ def delete_datasheet(id):
         return prepare_error_response('Failed to delete.')
 
 def parse_words(text):
-    ignore_array = ["","a", "in", "into", "of", "on", "the","to","with"]
+    ignore_array = ["","a","and","as","for","in","into","it","of","on","or","the","to","with"]
     ret = []
     if (len(text) > 0):
         words = text.split(" ")
         for word in words:
             if word in ignore_array:
-                print("ignoring word: "+word)
+                #print("ignoring word: "+word)
+                pass
             else:
                 if word not in ret:
                     ret.append(word.lower())
@@ -360,7 +361,80 @@ def return_all_datasheets():
                         for word in f_words:
                             if word not in keywords:
                                 keywords.append(word)
-                                
+            if ("industry" in context):
+                industries = context["industry"]
+                for selection in industries:
+                    f_arr = schema["industry"]["oneOf"]
+                    if (len(f_arr) < int(selection)):
+                        print("industries out of bounds: "+str(len(f_arr)))
+                    else:
+                        f_words = parse_words(f_arr[int(selection)-1]["title"])
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+            if ("benefits" in context):
+                if ("quality" in context["benefits"]):
+                    benefits_quality = context["benefits"]["quality"]
+                    if (benefits_quality["1"]):
+                        title = schema["benefits"]["properties"]["quality"]["properties"]["1"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                    if (benefits_quality["2"]):
+                        title = schema["benefits"]["properties"]["quality"]["properties"]["2"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                if ("operator" in context["benefits"]):
+                    benefits_quality = context["benefits"]["operator"]
+                    if (benefits_quality["1"]):
+                        title = schema["benefits"]["properties"]["operator"]["properties"]["1"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                    if (benefits_quality["2"]):
+                        title = schema["benefits"]["properties"]["operator"]["properties"]["2"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                    if (benefits_quality["3"]):
+                        title = schema["benefits"]["properties"]["operator"]["properties"]["2"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                if ("machine" in context["benefits"]):
+                    benefits_quality = context["benefits"]["machine"]
+                    if (benefits_quality["1"]):
+                        title = schema["benefits"]["properties"]["machine"]["properties"]["1"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                    if (benefits_quality["2"]):
+                        title = schema["benefits"]["properties"]["machine"]["properties"]["2"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                if ("production" in context["benefits"]):
+                    benefits_quality = context["benefits"]["production"]
+                    if (benefits_quality["1"]):
+                        title = schema["benefits"]["properties"]["production"]["properties"]["1"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
+                    if (benefits_quality["2"]):
+                        title = schema["benefits"]["properties"]["production"]["properties"]["2"]["title"]
+                        f_words = parse_words(title)
+                        for word in f_words:
+                            if word not in keywords:
+                                keywords.append(word)
             print("keywords of the datasheet")
             print(keywords)
             if ("module_properties" in datasheet["datasheet"]):

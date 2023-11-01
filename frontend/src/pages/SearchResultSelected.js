@@ -78,31 +78,37 @@ const UploadFunctionality = () => {
   }
 
   //PATCH
-  /*const onSubmit = async ({formData}) => {
-        try {
-            if (digitalDatasheetOwner) {
-                const response_keycloak = await keycloak.loadUserInfo();
-                formData['keycloak_id'] = response_keycloak.sub;
-                formData['datasheet_id'] = data.id;
-                const url = UPDATE_DATASHEET_URL
-                const response = await fetch(url, {
-                    method: 'PUT', mode: 'cors', cache: 'no-cache', credentials: 'same-origin', headers: {
-                        'Content-Type': 'application/json'
-                    }, redirect: 'follow', referrerPolicy: 'no-referrer', body: JSON.stringify(formData)
-                });
-                if (response.status === 200) {
-                    alert("Success: Datasheet was updated successfully.")
-                } else {
-                    alert("Error: Datasheet was not updated successfully.")
-                }
-            }else {
-                alert("Warning: You are not the owner of this datasheet!")
-            }
-
-        } catch (err) {
-            alert("Error: Unknown error has occurred!")
+  const onSubmit = async ({ formData }) => {
+    try {
+      if (digitalDatasheetOwner) {
+        const response_keycloak = await keycloak.loadUserInfo()
+        formData['keycloak_id'] = response_keycloak.sub
+        formData['datasheet_id'] = data.id
+        const url = UPDATE_DATASHEET_URL
+        const response = await fetch(url, {
+          method: 'PUT',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer',
+          body: JSON.stringify(formData),
+        })
+        if (response.status === 200) {
+          alert('Success: Datasheet was updated successfully.')
+        } else {
+          alert('Error: Datasheet was not updated successfully.')
         }
-    }*/
+      } else {
+        alert('Warning: You are not the owner of this datasheet!')
+      }
+    } catch (err) {
+      alert('Error: Unknown error has occurred!')
+    }
+  }
 
   return (
     <>
@@ -138,7 +144,8 @@ const UploadFunctionality = () => {
             <Spacer />
             <FormWithConditionals
               showErrorList={true}
-              /*onSubmit={onSubmit} */ formData={data['datasheet']}
+              onSubmit={onSubmit}
+              formData={data['datasheet']}
               disabled={!digitalDatasheetOwner}
             />
           </>

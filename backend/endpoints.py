@@ -265,7 +265,7 @@ def return_all_datasheets():
         print("search_words:")
         print(search_words)
 
-        result = query.all()    
+        result = query.all()
         datahseets = datasheet_schema.dump(result)
         #print(datahseets)
         keywords = []
@@ -274,7 +274,7 @@ def return_all_datasheets():
             print("datasheet:")
             #print(datasheet)
             information = datasheet["datasheet"]["information"]
-            print(information)  
+            print(information)
             keywords.extend(parse_words(information["component_accronym"]))
             keywords.extend(parse_words(information["component_name"]))
             keywords.extend(parse_words(information["provider"]))
@@ -439,9 +439,9 @@ def return_all_datasheets():
             print(keywords)
             if ("module_properties" in datasheet["datasheet"]):
                 module_properties = datasheet["datasheet"]["module_properties"]
-            
+
                 if (len(search_words) > 0):
-                    matches = 0 
+                    matches = 0
                     for word in search_words:
                         if word in keywords:
                             matches = matches + 1
@@ -461,10 +461,9 @@ def return_all_datasheets():
                     print(datasheet)
                     return_sheets.append(datasheet)
             keywords = []
-            
-    except KeyError:
-        print("Error fetching datasheets")
-        return prepare_error_response('Failed to search.')      
+    except KeyError as e:
+        print("Error fetching datasheets: ", e)
+        return prepare_error_response('Failed to search.')
     return prepare_success_response(data=return_sheets)
 
 """
@@ -576,5 +575,5 @@ if __name__ == '__main__':
     app.run(
         debug=os.getenv("DEBUG", False),
         host='0.0.0.0',
-        port="5001"
+        port="5000"
     )

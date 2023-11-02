@@ -322,7 +322,7 @@ def return_all_datasheets():
                         for word in f_words:
                             if word not in keywords:
                                 keywords.append(word)
-                        keywords.extend()
+                        #keywords.extend()
             if ("features" in context):
                 if ("quality" in context["features"]):
                     features_quality_selected = context["features"]["quality"]

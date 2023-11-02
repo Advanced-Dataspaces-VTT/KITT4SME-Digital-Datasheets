@@ -34,7 +34,7 @@ const UploadFunctionality = () => {
   const keycloak_id = keycloak.tokenParsed.sub
   const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(
     data?.keycloak_id
-      ? '501168d1-1067-48aa-83de-278f50e6e8a3' == data['keycloak_id']
+      ? '501168d1-1067-48aa-83de-278f50e6e8a3' == keycloak_id
       : false,
   )
   //const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(false)

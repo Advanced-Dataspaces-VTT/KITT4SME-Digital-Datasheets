@@ -460,6 +460,8 @@ def return_all_datasheets():
                     print("append datasheet")
                     print(datasheet)
                     return_sheets.append(datasheet)
+            keywords = []
+            
     except KeyError:
         print("Error fetching datasheets")
         return prepare_error_response('Failed to search.')      

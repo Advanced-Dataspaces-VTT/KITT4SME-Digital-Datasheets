@@ -274,9 +274,12 @@ def return_all_datasheets():
             #print(datasheet)
             information = datasheet["datasheet"]["information"]
             print(information)
-            keywords.extend(parse_words(information["component_accronym"]))
-            keywords.extend(parse_words(information["component_name"]))
-            keywords.extend(parse_words(information["provider"]))
+            if "component_accronym" in information:
+                keywords.extend(parse_words(information["component_accronym"]))
+            if "component_name" in information:
+                keywords.extend(parse_words(information["component_name"]))
+            if "provider" in information:
+                keywords.extend(parse_words(information["provider"]))
             print(keywords)
             # context elements
             context = datasheet["datasheet"]["context"]
@@ -322,7 +325,6 @@ def return_all_datasheets():
                         for word in f_words:
                             if word not in keywords:
                                 keywords.append(word)
-                        #keywords.extend()
             if ("features" in context):
                 if ("quality" in context["features"]):
                     features_quality_selected = context["features"]["quality"]

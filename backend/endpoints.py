@@ -257,8 +257,6 @@ def return_all_datasheets():
         for word in property_words:
             if word not in search_words:
                 search_words.append(word)
-        properties = len(selected_checkboxes)
-
         return_sheets = []
         query = session.query(Datasheets)
         search_words = parse_words(filter_text)
@@ -270,6 +268,7 @@ def return_all_datasheets():
         #print(datahseets)
         keywords = []
         for datasheet in datahseets:
+            properties = len(selected_checkboxes)
             found = True
             print("datasheet:")
             #print(datasheet)

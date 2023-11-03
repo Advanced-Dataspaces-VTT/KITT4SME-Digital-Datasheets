@@ -21,6 +21,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 
 from convert import manage_conversion
 from util import load_saved_datasheeet
+import fnmatch
 
 app = Flask(__name__)
 
@@ -473,7 +474,9 @@ def return_all_datasheets():
                 if (len(search_words) > 0):
                     matches = 0
                     for word in search_words:
-                        if word in keywords:
+                        # actual search matchings happens here
+                        hits = fnmatch.filter(keywords, word)
+                        if (len(hits)>0):
                             matches = matches + 1
                     if (matches == 0):
                         found = False
@@ -540,10 +543,13 @@ def insert_new_datasheet():
 @cross_origin()
 def update_existing_datasheet():
     try:
+        with open("content.json", 'r') as file:
+            schema = json.load(file)
         data = request.get_json()
         datasheet_id = data['datasheet_id']
         session = create_database_connection()
-        query = (update(Datasheets).where(Datasheets.id == datasheet_id).values(datasheet=data))
+        keywords = parseKeywordsRaw(data, schema)
+        query = (update(Datasheets).where(Datasheets.id == datasheet_id).values(datasheet=data, keywords=keywords))
         session.execute(query)
         session.commit()
         return prepare_success_response(message="Successfully updated the datasheet")

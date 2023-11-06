@@ -485,10 +485,11 @@ def return_all_datasheets():
                 # module_properties elements
                 for checkbox in selected_checkboxes:
                     box_element = checkbox.split(".")
-                    for issue in module_properties[box_element[1]]:
-                        index = int(box_element[2].split("_")[1])
-                        if (int(issue["issue"]) == index):
-                            properties = properties - 1
+                    if box_element[1] in module_properties:
+                        for issue in module_properties[box_element[1]]:
+                            index = int(box_element[2].split("_")[1])
+                            if (int(issue["issue"]) == index):
+                                properties = properties - 1
 
                 if (found and properties <= 0):
                     print("append datasheet")

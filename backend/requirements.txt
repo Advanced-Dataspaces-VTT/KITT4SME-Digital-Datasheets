@@ -12,4 +12,4 @@ sqlalchemy-utils
 requests
 #logging
 flask-swagger-ui
-fnmatch
+fnmatch2

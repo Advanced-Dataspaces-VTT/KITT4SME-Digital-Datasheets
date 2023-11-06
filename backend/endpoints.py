@@ -215,7 +215,7 @@ def delete_datasheet(id):
         return prepare_error_response('Failed to delete.')
 
 def parse_words(text):
-    ignore_array = ["","a","and","as","for","in","into","it","of","on","or","the","to","with"]
+    ignore_array = ["","a","and","as","by","for","in","into","it","of","on","or","the","to","with"]
     ret = []
     if (len(text) > 0):
         words = text.split(" ")
@@ -244,11 +244,11 @@ def get_property_words(selected_checkboxes, schema):
 def parseKeywords(datasheet, schema):
     print("datasheet kwords: "+str(datasheet["keywords"]))
     keywords = []
-    if (len(datasheet["keywords"]) < 1):       
+    if (datasheet["keywords"] is None or len(datasheet["keywords"]) < 1):       
         print("datasheet:")
         keywords = parseKeywordsRaw(datasheet["datasheet"], schema)
         session = create_database_connection()
-        query = (update(Datasheets).where(Datasheets.id == datasheet.id).values(keywords = keywords))
+        query = (update(Datasheets).where(Datasheets.id == datasheet["id"]).values(keywords = keywords))
         session.execute(query)
         session.commit()
     else:

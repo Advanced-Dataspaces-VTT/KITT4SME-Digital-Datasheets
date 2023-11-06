@@ -643,6 +643,7 @@ def updatedb():
             query = "ALTER TABLE datasheets ADD COLUMN keywords text[]"
             print("excute query")
             results = curs.execute(query)
+            conn.commit()
             print(results)
             return prepare_success_response(data=results)
         except psycopg2.Error:

@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import sys
 import random
 import datetime
 import psycopg2
@@ -606,6 +607,47 @@ def insert_new_customer():
     except psycopg2.Error:
         return prepare_error_response('Failed.')
 
+def print_psycopg2_exception(err):
+    err_type, err_obj, traceback = sys.exc_info()
+
+    # get the line number when exception occured
+    line_num = traceback.tb_lineno
+    # print the connect() error
+    print ("\npsycopg2 ERROR:", err, "on line number:", line_num)
+    print ("psycopg2 traceback:", traceback, "-- type:", err_type)
+
+    # psycopg2 extensions.Diagnostics object attribute
+    print ("\nextensions.Diagnostics:", err.diag)
+
+    # print the pgcode and pgerror exceptions
+    print ("pgerror:", err.pgerror)
+    print ("pgcode:", err.pgcode, "\n")
+
+@app.route('/updatedb', methods=['GET'])
+@cross_origin()
+def updatedb():
+    try:
+        db_user = os.getenv("POSTGRES_DB_USER", 'postgres')
+        db_pass =  os.getenv("POSTGRES_DB_PASS", 'postgres')
+        db_host = os.getenv("POSTGRES_HOST", 'localhost')
+        db_port = os.getenv("POSTGRES_PORT", 5432)
+        db_name = os.getenv("POSTGRES_DB_NAME", 'kitt4sme-digital-datasheet-database')
+        db_use_ssl = os.getenv("POSTGRES_USE_SSL")
+        conn = psycopg2.connect("dbname='"+db_name+"' user='"+db_user+"' host='"+db_host+"' password='"+db_pass+"'")
+        print("connected to DB")
+    except psycopg2.Error:
+        print(psycopg2.Error)
+    with conn.cursor() as curs:
+        try:
+            # simple single row system query
+            query = "ALTER TABLE datasheets ADD COLUMN keywords text[]"
+            print("excute query")
+            results = curs.execute(query)
+            print(results)
+            return prepare_success_response(data=results)
+        except psycopg2.Error:
+            print_psycopg2_exception(psycopg2.Error)
+            return prepare_error_response('Failed to retrieve datasheets from DB')
 
 """
     End of Customer API

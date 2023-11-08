@@ -76,12 +76,12 @@
                 ],
                 "parameters": [
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Pet object that needs to be added to the store",
+                        "in": "path",
+                        "name": "filename",
+                        "description": "Download backupfile given in path",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Pet"
+                            
                         }
                     }
                 ],
@@ -89,15 +89,7 @@
                     "405": {
                         "description": "Invalid input"
                     }
-                },
-                "security": [
-                    {
-                        "petstore_auth": [
-                            "write:pets",
-                            "read:pets"
-                        ]
-                    }
-                ]
+                }
             }
         },
         "/backup-files": {
@@ -107,7 +99,7 @@
                 ],
                 "summary": "List of backupfiles",
                 "description": "Get list of backupfiles",
-                "operationId": "findPetsByStatus",
+                "operationId": "",
                 "produces": [
                     "application/json"
                 ],
@@ -136,7 +128,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Pet"
+                                
                             }
                         }
                     }
@@ -159,7 +151,7 @@
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "$ref": "#/definitions/Pet"
+                            
                         }
                     }
                 },
@@ -257,7 +249,10 @@
                 "responses": {
                     "200": {
                         "description": "successful operation",
-                        "schema": {}
+                        "type":"object",
+                        "schema": {
+                            "$ref": "#/definitions/DatasheetSchema"
+                        }
                     }
                 }
             },
@@ -302,19 +297,95 @@
             "type": "apiKey",
             "name": "api_key",
             "in": "header"
-        },
-        "petstore_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://petstore.swagger.io/oauth/authorize",
-            "flow": "implicit",
-            "scopes": {
-                "read:pets": "read your pets",
-                "write:pets": "modify pets in your account"
-            }
         }
     },
     "definitions": {
-       
+        "DatasheetSchema": {
+            "data": [
+                {
+                    "context": {
+                        "benefits": {
+                            "machine": {
+                                "1": "Boolean",
+                                "2": "Boolean"
+                            },
+                            "operator": {
+                                "1": "Boolean",
+                                "2": "Boolean",
+                                "3": "Boolean"
+                            },
+                            "production": {
+                                "1": "Boolean",
+                                "2": "Boolean"
+                            },
+                            "quality": {
+                                "1": "Boolean",
+                                "2": "Boolean"
+                            }
+                        },
+                        "category": {
+                            "decisionmaker": "Boolean",
+                            "reasoning": "Boolean"
+                        },
+                        "features": {},
+                        "productiveaxis": {
+                            "ai_hri": "Boolean",
+                            "ai_manualactivity": "Boolean",
+                            "ai_quality": "Boolean"
+                        },
+                        "usecase": {}
+                    },
+                    "datamodel": {
+                        "datamodel_links": {},
+                        "input": {},
+                        "output": {}
+                    },
+                    "information": {
+                        "component_accronym": "Text",
+                        "component_name": "Text",
+                        "component_uuid": "Text",
+                        "provider": "Text",
+                        "version": "Text"
+                    },
+                    "keycloak_id": "Text",
+                    "module_properties": {
+                        "quality": [ {
+                            "issue": "Integer",
+                            "relevance": "Integer"
+                        } ],
+                        "operator": [ {
+                            "issue": "Integer",
+                            "relevance": "Integer"
+                        } ],
+                        "performance": [ {
+                            "issue": "Integer",
+                            "relevance": "Integer"
+                        } ],
+                        "management": [ {
+                            "issue": "Integer",
+                            "relevance": "Integer"
+                        } ]
+                    },
+                    "public_endpoints": {},
+                    "skills": {
+                        "basic": {},
+                        "crossfunctional": {}
+                    },
+                    "support": {},
+                    "technicalrequirements": {
+                        "disk_unit": "Integer",
+                        "gpu_unit": "Integer",
+                        "multienancy_support": {
+                            "checkbox": "Boolean"
+                        },
+                        "multiuser_support": {
+                            "checkbox": "Boolean"
+                        },
+                        "ram_unit": "Integer"
+                    }
+                }
+            ]
+        }
     },
     "externalDocs": {
         "description": "Find out more about Swagger",

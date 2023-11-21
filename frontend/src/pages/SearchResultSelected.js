@@ -27,6 +27,8 @@ const extraActions = {
 
 const UploadFunctionality = () => {
   const location = useLocation()
+  const navigate = useNavigate()
+
   const [data, setData] = useState(
     location?.state?.data ? location.state.data : null,
   )
@@ -34,7 +36,7 @@ const UploadFunctionality = () => {
   const keycloak_id = keycloak.tokenParsed.sub
   const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(
     data?.keycloak_id
-      ? '501168d1-1067-48aa-83de-278f50e6e8a3' == keycloak_id
+      ? '501168d1-1067-48aa-83de-278f50e6e8a3' == keycloak_id || keycloak_id == data?.keycloak_id
       : false,
   )
   //const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(false)
@@ -110,6 +112,36 @@ const UploadFunctionality = () => {
     }
   }
 
+  const deleteDatasheet = async () => {
+    try {
+      if (digitalDatasheetOwner) {
+        const url =
+          'https://kitt4sme.collab-cloud.eu/datasheets-delete/' + data.id
+        const response = await fetch(url, {
+          method: 'DELETE',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer',
+        })
+        if (response.status === 200) {
+          alert('Success: Datasheet was deleted successfully.')
+          navigate('/')
+        } else {
+          alert('Error: Datasheet was not deleted successfully.')
+        }
+      } else {
+        alert('Warning: You are not the owner of this datasheet!')
+      }
+    } catch (err) {
+      alert('Error: Unknown error has occurred!')
+    }
+  }
+
   return (
     <>
       <div>
@@ -148,6 +180,15 @@ const UploadFunctionality = () => {
               formData={data['datasheet']}
               disabled={!digitalDatasheetOwner}
             />
+            <Stack spacing={1} direction="column">
+              <>
+                <SingleButton
+                  text={'Delete Digital Datasheet'}
+                  path={''}
+                  handleClick={() => deleteDatasheet()}
+                />
+              </>
+            </Stack>
           </>
         ) : (
           <Title text={'Error loading datasheet.'} />

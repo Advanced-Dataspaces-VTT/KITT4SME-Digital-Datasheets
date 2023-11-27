@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Spacer from '../components/Spacer'
 import Stack from '@mui/material/Stack'
 import SingleButton from '../components/SingleButton'
+import SingleButtonRed from '../components/SingleButtonRed'
 import { useKeycloak } from '@react-keycloak/web'
 import Title from '../components/Title'
 import yaml from 'yaml'
@@ -36,7 +37,8 @@ const UploadFunctionality = () => {
   const keycloak_id = keycloak.tokenParsed.sub
   const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(
     data?.keycloak_id
-      ? '501168d1-1067-48aa-83de-278f50e6e8a3' == keycloak_id || keycloak_id == data?.keycloak_id
+      ? '501168d1-1067-48aa-83de-278f50e6e8a3' == keycloak_id ||
+          keycloak_id == data?.keycloak_id
       : false,
   )
   //const [digitalDatasheetOwner, setDigigtalDatasheetOwner] = useState(false)
@@ -116,7 +118,8 @@ const UploadFunctionality = () => {
     try {
       if (digitalDatasheetOwner) {
         const url =
-          'https://kitt4sme.collab-cloud.eu/datasheets-delete/' + data.id
+          'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets-delete/' +
+          data.id
         const response = await fetch(url, {
           method: 'DELETE',
           mode: 'cors',
@@ -180,15 +183,25 @@ const UploadFunctionality = () => {
               formData={data['datasheet']}
               disabled={!digitalDatasheetOwner}
             />
-            <Stack spacing={1} direction="column">
+            {digitalDatasheetOwner ? (
               <>
-                <SingleButton
-                  text={'Delete Digital Datasheet'}
-                  path={''}
-                  handleClick={() => deleteDatasheet()}
-                />
+                <Spacer />
+                <Spacer />
+                <Spacer />
+                <Stack spacing={1} direction="column">
+                  <>
+                    <SingleButtonRed
+                      text={'Delete Digital Datasheet'}
+                      path={''}
+                      handleClick={() => deleteDatasheet()}
+                      style={{ backgroundColor: 'red', color: 'white' }}
+                    />
+                  </>
+                </Stack>
               </>
-            </Stack>
+            ) : (
+              <></>
+            )}
           </>
         ) : (
           <Title text={'Error loading datasheet.'} />

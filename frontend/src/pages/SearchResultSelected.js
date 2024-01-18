@@ -118,7 +118,7 @@ const UploadFunctionality = () => {
     try {
       if (digitalDatasheetOwner) {
         const url =
-          'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest/datasheets-delete/' +
+          'https://datasheets-backend.kitt4sme.collab-cloud.eu/datasheets-delete/' +
           data.id
         const response = await fetch(url, {
           method: 'DELETE',

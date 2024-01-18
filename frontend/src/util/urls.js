@@ -1,5 +1,5 @@
 export const BASE_DATASHEET_URL =
-  'https://kitt4sme.collab-cloud.eu/datasheets-backend-rest'
+  'https://datasheets-backend.kitt4sme.collab-cloud.eu'
 
 //export const BASE_DATASHEET_URL = 'http://localhost:5001'
 
